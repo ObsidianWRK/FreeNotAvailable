@@ -36,3 +36,9 @@ next-env.d.ts
 
 # raw assets (too large for git)
 /assets/
+
+# remotion
+remotion/output/
+remotion/assets/
+remotion/node_modules/
+remotion/public/
