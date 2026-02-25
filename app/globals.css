@@ -51,7 +51,7 @@ section[id] {
   background-repeat: repeat;
   background-size: 200px 200px;
   animation: grain-shift 0.5s steps(1) infinite;
-  will-change: opacity;
+  will-change: background-position;
 }
 
 @keyframes grain-shift {

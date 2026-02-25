@@ -32,6 +32,7 @@ export default function Nav() {
           fill
           className="object-contain"
           sizes="80px"
+          priority
         />
       </Link>
 
@@ -53,7 +54,9 @@ export default function Nav() {
       <button
         onClick={() => setMenuOpen(!menuOpen)}
         className="md:hidden text-white/70 hover:text-white"
-        aria-label="Menu"
+        aria-expanded={menuOpen}
+        aria-controls="mobile-nav-menu"
+        aria-label={menuOpen ? 'Close menu' : 'Open menu'}
       >
         <svg
           width="24"
@@ -77,7 +80,7 @@ export default function Nav() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="absolute top-full left-0 right-0 bg-black/95 backdrop-blur-xl border-b border-white/5 md:hidden">
+        <div id="mobile-nav-menu" className="absolute top-full left-0 right-0 bg-black/95 backdrop-blur-xl border-b border-white/5 md:hidden">
           <ul className="flex flex-col p-6 gap-6">
             {NAV_LINKS.map(({ label, href }) => (
               <li key={href}>

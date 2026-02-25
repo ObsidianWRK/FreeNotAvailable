@@ -38,8 +38,8 @@ export default function MythosSection() {
             The Lady In Black is the Eagle. She is consequence personified&mdash;the
             figure who arrives when the bill comes due. She doesn&rsquo;t speak. She
             doesn&rsquo;t negotiate. She executes. In every era she wears a
-            different face but the same intent: to remind FREE that devotion
-            without discipline is just another word for destruction.
+            different face but the same intent: to collect what FREE owes
+            for loving recklessly.
           </p>
           <p className="font-sans text-sm md:text-base leading-[1.8] text-[#b5afa5] max-w-[65ch]">
             The visual law follows accordingly. Voyeuristic framing, faces

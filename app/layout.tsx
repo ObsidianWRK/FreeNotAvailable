@@ -46,12 +46,7 @@ export default function RootLayout({
       className={`${displayFont.variable} ${bodyFont.variable} dark`}
     >
       <head>
-        <link
-          rel="preload"
-          as="image"
-          href="/images/hero-cover.avif"
-          type="image/avif"
-        />
+        <link rel="preload" as="image" href="/textures/grain-200x200.png" />
       </head>
       <body className="bg-canvas text-body antialiased">
         {children}

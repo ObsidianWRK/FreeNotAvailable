@@ -2,7 +2,7 @@ import { Cormorant_Garamond, Inter } from 'next/font/google'
 
 export const displayFont = Cormorant_Garamond({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
+  weight: ['300', '400'],
   style: ['normal', 'italic'],
   variable: '--font-display',
   display: 'swap',
