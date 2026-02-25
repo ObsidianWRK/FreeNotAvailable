@@ -321,7 +321,7 @@ export default function EkthesisPage() {
                 Stillness on the surface, something heavier underneath.
               </p>
               <div className="font-mono text-xs text-white/30 space-y-1">
-                <div>Production: FREE, HNMadeThisOne, Eli Myles, Ashton Woods</div>
+                <div>Production: FREE, HNMadeThisOne, Eli Myles</div>
                 <div>Focal motif: The Alpinestars Jacket (shelter and resilience)</div>
               </div>
             </div>
@@ -415,7 +415,7 @@ export default function EkthesisPage() {
             { num: '02', title: 'Independent artists are winning', body: 'Indie artists earned $5B+ on Spotify alone in 2024. The tools, distribution, and economics have never been more favorable for unsigned artists.' },
             { num: '03', title: 'Discovery has decentralized', body: 'TikTok, algorithmic playlists, and social platforms mean an artist no longer needs a label\u2019s radio machine. A visual/narrative hook is what the algorithm rewards.' },
             { num: '04', title: 'Visual storytelling is a competitive moat', body: 'R&B\u2019s emotional range pairs well with cinematic content. Audio-only artists can\u2019t compete for brand deals and sync placements the same way.' },
-            { num: '05', title: 'Fan-direct economics favor depth over breadth', body: 'With Bandcamp (82% to artist), Patreon ($10B+ paid out), and D2C merch, an artist with 1,000-5,000 deeply engaged fans can generate meaningful revenue.' },
+            { num: '05', title: 'Fan-direct economics favor depth over breadth', body: 'With Bandcamp (82% to artist), Patreon ($3.5B+ paid to creators), and D2C merch, an artist with 1,000-5,000 deeply engaged fans can generate meaningful revenue.' },
             { num: '06', title: 'Detroit\u2019s Motown legacy', body: 'The city that built Motown. That still means something, globally. And it gives FREE a story no one else can claim.' },
           ].map((item, i) => (
             <motion.div key={item.num} variants={fadeUp} custom={i + 2} className="flex gap-6 items-start">
@@ -434,15 +434,15 @@ export default function EkthesisPage() {
         <SectionLabel>The Model</SectionLabel>
         <SectionTitle className="max-w-[24ch]">Music &times; Film</SectionTitle>
         <motion.p variants={fadeUp} custom={2} className="font-display text-xl md:text-2xl italic text-heading/80 max-w-[36ch] mb-16 leading-snug">
-          Every project is a Greek vignette. Every song is a scene. Every album is a season.
+          Each project is a Greek vignette — songs as scenes, albums as seasons.
         </motion.p>
 
         <motion.div variants={fadeUp} custom={3} className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
           {[
             { label: 'Create', desc: 'Original music scored to narrative short films. Each film is a living sync demo reel.', color: 'text-accent' },
             { label: 'Circulate', desc: 'Films play festivals, YouTube, social. Music supervisors see the music working in visual context.', color: 'text-heading' },
-            { label: 'Convert', desc: 'External sync inquiries follow. Brand partnerships emerge. Fans deepen through multi-format engagement.', color: 'text-heading' },
-            { label: 'Compound', desc: 'Revenue funds more production. Growing catalog creates more licensing opportunities. The IP appreciates.', color: 'text-heading' },
+            { label: 'Convert', desc: 'Sync inquiries come in from the films. Brand deals follow. Fans who watch the films stick around for the music.', color: 'text-heading' },
+            { label: 'Compound', desc: 'Revenue funds the next film. More films mean more songs in the catalog, more sync opportunities. The whole body of work becomes more valuable over time.', color: 'text-heading' },
           ].map((step) => (
             <div key={step.label} className="border border-white/10 p-6 hover:border-white/20 transition-colors">
               <span className={`text-xs font-sans tracking-[0.15em] uppercase block mb-3 ${step.color}`}>{step.label}</span>
@@ -492,7 +492,7 @@ export default function EkthesisPage() {
           <div>Relevance to FREE</div>
         </motion.div>
 
-        <CompRow name="Beyonc&eacute;" detail="Visual albums (Lemonade 4x Plat, Black Is King). Self-distributed concert film ($44M). Platform-exclusive premieres." relevance="Gold standard for visual album as narrative IP. FREE echoes this at indie scale." i={4} />
+        <CompRow name="Beyonc&eacute;" detail="Visual albums (Lemonade 4x Plat, Black Is King). Self-distributed concert film ($44M worldwide). Platform-exclusive premieres." relevance="The template for visual album as narrative IP. FREE echoes this at indie scale." i={4} />
         <CompRow name="The Weeknd" detail="Multi-album cinematic universe (After Hours 3x Plat / Dawn FM / Hurry Up Tomorrow). HBO series. Feature film." relevance="Most direct comp for serialized narrative. Proves male R&B supports cinematic world-building." i={5} />
         <CompRow name="Brent Faiyaz" detail="Fully independent. Wasteland debuted #2 Billboard via Lost Kids label. Platinum. Owns masters." relevance="Most direct independent male R&B comp. Proved indie structure works commercially." i={6} />
         <CompRow name="Frank Ocean" detail="Visual album as contract escape. Blonde Platinum on Boys Don't Cry label. Limited-edition magazine." relevance="Template for visual content as strategy. FREE's creative bible parallels Ocean's magazine." i={7} />
@@ -615,11 +615,11 @@ export default function EkthesisPage() {
             custom={0}
             className="font-display text-5xl md:text-6xl lg:text-7xl italic text-heading leading-[0.9] mb-8"
           >
-            The fire is already lit.
+            Prometheus doesn&rsquo;t wait for permission.
           </motion.h2>
           <motion.p variants={fadeUp} custom={1} className="font-sans text-sm text-muted mb-16 max-w-[40ch] mx-auto">
             FREE is building in public. The visual universe is live. The music is written.
-            What comes next is scale.
+            This is about funding what&rsquo;s already working.
           </motion.p>
 
           <motion.div variants={fadeUp} custom={2} className="flex flex-wrap justify-center gap-4 md:gap-6 mb-16">
