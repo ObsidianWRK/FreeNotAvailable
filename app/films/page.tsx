@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import Link from 'next/link'
+import Footer from '@/components/layout/Footer'
 
 /* ------------------------------------------------------------------ */
 /*  Data                                                               */
@@ -349,31 +349,7 @@ export default function FilmsPage() {
         </div>
       </section>
 
-      {/* ---- Footer / back link ---- */}
-      <footer className="relative py-16 md:py-24 border-t border-white/5">
-        <div className="max-w-6xl mx-auto px-6 md:px-10 flex flex-col items-center gap-8">
-          <Link
-            href="/"
-            className="font-sans text-xs tracking-[0.2em] uppercase text-white/40 hover:text-white/70 transition-colors"
-          >
-            &larr; Back to the Other World
-          </Link>
-
-          <div className="relative w-12 h-12 md:w-16 md:h-16 opacity-40">
-            <Image
-              src="/images/owjv-cherub.png"
-              alt="OWJV"
-              fill
-              className="object-contain"
-              sizes="64px"
-            />
-          </div>
-
-          <p className="text-[10px] font-sans tracking-[0.1em] text-white/15">
-            &copy; {new Date().getFullYear()} FREE. All rights reserved.
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }

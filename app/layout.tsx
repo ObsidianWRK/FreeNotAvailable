@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { displayFont, bodyFont, monoFont } from './fonts'
+import Nav from '@/components/layout/Nav'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -52,6 +53,7 @@ export default function RootLayout({
         <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-4 focus:left-4 focus:px-4 focus:py-2 focus:bg-canvas focus:text-heading focus:border focus:border-white/20">
           Skip to main content
         </a>
+        <Nav />
         {children}
       </body>
     </html>

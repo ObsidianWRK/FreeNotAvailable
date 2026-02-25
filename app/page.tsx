@@ -1,6 +1,5 @@
 import ScrollController from '@/components/ui/ScrollController'
 import GrainOverlay from '@/components/ui/GrainOverlay'
-import Nav from '@/components/layout/Nav'
 import HeroSection from '@/components/sections/HeroSection'
 import FineXMeSection from '@/components/sections/FineXMeSection'
 import SineNoctisSection from '@/components/sections/SineNoctisSection'
@@ -12,7 +11,6 @@ export default function HomePage() {
   return (
     <ScrollController>
       <GrainOverlay />
-      <Nav />
       <main>
         <HeroSection />
         <FineXMeSection />
