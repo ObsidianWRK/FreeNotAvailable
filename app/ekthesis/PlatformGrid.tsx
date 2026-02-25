@@ -7,7 +7,7 @@ const platforms = [
     name: 'YouTube / YouTube Music',
     monthlyActiveUsers: '2.5B+ (YouTube), 100M+ (Music)',
     revenueModel: '$8B/yr paid to music industry. 55% long-form / 45% Shorts rev share to creators. $40.4B total ad revenue (2025).',
-    relevanceToFree: 'Primary long-form film distribution. Music videos + short films generate both ad revenue and discovery. Music is #1 content category.',
+    relevanceToFree: 'Where the films live. Music videos and short films pull ad revenue and discovery at the same time. Music is the #1 content category on YouTube.',
   },
   {
     name: 'Spotify',
@@ -19,7 +19,7 @@ const platforms = [
     name: 'Apple Music',
     monthlyActiveUsers: '~88-100M subscribers',
     revenueModel: '~$0.01/stream (highest major platform rate). Editorial-first curation. 30,000+ curated playlists.',
-    relevanceToFree: 'Higher per-stream payout rewards quality over volume. Editorial approach favors artists with strong narratives and visual assets.',
+    relevanceToFree: 'Higher per-stream payout rewards quality over volume. Editorial playlists favor artists who have a story to tell and visuals to show.',
   },
   {
     name: 'TIDAL',
@@ -49,7 +49,7 @@ const platforms = [
     name: 'Gunpowder & Sky (DUST / ALTER)',
     monthlyActiveUsers: '7M+ combined YouTube subscribers',
     revenueModel: 'Genre-specific short film channels (sci-fi, horror). YouTube ad revenue share. Content acquisition.',
-    relevanceToFree: 'Model for genre-specific short film distribution at scale. Proves curated short film channels build dedicated audiences.',
+    relevanceToFree: 'Model for genre-specific short film distribution at scale. Curated channels like these build real audiences around short-form narrative.',
   },
 ] as const satisfies readonly PlatformComparable[]
 

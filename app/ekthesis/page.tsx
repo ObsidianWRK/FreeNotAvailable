@@ -97,26 +97,26 @@ const caseStudies = [
   {
     artist: 'Brent Faiyaz',
     project: 'Lost Kids / Wasteland (2022)',
-    finding: 'Debuted #2 Billboard 200 fully independent. Wasteland certified Platinum (Sep 2023). Built Lost Kids label, maintained master ownership, and created a consistent moody cinematic visual brand. Later distributed via UnitedMasters.',
-    relevance: 'Proves independent male R&B can reach platinum-level commercial success. FREE\'s CMC/OWJV structure and visual consistency follow this model.',
+    finding: 'Debuted #2 Billboard 200 fully independent. Wasteland certified Platinum (Sep 2023). Built Lost Kids label, kept his masters, built a moody cinematic visual identity around the music. Later distributed via UnitedMasters.',
+    relevance: 'Independent male R&B can go Platinum. FREE\'s CMC/OWJV structure follows this path.',
   },
   {
     artist: 'Frank Ocean',
     project: 'Endless / Blonde (2016)',
     finding: 'Released 45-minute visual album Endless on Apple Music to fulfill Def Jam contract. Next day, independently released Blonde via Boys Don\'t Cry label. Blonde went Platinum. Limited-edition magazine ($80) sold out at pop-ups, now resells at $300-500+.',
-    relevance: 'Pioneered the visual album as strategic business tool. FREE\'s creative bible parallels Ocean\'s magazine as a tangible narrative artifact.',
+    relevance: 'Used a visual album as a business move, not just art. FREE\'s creative bible parallels Ocean\'s magazine: a physical narrative object.',
   },
   {
     artist: 'Beyonce',
     project: 'Black Is King (2020)',
-    finding: '85-minute music-driven visual film released exclusively on Disney+. Grammy-nominated for Best Music Film. Shot across multiple countries with elaborate visual mythology. Drove Disney+ subscriber acquisition during the pandemic streaming boom.',
-    relevance: 'Proves music-driven visual narrative can serve as premium streaming content. FREE\'s Other World mythology mirrors this visual world-building approach.',
+    finding: '85-minute visual film released exclusively on Disney+. Grammy-nominated for Best Music Film. Shot across multiple countries. Helped drive Disney+ subscriber numbers during 2020.',
+    relevance: 'Music-driven visual narrative sold as premium streaming content. FREE\'s Other World builds the same type of mythology at indie scale.',
   },
   {
     artist: 'Childish Gambino',
     project: 'Because the Internet (2013) + Clapping for the Wrong Reasons',
-    finding: 'Released album alongside a 72-page screenplay and a free 25-minute short film on YouTube. This Is America later certified Diamond (10M+ units). The multimedia approach directly led to Atlanta (FX, 2016-2022).',
-    relevance: 'Closest blueprint for free short film + written narrative as IP funnel. FREE\'s creative bible + Fine By Me Film directly parallels this playbook.',
+    finding: 'Released album alongside a 72-page screenplay and a free 25-minute short film on YouTube. This Is America later certified Diamond (10M+ units). The album/screenplay/film combo led directly to Atlanta (FX, 2016-2022).',
+    relevance: 'Free short film + written narrative turned into a TV deal. FREE\'s creative bible + Fine By Me Film runs the same play.',
   },
 ] as const satisfies readonly CaseStudy[]
 
@@ -196,7 +196,7 @@ export default function EkthesisPage() {
             className="font-sans text-3xl md:text-5xl italic text-heading leading-[1.05] max-w-[24ch] mb-12"
           >
             Male R&amp;B artists rarely create music rooted in{' '}
-            <span className="text-accent">longing</span> anymore, yet emotional wounds remain universal.
+            <span className="text-accent">longing</span> anymore. The bruises haven&rsquo;t gone anywhere.
           </motion.h2>
           <motion.div variants={fadeUp} custom={2} className="font-sans text-sm md:text-base leading-[1.8] text-muted max-w-[60ch] space-y-5 mb-12">
             <p>
@@ -245,9 +245,9 @@ export default function EkthesisPage() {
             actual cultural weight.
           </p>
           <p>
-            Visual storytelling is the competitive moat. Audio-only artists compete in a
-            saturated feed. Pairing music with narrative short films creates a differentiated hook
-            that algorithms, editorial curators, and sync supervisors all reward.
+            Visual storytelling is the edge. Audio-only artists get lost in the feed.
+            Short films give algorithms something to push, give editors something to write about,
+            and give sync supervisors proof the music works on screen.
           </p>
         </motion.div>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
@@ -259,9 +259,8 @@ export default function EkthesisPage() {
         <motion.div variants={fadeUp} custom={7} className="mt-12 border border-white/10 p-6">
           <span className="text-xs font-sans tracking-[0.15em] uppercase text-white/30 block mb-4">Visual album press multiplier</span>
           <p className="font-sans text-xs text-muted leading-relaxed">
-            Visual albums generate 3-5x more press coverage than audio-only releases because they
-            give music critics, film critics, fashion press, and cultural commentators all something
-            to write about. The surface area for conversation multiplies.
+            Visual albums pull 3-5x more press than audio-only releases. Music writers cover the sound,
+            film writers cover the visuals, fashion press covers the wardrobe. One release, multiple news cycles.
           </p>
           <p className="font-sans text-xs text-muted leading-relaxed mt-3">
             Spotify Canvas data: +5% streams, +145% shares, +20% playlist adds versus tracks without Canvas.
@@ -373,23 +372,23 @@ export default function EkthesisPage() {
         <SectionTitle className="max-w-[24ch]">Music &times; Film</SectionTitle>
         <motion.div variants={fadeUp} custom={2} className="font-sans text-sm leading-[1.8] text-muted max-w-[60ch] space-y-5 mb-16">
           <p>
-            The hybrid model pairs every music release with narrative short film content.
-            Each film is a living sync demo reel. Music supervisors see the music working in
-            visual context, not just hear it cold on a playlist.
+            Every music release gets a narrative short film. The film doubles as a sync
+            demo reel. Music supervisors watch the music work on screen instead of
+            hearing it cold on a playlist.
           </p>
           <p>
-            Visual albums generate 3-5x more press coverage than audio-only releases.
-            Spotify Canvas adds +5% streams, +145% shares, and +20% playlist adds. Those
-            numbers are for a looping video. A narrative short film compounds the effect.
+            Visual albums pull 3-5x more press than audio-only releases.
+            Spotify Canvas alone adds +5% streams, +145% shares, +20% playlist adds.
+            Canvas is a looping video. A real short film does more.
           </p>
         </motion.div>
 
         <motion.div variants={fadeUp} custom={3} className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
           {[
-            { label: 'Create', desc: 'Original music scored to narrative short films. Each film is a living sync demo reel.', color: 'text-accent' },
-            { label: 'Circulate', desc: 'Films play festivals, YouTube, social. Music supervisors discover the music in visual context.', color: 'text-heading' },
-            { label: 'Convert', desc: 'Sync inquiries follow. Brand deals follow. Film viewers have higher engagement than casual listeners.', color: 'text-heading' },
-            { label: 'Compound', desc: 'Revenue funds the next film. More catalog. More sync opportunities. The body of work appreciates.', color: 'text-heading' },
+            { label: 'Create', desc: 'Original music scored to narrative short films. Each film doubles as a sync demo reel.', color: 'text-accent' },
+            { label: 'Circulate', desc: 'Films play festivals, YouTube, social. Music supervisors find the music already working on screen.', color: 'text-heading' },
+            { label: 'Convert', desc: 'Sync inquiries come from the films. Brand deals follow. People who watch stick around longer than casual listeners.', color: 'text-heading' },
+            { label: 'Compound', desc: 'Revenue funds the next film. Catalog grows. Sync pool grows. The whole body of work gets more valuable.', color: 'text-heading' },
           ].map((step) => (
             <div key={step.label} className="border border-white/10 p-6 hover:border-white/20 transition-colors">
               <span className={`text-xs font-sans tracking-[0.15em] uppercase block mb-3 ${step.color}`}>{step.label}</span>
@@ -432,9 +431,9 @@ export default function EkthesisPage() {
           R&amp;B is the largest genre ecosystem in America
         </motion.h2>
         <motion.p variants={fadeUp} custom={2} className="font-sans text-sm leading-[1.8] text-muted max-w-[60ch] mb-16">
-          Combined R&amp;B/Hip-Hop has held the #1 genre position in US music consumption every year
-          since 2017. Independent artists now earn half of all Spotify royalties. The tools,
-          distribution, and economics have never been more favorable for unsigned artists.
+          Combined R&amp;B/Hip-Hop has been the #1 genre in US music consumption every year
+          since 2017. Independent artists now earn half of all Spotify royalties. Distribution
+          is cheaper, tools are better, and the middlemen are optional.
         </motion.p>
 
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 mb-16">
@@ -485,9 +484,9 @@ export default function EkthesisPage() {
             means a loyal but somewhat underserved audience on digital platforms.
           </p>
           <p>
-            TikTok is the primary discovery engine for Gen Z. R&amp;B is well-suited: singable hooks,
-            emotional resonance, and visual aesthetics that pair well with short-form video.
-            Users spend an average of 53.8 minutes/day on the platform.
+            TikTok is where Gen Z finds new music. R&amp;B works there because the hooks are
+            singable and the visuals translate to short-form clips. Average daily time on platform:
+            53.8 minutes.
           </p>
         </motion.div>
 
@@ -508,9 +507,9 @@ export default function EkthesisPage() {
         <SectionLabel>Platform Landscape</SectionLabel>
         <SectionTitle className="max-w-[24ch]">Where It Lives</SectionTitle>
         <motion.p variants={fadeUp} custom={2} className="font-sans text-sm leading-[1.8] text-muted max-w-[60ch] mb-12">
-          Discovery has decentralized. 80%+ of artists earning $1M+ on Spotify never reached the
-          Global Daily Top 50. Playlist and algorithmic discovery drive the majority of revenue
-          for indie artists. Social platforms serve as the first touchpoint before fans migrate to DSPs.
+          Discovery has decentralized. 80%+ of artists earning $1M+ on Spotify never hit the
+          Global Daily Top 50. Playlists and algorithms do the work now, not radio.
+          Social platforms are where fans hear it first, then they go find it on a DSP.
         </motion.p>
 
         <motion.div variants={fadeUp} custom={3}>
@@ -645,8 +644,7 @@ export default function EkthesisPage() {
                   </div>
                 </div>
                 <p className="font-mono text-[10px] text-white/20 mt-4">
-                  Sources: Patreon About page 2025, bandcamp.com/about, industry benchmarks. Fan-direct is the fastest-growing
-                  monetization category for indie artists.
+                  Sources: Patreon About page 2025, bandcamp.com/about.
                 </p>
               </div>
             </div>

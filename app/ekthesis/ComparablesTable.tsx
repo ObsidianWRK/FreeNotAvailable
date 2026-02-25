@@ -7,7 +7,7 @@ const comparables = [
     name: 'Beyonce',
     category: 'visual',
     achievement: 'Visual albums (Lemonade 4x Plat, Black Is King on Disney+). Self-distributed concert film. Platform-exclusive premieres via Parkwood Entertainment.',
-    relevance: 'Gold standard for visual album as narrative IP. FREE echoes this at indie scale.',
+    relevance: 'The template for visual album as narrative IP. FREE runs a version of this at indie scale.',
   },
   {
     name: 'The Weeknd',
@@ -43,7 +43,7 @@ const comparables = [
     name: 'SZA',
     category: 'visual',
     achievement: 'SOS 8x Platinum. Ctrl 6x Platinum. Cohesive visual identity with ocean/water motifs across all SOS-era visuals.',
-    relevance: 'Proves visual cohesion drives fan engagement and repeat consumption in R&B.',
+    relevance: 'Visual cohesion keeps fans coming back. One look, one world, every release.',
   },
   {
     name: 'Daniel Caesar',
@@ -61,13 +61,13 @@ const comparables = [
     name: 'EMPIRE Distribution',
     category: 'franchise',
     achievement: 'Independent distributor (SF). Roster includes Shaboozey, Larry June. Expanded into Web3. Competes with majors.',
-    relevance: 'Infrastructure comp. Represents the indie distribution tier that could scale FREE\'s releases.',
+    relevance: 'Infrastructure comp. The indie distribution tier that could carry FREE\'s releases.',
   },
   {
     name: 'Detroit Sound Conservancy',
     category: 'franchise',
     achievement: '501(c)(3) nonprofit preserving Detroit\'s musical heritage. Operates Graystone Jazz Museum. Blues, Jazz, Techno, Soul programs.',
-    relevance: 'Represents the Detroit creative ecosystem FREE operates within. Heritage anchor for the brand.',
+    relevance: 'The Detroit creative ecosystem FREE operates in. Heritage anchor for the brand.',
   },
 ] as const satisfies readonly ComparableArtist[]
 
