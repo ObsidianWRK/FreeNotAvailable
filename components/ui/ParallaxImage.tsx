@@ -8,11 +8,11 @@ interface ParallaxImageProps {
   alt: string
   width: number
   height: number
-  preload?: boolean
+  priority?: boolean
   className?: string
 }
 
-export default function ParallaxImage({ src, alt, width, height, preload, className }: ParallaxImageProps) {
+export default function ParallaxImage({ src, alt, width, height, priority, className }: ParallaxImageProps) {
   const ref = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
   const y = useTransform(scrollYProgress, [0, 1], ['-5%', '5%'])
@@ -20,7 +20,7 @@ export default function ParallaxImage({ src, alt, width, height, preload, classN
   return (
     <div ref={ref} className={`overflow-hidden ${className || ''}`}>
       <motion.div style={{ y }} className="will-change-transform">
-        <Image src={src} alt={alt} width={width} height={height} preload={preload} sizes="100vw" style={{ width: '100%', height: 'auto' }} />
+        <Image src={src} alt={alt} width={width} height={height} priority={priority} sizes="100vw" style={{ width: '100%', height: 'auto' }} />
       </motion.div>
     </div>
   )
