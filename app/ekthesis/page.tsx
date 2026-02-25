@@ -3,6 +3,10 @@
 import { motion, useScroll, useTransform } from 'motion/react'
 import Image from 'next/image'
 import { useRef } from 'react'
+import type { CaseStudy, StatItem } from '@/lib/content/types'
+import ComparablesTable from './ComparablesTable'
+import PlatformGrid from './PlatformGrid'
+import { StreamingRatesTable, SyncRangesTable, Year1Projections, Year23Projections } from './RevenueTable'
 
 /* ─── Animation helpers ─── */
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number]
@@ -33,6 +37,7 @@ function Section({
   return (
     <motion.section
       id={id}
+      data-section-id={id}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: '-80px' }}
@@ -75,72 +80,48 @@ function SectionTitle({
 }
 
 /* ─── Stat ─── */
-function Stat({ value, label, accent, i = 0 }: { value: string; label: string; accent?: boolean; i?: number }) {
+function Stat({ value, label, source, accent, i = 0 }: StatItem & { accent?: boolean; i?: number }) {
   return (
     <motion.div variants={fadeUp} custom={i}>
       <span className={`block font-display text-4xl md:text-5xl ${accent ? 'text-accent' : 'text-heading'}`}>
         {value}
       </span>
       <span className="font-sans text-xs text-muted mt-2 block">{label}</span>
+      {source && <span className="font-mono text-[9px] text-white/15 mt-1 block">{source}</span>}
     </motion.div>
   )
 }
 
-/* ─── Comp row ─── */
-function CompRow({
-  name,
-  detail,
-  relevance,
-  i = 0,
-}: {
-  name: string
-  detail: string
-  relevance: string
-  i?: number
-}) {
-  return (
-    <motion.div
-      variants={fadeUp}
-      custom={i}
-      className="grid grid-cols-1 md:grid-cols-[160px_1fr_1fr] gap-3 md:gap-8 py-5 border-b border-white/5 last:border-0"
-    >
-      <div className="font-display text-base text-heading">{name}</div>
-      <div className="font-sans text-xs text-muted leading-relaxed">{detail}</div>
-      <div className="font-mono text-xs text-white/50 leading-relaxed italic">{relevance}</div>
-    </motion.div>
-  )
-}
-
-/* ─── Revenue row ─── */
-function RevenueRow({
-  stream,
-  conservative,
-  base,
-  aggressive,
-  i = 0,
-}: {
-  stream: string
-  conservative: string
-  base: string
-  aggressive: string
-  i?: number
-}) {
-  return (
-    <motion.div
-      variants={fadeUp}
-      custom={i}
-      className="grid grid-cols-4 gap-4 py-3 border-b border-white/5 last:border-0 text-sm"
-    >
-      <div className="font-sans text-muted">{stream}</div>
-      <div className="font-mono text-white/40 text-right">{conservative}</div>
-      <div className="font-mono text-heading text-right">{base}</div>
-      <div className="font-mono text-accent text-right">{aggressive}</div>
-    </motion.div>
-  )
-}
+/* ─── Case studies data ─── */
+const caseStudies = [
+  {
+    artist: 'Brent Faiyaz',
+    project: 'Lost Kids / Wasteland (2022)',
+    finding: 'Debuted #2 Billboard 200 fully independent. Wasteland certified Platinum (Sep 2023). Built Lost Kids label, maintained master ownership, and created a consistent moody cinematic visual brand. Later distributed via UnitedMasters.',
+    relevance: 'Proves independent male R&B can reach platinum-level commercial success. FREE\'s CMC/OWJV structure and visual consistency follow this model.',
+  },
+  {
+    artist: 'Frank Ocean',
+    project: 'Endless / Blonde (2016)',
+    finding: 'Released 45-minute visual album Endless on Apple Music to fulfill Def Jam contract. Next day, independently released Blonde via Boys Don\'t Cry label. Blonde went Platinum. Limited-edition magazine ($80) sold out at pop-ups, now resells at $300-500+.',
+    relevance: 'Pioneered the visual album as strategic business tool. FREE\'s creative bible parallels Ocean\'s magazine as a tangible narrative artifact.',
+  },
+  {
+    artist: 'Beyonce',
+    project: 'Black Is King (2020)',
+    finding: '85-minute music-driven visual film released exclusively on Disney+. Grammy-nominated for Best Music Film. Shot across multiple countries with elaborate visual mythology. Drove Disney+ subscriber acquisition during the pandemic streaming boom.',
+    relevance: 'Proves music-driven visual narrative can serve as premium streaming content. FREE\'s Other World mythology mirrors this visual world-building approach.',
+  },
+  {
+    artist: 'Childish Gambino',
+    project: 'Because the Internet (2013) + Clapping for the Wrong Reasons',
+    finding: 'Released album alongside a 72-page screenplay and a free 25-minute short film on YouTube. This Is America later certified Diamond (10M+ units). The multimedia approach directly led to Atlanta (FX, 2016-2022).',
+    relevance: 'Closest blueprint for free short film + written narrative as IP funnel. FREE\'s creative bible + Fine By Me Film directly parallels this playbook.',
+  },
+] as const satisfies readonly CaseStudy[]
 
 /* ═══════════════════════════════════════════ */
-/*  EKTHESIS PAGE                              */
+/*  EKTHESIS PAGE — 12 SECTIONS               */
 /* ═══════════════════════════════════════════ */
 export default function EkthesisPage() {
   const heroRef = useRef<HTMLDivElement>(null)
@@ -149,9 +130,11 @@ export default function EkthesisPage() {
 
   return (
     <main className="bg-canvas min-h-screen">
-      {/* ─── 1. TITLE ─── */}
+
+      {/* ═══ 1. TITLE ═══ */}
       <motion.section
         ref={heroRef}
+        data-section-id="title"
         style={{ opacity: heroOpacity }}
         className="min-h-screen flex flex-col items-center justify-center px-6 relative"
       >
@@ -177,7 +160,7 @@ export default function EkthesisPage() {
           transition={{ duration: 0.8, delay: 0.8 }}
           className="font-mono text-[clamp(0.75rem,2vw,1rem)] text-muted mt-6 text-center tracking-wider"
         >
-          Ἔκθεσις — A proposition for the Other World
+          A proposition for the Other World
         </motion.p>
         <motion.div
           initial={{ opacity: 0 }}
@@ -193,12 +176,12 @@ export default function EkthesisPage() {
         </motion.div>
       </motion.section>
 
-      {/* ─── 2. THE ARTIST ─── */}
+      {/* ═══ 2. THE ARTIST ═══ */}
       <Section id="artist" className="overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src="/images/hero-cover.avif"
-            alt="FREE in shadow, partially obscured face, the Faceless Man"
+            alt="FREE in shadow"
             fill
             className="object-cover object-center opacity-15"
             sizes="100vw"
@@ -212,75 +195,91 @@ export default function EkthesisPage() {
             custom={1}
             className="font-sans text-3xl md:text-5xl italic text-heading leading-[1.05] max-w-[24ch] mb-12"
           >
-            In today&rsquo;s R&amp;B landscape, men rarely make music that{' '}
-            <span className="text-accent">yearns</span> anymore.
+            Male R&amp;B artists rarely create music rooted in{' '}
+            <span className="text-accent">longing</span> anymore, yet emotional wounds remain universal.
           </motion.h2>
           <motion.div variants={fadeUp} custom={2} className="font-sans text-sm md:text-base leading-[1.8] text-muted max-w-[60ch] space-y-5 mb-12">
             <p>
-              In 2026, we&rsquo;re just as bruised, conflicted, and love-worn as our female counterparts.
-              Heartbreak is universal. Duality sits at the core of everyone navigating love and life.
+              FREE is a songwriter in the space where deflection meets self-reflection.
+              His sound draws from early 2010s R&amp;B: a cold croon. Product of the 90s, shaped
+              by the Jodeci era, filtered through a millennial viewpoint. Based in Detroit.
             </p>
             <p>
-              As a songwriter, FREE thrives in that grey area where deflection meets self-reflection.
-              His sound doesn&rsquo;t chase the glossy nostalgia of old-school love ballads, but embraces
-              the cold croon of the early 2010s &mdash; a shadowy echo that still resonates today.
-            </p>
-            <p>
-              A product of the &rsquo;90s &mdash; particularly the Jodeci era &mdash; with a millennial viewpoint.
-              Emotions move beyond eras, looping endlessly through time.
+              The creative universe is called Other World. Two copyright-holding entities
+              sit behind it: Creative Minds Coalition and OWJV (Other World Joint Venture).
+              Every release lives inside a visual mythology built before the first track dropped.
             </p>
           </motion.div>
-          <motion.div variants={fadeUp} custom={3} className="flex items-baseline gap-4">
-            <span className="font-display text-5xl md:text-6xl text-accent">10</span>
-            <span className="font-sans text-sm text-muted">
-              released tracks across 2 projects &mdash; FINExME &amp; SINE NOCTIS
-            </span>
+          <motion.div variants={fadeUp} custom={3} className="grid grid-cols-3 gap-6">
+            <div>
+              <span className="font-display text-5xl md:text-6xl text-accent block">10</span>
+              <span className="font-sans text-xs text-muted mt-1 block">released tracks across 2 projects</span>
+            </div>
+            <div>
+              <span className="font-display text-5xl md:text-6xl text-heading block">2</span>
+              <span className="font-sans text-xs text-muted mt-1 block">film assets (Fine By Me Film + SINE NOCTIS trailers)</span>
+            </div>
+            <div>
+              <span className="font-display text-5xl md:text-6xl text-heading block">5</span>
+              <span className="font-sans text-xs text-muted mt-1 block">planned projects in the Other World arc</span>
+            </div>
           </motion.div>
         </div>
       </Section>
 
-      {/* ─── 3. THE MYTHOS ─── */}
-      <Section id="mythos">
-        <SectionLabel>The Mythos</SectionLabel>
-        <SectionTitle>Other World</SectionTitle>
-        <motion.p variants={fadeUp} custom={2} className="font-sans text-sm leading-[1.8] text-muted max-w-[60ch] mb-16">
-          Each project is a self-contained Greek-style tale about FREE, whose love life and vices
-          replay the Prometheus myth in modern, nocturnal settings. Every era is a new &ldquo;night-world&rdquo;
-          with its own armor, color grade, and emotional weather.
-        </motion.p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-16">
-          {[
-            { title: 'FREE = Prometheus', body: 'In every project, he overindulges in intimacy of the body while neglecting intimacy of mind and spirit, repeating the same core sin until it kills him and triggers reincarnation into a new version of himself.' },
-            { title: 'The Lady in Black = The Eagle', body: 'She is the executor of consequence rather than a villain. Her face and identity are not highlighted as much as the pattern she represents: the way his own choices come back to devour him.' },
-            { title: 'Eternal Return', body: 'No matter how the details change \u2014 the women, the city, the car, the jacket \u2014 the end result is always the same: Prometheus meets his demise again at the beak of his own choices.' },
-          ].map((item, i) => (
-            <motion.div key={item.title} variants={fadeUp} custom={i + 3}>
-              <span className="text-xs font-sans tracking-[0.15em] uppercase text-accent/70 block mb-3">{item.title}</span>
-              <p className="font-sans text-xs text-muted leading-relaxed">{item.body}</p>
-            </motion.div>
-          ))}
+      {/* ═══ 3. THE THESIS ═══ */}
+      <Section id="thesis">
+        <SectionLabel>The Thesis</SectionLabel>
+        <motion.h2
+          variants={fadeUp}
+          custom={1}
+          className="font-sans text-3xl md:text-4xl lg:text-5xl italic text-heading leading-[1.05] max-w-[28ch] mb-6"
+        >
+          Male vulnerability is <span className="text-accent">underserved</span> in R&amp;B.
+        </motion.h2>
+        <motion.div variants={fadeUp} custom={2} className="font-sans text-sm leading-[1.8] text-muted max-w-[60ch] space-y-5 mb-16">
+          <p>
+            R&amp;B/Hip-Hop has been the #1 genre in US music consumption every year since 2017,
+            holding roughly 28% of the market. R&amp;B standalone accounts for about 10-11%.
+            That 10-11% is stable, loyal, and underserved on digital platforms relative to its
+            actual cultural weight.
+          </p>
+          <p>
+            Visual storytelling is the competitive moat. Audio-only artists compete in a
+            saturated feed. Pairing music with narrative short films creates a differentiated hook
+            that algorithms, editorial curators, and sync supervisors all reward.
+          </p>
+        </motion.div>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+          <Stat value="~28%" label="R&B/Hip-Hop share of US consumption" source="MRC Data/Luminate" accent i={3} />
+          <Stat value="10-11%" label="R&B standalone share" source="RIAA via Statista" i={4} />
+          <Stat value="+5%" label="Streams with Spotify Canvas" source="Spotify for Artists" i={5} />
+          <Stat value="+145%" label="Shares with Spotify Canvas" source="Spotify for Artists" accent i={6} />
         </div>
-        <motion.div variants={fadeUp} custom={6} className="border border-white/10 p-6 md:p-10">
-          <span className="text-xs font-sans tracking-[0.15em] uppercase text-white/30 block mb-6">Visual Law</span>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 font-sans text-xs text-muted leading-relaxed">
-            <div><span className="text-heading">Intimacy vs Distance</span> &mdash; Bodies are close but faces are obscured. The camera is a spy.</div>
-            <div><span className="text-heading">Voyeurism</span> &mdash; Long lenses, over-the-shoulder angles, silhouettes, reflections, partial occlusions.</div>
-            <div><span className="text-heading">Reincarnation Cues</span> &mdash; Each era swaps his armor while retaining shared DNA: night settings, partial visibility, ambiguous urban locations.</div>
-            <div><span className="text-heading">No Text on Covers</span> &mdash; Art alone must communicate the story. Each cover forms part of a cohesive visual anthology.</div>
-          </div>
+        <motion.div variants={fadeUp} custom={7} className="mt-12 border border-white/10 p-6">
+          <span className="text-xs font-sans tracking-[0.15em] uppercase text-white/30 block mb-4">Visual album press multiplier</span>
+          <p className="font-sans text-xs text-muted leading-relaxed">
+            Visual albums generate 3-5x more press coverage than audio-only releases because they
+            give music critics, film critics, fashion press, and cultural commentators all something
+            to write about. The surface area for conversation multiplies.
+          </p>
+          <p className="font-sans text-xs text-muted leading-relaxed mt-3">
+            Spotify Canvas data: +5% streams, +145% shares, +20% playlist adds versus tracks without Canvas.
+            That is just a looping video. A full narrative short film compounds the effect.
+          </p>
         </motion.div>
       </Section>
 
-      {/* ─── 4. THE WORK ─── */}
-      <Section id="work">
-        <SectionLabel>The Work</SectionLabel>
-        <SectionTitle>Released Projects</SectionTitle>
+      {/* ═══ 4. THE UNIVERSE ═══ */}
+      <Section id="universe">
+        <SectionLabel>The Universe</SectionLabel>
+        <SectionTitle>Other World</SectionTitle>
 
+        {/* Released projects */}
         <div className="space-y-16 mb-20">
-          {/* FINExME */}
           <motion.div variants={fadeUp} custom={2} className="flex flex-col md:flex-row gap-6 md:gap-10">
             <div className="relative w-40 h-40 shrink-0">
-              <Image src="/images/finexme-cover.avif" alt="FINExME album cover \u2014 vibrant reds and neon accents, shadow work" fill className="object-cover" sizes="160px" />
+              <Image src="/images/finexme-cover.avif" alt="FINExME album cover" fill className="object-cover" sizes="160px" />
             </div>
             <div>
               <div className="flex items-center gap-4 mb-2">
@@ -304,10 +303,9 @@ export default function EkthesisPage() {
             </div>
           </motion.div>
 
-          {/* SINE NOCTIS */}
           <motion.div variants={fadeUp} custom={3} className="flex flex-col md:flex-row gap-6 md:gap-10">
             <div className="relative w-40 h-40 shrink-0">
-              <Image src="/images/jacket-portrait.avif" alt="FREE in the SINE NOCTIS era \u2014 grayscale, Alpinestars jacket, alone" fill className="object-cover grayscale" sizes="160px" />
+              <Image src="/images/jacket-portrait.avif" alt="FREE in the SINE NOCTIS era" fill className="object-cover grayscale" sizes="160px" />
             </div>
             <div>
               <div className="flex items-center gap-4 mb-2">
@@ -317,8 +315,8 @@ export default function EkthesisPage() {
                 <span className="font-sans text-xs tracking-[0.15em] uppercase text-white/40">Act II &mdash; 2024/2026</span>
               </div>
               <p className="font-sans text-sm leading-[1.8] text-muted mb-3">
-                The icy follow-up to 2024&rsquo;s steamy FINExME. Three tracks. Grayscale. Alone this time.
-                Stillness on the surface, something heavier underneath.
+                The icy follow-up. Three tracks. Grayscale. Alone this time. Stillness on the
+                surface, something heavier underneath.
               </p>
               <div className="font-mono text-xs text-white/30 space-y-1">
                 <div>Production: FREE, HNMadeThisOne, Eli Myles</div>
@@ -329,7 +327,7 @@ export default function EkthesisPage() {
         </div>
 
         {/* Film content */}
-        <motion.div variants={fadeUp} custom={4} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <motion.div variants={fadeUp} custom={4} className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
           <div className="border border-white/10 p-6">
             <span className="font-sans text-xs tracking-[0.15em] uppercase text-accent/60 block mb-3">Film</span>
             <span className="font-display text-lg text-heading block mb-2">Fine By Me Film</span>
@@ -342,16 +340,90 @@ export default function EkthesisPage() {
             <span className="font-sans text-xs tracking-[0.15em] uppercase text-white/40 block mb-3">Trailers</span>
             <span className="font-display text-lg text-heading block mb-2">SINE NOCTIS Visual Series</span>
             <p className="font-sans text-xs text-muted leading-relaxed">
-              ANTE (the doorway), VESPERA (the dusk walk), NOCTEM (the night plunge) &mdash; a three-part
+              ANTE (the doorway), VESPERA (the dusk walk), NOCTEM (the night plunge). A three-part
               descent leading into the full visual for VAN GOGH and THIN ICE FREESTYLE.
             </p>
           </div>
         </motion.div>
+
+        {/* Future roadmap */}
+        <motion.div variants={fadeUp} custom={5}>
+          <span className="text-xs font-sans tracking-[0.15em] uppercase text-white/30 block mb-6">What comes next</span>
+          <div className="grid grid-cols-3 gap-8">
+            {[
+              { src: '/images/logotype-otherland.png', alt: 'OTHERLAND', status: 'In Development', desc: 'Next full-length album' },
+              { src: '/images/logotype-neverdyin.png', alt: 'NEVERDYIN', status: 'Early Concept', desc: 'Origins and reincarnation' },
+              { src: '/images/logotype-sexsymbol.png', alt: 'SEX SYMBOL', status: 'Postponed', desc: 'The culmination. Entirely produced by Worst Choice.' },
+            ].map((item) => (
+              <div key={item.alt}>
+                <div className="relative w-full aspect-[3/1] mb-4">
+                  <Image src={item.src} alt={item.alt} fill className="object-contain opacity-40" sizes="(max-width: 768px) 30vw, 250px" />
+                </div>
+                <span className="font-mono text-xs text-white/30 block mb-1">{item.status}</span>
+                <p className="font-sans text-xs text-muted">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
       </Section>
 
-      {/* ─── 5. THE MARKET ─── */}
+      {/* ═══ 5. THE MODEL ═══ */}
+      <Section id="model">
+        <SectionLabel>The Model</SectionLabel>
+        <SectionTitle className="max-w-[24ch]">Music &times; Film</SectionTitle>
+        <motion.div variants={fadeUp} custom={2} className="font-sans text-sm leading-[1.8] text-muted max-w-[60ch] space-y-5 mb-16">
+          <p>
+            The hybrid model pairs every music release with narrative short film content.
+            Each film is a living sync demo reel. Music supervisors see the music working in
+            visual context, not just hear it cold on a playlist.
+          </p>
+          <p>
+            Visual albums generate 3-5x more press coverage than audio-only releases.
+            Spotify Canvas adds +5% streams, +145% shares, and +20% playlist adds. Those
+            numbers are for a looping video. A narrative short film compounds the effect.
+          </p>
+        </motion.div>
+
+        <motion.div variants={fadeUp} custom={3} className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+          {[
+            { label: 'Create', desc: 'Original music scored to narrative short films. Each film is a living sync demo reel.', color: 'text-accent' },
+            { label: 'Circulate', desc: 'Films play festivals, YouTube, social. Music supervisors discover the music in visual context.', color: 'text-heading' },
+            { label: 'Convert', desc: 'Sync inquiries follow. Brand deals follow. Film viewers have higher engagement than casual listeners.', color: 'text-heading' },
+            { label: 'Compound', desc: 'Revenue funds the next film. More catalog. More sync opportunities. The body of work appreciates.', color: 'text-heading' },
+          ].map((step) => (
+            <div key={step.label} className="border border-white/10 p-6 hover:border-white/20 transition-colors">
+              <span className={`text-xs font-sans tracking-[0.15em] uppercase block mb-3 ${step.color}`}>{step.label}</span>
+              <p className="font-sans text-xs text-muted leading-relaxed">{step.desc}</p>
+            </div>
+          ))}
+        </motion.div>
+
+        {/* Revenue streams list */}
+        <motion.div variants={fadeUp} custom={4} className="border border-white/10 p-6 md:p-10">
+          <span className="text-xs font-sans tracking-[0.15em] uppercase text-white/30 block mb-6">Revenue Streams</span>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-2 text-sm">
+            {[
+              'Streaming royalties (Spotify, Apple Music, TIDAL, etc.)',
+              'YouTube ad revenue (long-form films)',
+              'Sync licensing (TV, film, ads, games)',
+              'Live performance / touring',
+              'Merchandise (Other World IP-driven)',
+              'Brand deals (music + visual content)',
+              'Patreon / Bandcamp (direct fan support)',
+              'Film festivals / platform acquisitions',
+            ].map((s) => (
+              <div key={s} className="flex items-start gap-2 py-2 border-b border-white/5 last:border-0">
+                <span className="text-accent/40 mt-0.5">+</span>
+                <span className="font-sans text-xs text-muted">{s}</span>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </Section>
+
+      {/* ═══ 6. MARKET OPPORTUNITY ═══ */}
       <Section id="market">
-        <SectionLabel>The Market</SectionLabel>
+        <SectionLabel>Market Opportunity</SectionLabel>
         <motion.h2
           variants={fadeUp}
           custom={1}
@@ -361,268 +433,338 @@ export default function EkthesisPage() {
         </motion.h2>
         <motion.p variants={fadeUp} custom={2} className="font-sans text-sm leading-[1.8] text-muted max-w-[60ch] mb-16">
           Combined R&amp;B/Hip-Hop has held the #1 genre position in US music consumption every year
-          since 2017. R&amp;B standalone holds about 10-11% &mdash; a stable, loyal audience that is
-          underserved on digital platforms relative to its actual popularity.
+          since 2017. Independent artists now earn half of all Spotify royalties. The tools,
+          distribution, and economics have never been more favorable for unsigned artists.
         </motion.p>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-16">
-          <Stat value="$29.6B" label="Global recorded music 2024" accent i={3} />
-          <Stat value="752M" label="Global paid streaming subscribers" i={4} />
-          <Stat value="$3.2B" label="US R&B/Hip-Hop revenue (est.)" i={5} />
-          <Stat value="27.7%" label="#1 genre share since 2017" accent i={6} />
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 mb-16">
+          <Stat value="$29.6B" label="Global recorded music revenue (2024)" source="IFPI 2024" accent i={3} />
+          <Stat value="$1.2B" label="US R&B standalone revenue (est.)" source="RIAA/Statista, ~10-11% of $11.3B" i={4} />
+          <Stat value="$412.6M" label="US sync licensing market (2024)" source="RIAA 2024" i={5} />
+          <Stat value="752M" label="Global paid streaming subscribers" source="IFPI 2024" accent i={6} />
+          <Stat value="$5B+" label="Indie artist earnings on Spotify (2024)" source="Spotify Loud & Clear 2024" i={7} />
+          <Stat value="$10B+" label="Total Spotify payouts in 2024 (record year)" source="Spotify Loud & Clear 2024" i={8} />
         </div>
 
-        <motion.div variants={fadeUp} custom={7} className="border border-white/10 p-6 md:p-10 mb-12">
-          <span className="text-xs font-sans tracking-[0.15em] uppercase text-white/30 block mb-6">Who Listens</span>
+        <motion.div variants={fadeUp} custom={9} className="border border-white/10 p-6 md:p-10">
+          <span className="text-xs font-sans tracking-[0.15em] uppercase text-white/30 block mb-6">Independent artist benchmarks (Spotify)</span>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-              <span className="font-display text-3xl text-accent block">36%</span>
-              <span className="font-sans text-xs text-muted mt-1 block">of Millennials prefer R&amp;B/Soul</span>
+              <span className="font-display text-3xl text-accent block">~1,500</span>
+              <span className="font-sans text-xs text-muted mt-1 block">artists earning $1M+/year</span>
             </div>
             <div>
-              <span className="font-display text-3xl text-heading block">30%</span>
-              <span className="font-sans text-xs text-muted mt-1 block">of Gen Z stream R&amp;B on Spotify (4th most popular)</span>
+              <span className="font-display text-3xl text-heading block">~$131K</span>
+              <span className="font-sans text-xs text-muted mt-1 block">10,000th-ranked artist annual earnings</span>
             </div>
             <div>
-              <span className="font-display text-3xl text-heading block">38.9%</span>
-              <span className="font-sans text-xs text-muted mt-1 block">of US respondents self-report listening to R&amp;B/Soul</span>
+              <span className="font-display text-3xl text-heading block">3x+</span>
+              <span className="font-sans text-xs text-muted mt-1 block">growth at every earning threshold since 2017</span>
             </div>
           </div>
+          <p className="font-mono text-[10px] text-white/20 mt-6">Source: Spotify Loud &amp; Clear 2024, loudandclear.byspotify.com</p>
+        </motion.div>
+      </Section>
+
+      {/* ═══ 7. AUDIENCE ═══ */}
+      <Section id="audience">
+        <SectionLabel>Audience</SectionLabel>
+        <SectionTitle className="max-w-[22ch]">Who Listens</SectionTitle>
+
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-16">
+          <Stat value="36%" label="Millennials prefer R&B/Soul" source="CBS News/Nielsen" accent i={2} />
+          <Stat value="30%" label="Gen Z stream R&B on Spotify (4th genre)" source="Spotify/headphonesaddict" i={3} />
+          <Stat value="75%" label="TikTok users discover new music there" source="demandsage.com 2025" accent i={4} />
+          <Stat value="40.3%" label="TikTok users aged 25-34 (largest cohort)" source="demandsage.com 2025" i={5} />
+        </div>
+
+        <motion.div variants={fadeUp} custom={6} className="font-sans text-sm leading-[1.8] text-muted max-w-[60ch] space-y-5 mb-12">
+          <p>
+            R&amp;B/Soul skews 18-34, with strong crossover appeal. The genre has broader
+            self-reported appeal (~39%) than its streaming share (~9-11%) suggests. That gap
+            means a loyal but somewhat underserved audience on digital platforms.
+          </p>
+          <p>
+            TikTok is the primary discovery engine for Gen Z. R&amp;B is well-suited: singable hooks,
+            emotional resonance, and visual aesthetics that pair well with short-form video.
+            Users spend an average of 53.8 minutes/day on the platform.
+          </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-          <Stat value="$5B+" label="Indie earnings on Spotify 2024 (~50% of all royalties)" i={8} />
-          <Stat value="1,500" label="Artists earning $1M+ on Spotify" i={9} />
-          <Stat value="$131K" label="10,000th-ranked artist annual earnings" i={10} />
-          <Stat value="75%" label="TikTok users discover music on platform" accent i={11} />
-        </div>
+        <motion.div variants={fadeUp} custom={7} className="border border-white/10 p-6">
+          <span className="text-xs font-sans tracking-[0.15em] uppercase text-white/30 block mb-4">Top markets</span>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-sans text-xs text-muted leading-relaxed">
+            <div><span className="text-heading">United States</span> &mdash; Largest music market globally. R&amp;B/Hip-Hop #1 since 2017.</div>
+            <div><span className="text-heading">United Kingdom</span> &mdash; R&amp;B/Soul climbed to 5th most popular genre by 2021.</div>
+            <div><span className="text-heading">Global streaming</span> &mdash; 50%+ of artists earning $1K+ generate majority of royalties outside home country.</div>
+            <div><span className="text-heading">Asia-Pacific</span> &mdash; Fastest-growing streaming region at 14%+ CAGR.</div>
+          </div>
+          <p className="font-mono text-[10px] text-white/20 mt-4">Sources: Luminate/MRC Data, Spotify Loud &amp; Clear 2024, Grand View Research</p>
+        </motion.div>
       </Section>
 
-      {/* ─── 6. THE GAP ─── */}
-      <Section id="gap">
-        <SectionLabel>The Gap</SectionLabel>
-        <motion.h2
-          variants={fadeUp}
-          custom={1}
-          className="font-sans text-4xl md:text-5xl lg:text-6xl italic text-heading leading-[0.95] mb-16"
-        >
-          Why <span className="text-accent">Now</span>
-        </motion.h2>
-
-        <div className="space-y-8">
-          {[
-            { num: '01', title: 'R&B is under-invested relative to its audience loyalty', body: 'R\u2019B standalone holds 10-11% of consumption, yet receives less label investment than hip-hop or pop. White space for distinctive artists.' },
-            { num: '02', title: 'Independent artists are winning', body: 'Indie artists earned $5B+ on Spotify alone in 2024. The tools, distribution, and economics have never been more favorable for unsigned artists.' },
-            { num: '03', title: 'Discovery has decentralized', body: 'TikTok, algorithmic playlists, and social platforms mean an artist no longer needs a label\u2019s radio machine. A visual/narrative hook is what the algorithm rewards.' },
-            { num: '04', title: 'Visual storytelling is a competitive moat', body: 'R&B\u2019s emotional range pairs well with cinematic content. Audio-only artists can\u2019t compete for brand deals and sync placements the same way.' },
-            { num: '05', title: 'Fan-direct economics favor depth over breadth', body: 'With Bandcamp (82% to artist), Patreon ($3.5B+ paid to creators), and D2C merch, an artist with 1,000-5,000 deeply engaged fans can generate meaningful revenue.' },
-            { num: '06', title: 'Detroit\u2019s Motown legacy', body: 'The city that built Motown. That still means something, globally. And it gives FREE a story no one else can claim.' },
-          ].map((item, i) => (
-            <motion.div key={item.num} variants={fadeUp} custom={i + 2} className="flex gap-6 items-start">
-              <span className="font-mono text-sm text-accent/30 shrink-0 w-8">{item.num}</span>
-              <div>
-                <span className="font-sans text-sm text-heading font-medium block">{item.title}</span>
-                <span className="font-sans text-xs text-muted leading-relaxed mt-1 block">{item.body}</span>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </Section>
-
-      {/* ─── 7. THE MODEL ─── */}
-      <Section id="model">
-        <SectionLabel>The Model</SectionLabel>
-        <SectionTitle className="max-w-[24ch]">Music &times; Film</SectionTitle>
-        <motion.p variants={fadeUp} custom={2} className="font-sans text-xl md:text-2xl italic text-heading/80 max-w-[36ch] mb-16 leading-snug">
-          Each project is a Greek vignette — songs as scenes, albums as seasons.
+      {/* ═══ 8. PLATFORM LANDSCAPE ═══ */}
+      <Section id="platforms">
+        <SectionLabel>Platform Landscape</SectionLabel>
+        <SectionTitle className="max-w-[24ch]">Where It Lives</SectionTitle>
+        <motion.p variants={fadeUp} custom={2} className="font-sans text-sm leading-[1.8] text-muted max-w-[60ch] mb-12">
+          Discovery has decentralized. 80%+ of artists earning $1M+ on Spotify never reached the
+          Global Daily Top 50. Playlist and algorithmic discovery drive the majority of revenue
+          for indie artists. Social platforms serve as the first touchpoint before fans migrate to DSPs.
         </motion.p>
 
-        <motion.div variants={fadeUp} custom={3} className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-          {[
-            { label: 'Create', desc: 'Original music scored to narrative short films. Each film is a living sync demo reel.', color: 'text-accent' },
-            { label: 'Circulate', desc: 'Films play festivals, YouTube, social. Music supervisors see the music working in visual context.', color: 'text-heading' },
-            { label: 'Convert', desc: 'Sync inquiries come in from the films. Brand deals follow. Fans who watch the films stick around for the music.', color: 'text-heading' },
-            { label: 'Compound', desc: 'Revenue funds the next film. More films mean more songs in the catalog, more sync opportunities. The whole body of work becomes more valuable over time.', color: 'text-heading' },
-          ].map((step) => (
-            <div key={step.label} className="border border-white/10 p-6 hover:border-white/20 transition-colors">
-              <span className={`text-xs font-sans tracking-[0.15em] uppercase block mb-3 ${step.color}`}>{step.label}</span>
-              <p className="font-sans text-xs text-muted leading-relaxed">{step.desc}</p>
-            </div>
-          ))}
-        </motion.div>
-
-        {/* Revenue stack per film */}
-        <motion.div variants={fadeUp} custom={4} className="border border-white/10 p-6 md:p-10">
-          <span className="text-xs font-sans tracking-[0.15em] uppercase text-white/30 block mb-6">Revenue Stack per Film</span>
-          <div className="space-y-2 text-sm">
-            {[
-              { stream: 'Festival prizes', range: '$0 \u2013 $10K' },
-              { stream: 'YouTube ad revenue (1M+ views)', range: '$3K \u2013 $7K' },
-              { stream: 'Platform acquisition', range: '$5K \u2013 $150K' },
-              { stream: 'Brand sponsorship', range: '$25K \u2013 $200K+' },
-              { stream: 'Film grants', range: '$10K \u2013 $50K' },
-              { stream: 'Music streaming royalties', range: '$1K \u2013 $10K+' },
-              { stream: 'Sync licensing', range: '$5K \u2013 $50K+' },
-            ].map((item) => (
-              <div key={item.stream} className="flex justify-between py-2 border-b border-white/5 last:border-0">
-                <span className="font-sans text-xs text-muted">{item.stream}</span>
-                <span className="font-mono text-xs text-heading">{item.range}</span>
-              </div>
-            ))}
-            <div className="flex justify-between pt-4 mt-2 border-t border-white/10">
-              <span className="font-sans text-sm text-heading font-medium">Optimistic total</span>
-              <span className="font-display text-lg text-accent">$50K &ndash; $300K+</span>
-            </div>
-          </div>
+        <motion.div variants={fadeUp} custom={3}>
+          <details className="group">
+            <summary className="cursor-pointer text-xs font-sans tracking-[0.15em] uppercase text-white/40 hover:text-white/60 transition-colors mb-6 list-none flex items-center gap-2">
+              <span className="text-accent group-open:rotate-90 transition-transform inline-block">&#9654;</span>
+              8 platforms &mdash; click to expand
+            </summary>
+            <PlatformGrid />
+          </details>
         </motion.div>
       </Section>
 
-      {/* ─── 8. THE LANDSCAPE ─── */}
-      <Section id="landscape">
-        <SectionLabel>The Landscape</SectionLabel>
-        <SectionTitle>Comparables</SectionTitle>
+      {/* ═══ 9. MONETIZATION ═══ */}
+      <Section id="monetization">
+        <SectionLabel>Monetization</SectionLabel>
+        <SectionTitle className="max-w-[24ch]">The Numbers</SectionTitle>
+        <motion.p variants={fadeUp} custom={2} className="font-sans text-sm leading-[1.8] text-muted max-w-[60ch] mb-12">
+          Revenue comes from eight channels. Streaming is the baseline. Sync licensing,
+          brand deals, and live performance are where the margins live. Fan-direct platforms
+          (Patreon, Bandcamp) deliver the highest per-fan revenue.
+        </motion.p>
+
+        <motion.div variants={fadeUp} custom={3}>
+          <StreamingRatesTable />
+          <SyncRangesTable />
+
+          <details className="group mt-8">
+            <summary className="cursor-pointer text-xs font-sans tracking-[0.15em] uppercase text-white/40 hover:text-white/60 transition-colors mb-6 list-none flex items-center gap-2">
+              <span className="text-accent group-open:rotate-90 transition-transform inline-block">&#9654;</span>
+              Additional monetization benchmarks &mdash; click to expand
+            </summary>
+            <div className="space-y-8">
+              {/* Live performance */}
+              <div>
+                <h4 className="text-xs font-sans tracking-[0.15em] uppercase text-white/30 mb-4">Live Performance Tiers</h4>
+                <div className="overflow-x-auto -mx-6 md:mx-0">
+                  <table className="w-full min-w-[480px] text-left border-collapse">
+                    <thead>
+                      <tr className="border-b border-white/10">
+                        <th className="py-2 px-3 text-xs font-sans tracking-wider uppercase text-white/25 font-normal">Tier</th>
+                        <th className="py-2 px-3 text-xs font-sans tracking-wider uppercase text-white/25 font-normal text-right">Per Show</th>
+                        <th className="py-2 px-3 text-xs font-sans tracking-wider uppercase text-white/25 font-normal text-right">Annual (est.)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {[
+                        { tier: 'Early-stage indie (local/regional)', perShow: '$200-$1,500', annual: '$5K-$30K' },
+                        { tier: 'Emerging with streaming traction', perShow: '$1,500-$5,000', annual: '$30K-$100K' },
+                        { tier: 'Mid-level (50K+ monthly listeners)', perShow: '$5,000-$15,000', annual: '$100K-$300K' },
+                        { tier: 'Breakout / small-venue headliner', perShow: '$15,000-$50,000', annual: '$300K-$1M+' },
+                      ].map((r) => (
+                        <tr key={r.tier} className="border-b border-white/5 last:border-0">
+                          <td className="py-3 px-3 font-sans text-xs text-muted">{r.tier}</td>
+                          <td className="py-3 px-3 font-mono text-xs text-heading text-right">{r.perShow}</td>
+                          <td className="py-3 px-3 font-mono text-xs text-accent text-right">{r.annual}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* Merch */}
+              <div>
+                <h4 className="text-xs font-sans tracking-[0.15em] uppercase text-white/30 mb-4">Merchandise Benchmarks</h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-sans text-xs text-muted leading-relaxed">
+                  <div className="border border-white/5 p-4">
+                    <span className="text-heading block mb-1">At-show merch</span>
+                    $5-$15 per attendee average. 60-70% margin on printed goods.
+                  </div>
+                  <div className="border border-white/5 p-4">
+                    <span className="text-heading block mb-1">Online D2C</span>
+                    $2,000-$20,000/month for emerging artists. Dependent on social following.
+                  </div>
+                  <div className="border border-white/5 p-4">
+                    <span className="text-heading block mb-1">Merch as % of revenue</span>
+                    10-25% of total indie artist income. Often the second-largest stream after live.
+                  </div>
+                  <div className="border border-white/5 p-4">
+                    <span className="text-heading block mb-1">Bandcamp</span>
+                    Artists receive 82% of each purchase. $1.67B total paid to artists. $214M in past year alone.
+                  </div>
+                </div>
+              </div>
+
+              {/* Brand deals */}
+              <div>
+                <h4 className="text-xs font-sans tracking-[0.15em] uppercase text-white/30 mb-4">Brand Deal Ranges</h4>
+                <div className="overflow-x-auto -mx-6 md:mx-0">
+                  <table className="w-full min-w-[480px] text-left border-collapse">
+                    <thead>
+                      <tr className="border-b border-white/10">
+                        <th className="py-2 px-3 text-xs font-sans tracking-wider uppercase text-white/25 font-normal">Tier</th>
+                        <th className="py-2 px-3 text-xs font-sans tracking-wider uppercase text-white/25 font-normal">Followers</th>
+                        <th className="py-2 px-3 text-xs font-sans tracking-wider uppercase text-white/25 font-normal text-right">Range</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {[
+                        { tier: 'Nano-influencer', followers: '1K-10K', range: '$500-$2,500' },
+                        { tier: 'Micro-influencer', followers: '10K-50K', range: '$2,500-$10,000' },
+                        { tier: 'Mid-tier emerging', followers: '50K-250K', range: '$10,000-$50,000' },
+                        { tier: 'Breakout artist', followers: '250K-1M', range: '$50,000-$150,000+' },
+                      ].map((r) => (
+                        <tr key={r.tier} className="border-b border-white/5 last:border-0">
+                          <td className="py-3 px-3 font-sans text-xs text-muted">{r.tier}</td>
+                          <td className="py-3 px-3 font-mono text-xs text-white/40">{r.followers}</td>
+                          <td className="py-3 px-3 font-mono text-xs text-accent text-right">{r.range}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <p className="mt-3 font-sans text-xs text-white/30">
+                  Hybrid premium: artists who deliver both original music AND visual content should command 1.5-3x
+                  over standard influencer rates.
+                </p>
+              </div>
+
+              {/* Patreon / fan-direct */}
+              <div>
+                <h4 className="text-xs font-sans tracking-[0.15em] uppercase text-white/30 mb-4">Fan-Direct Platforms</h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-sans text-xs text-muted leading-relaxed">
+                  <div className="border border-white/5 p-4">
+                    <span className="text-heading block mb-1">Patreon</span>
+                    $3.5B+ paid to creators lifetime. 10M+ paying members. 5-12% platform cut. Typical tiers: $3-$25/month.
+                  </div>
+                  <div className="border border-white/5 p-4">
+                    <span className="text-heading block mb-1">Bandcamp</span>
+                    $1.67B total paid to artists. 82% average to artist per purchase. 14.9M digital albums in past year.
+                  </div>
+                </div>
+                <p className="font-mono text-[10px] text-white/20 mt-4">
+                  Sources: Patreon About page 2025, bandcamp.com/about, industry benchmarks. Fan-direct is the fastest-growing
+                  monetization category for indie artists.
+                </p>
+              </div>
+            </div>
+          </details>
+        </motion.div>
+      </Section>
+
+      {/* ═══ 10. COMPARABLES ═══ */}
+      <Section id="comparables">
+        <SectionLabel>Comparables</SectionLabel>
+        <SectionTitle>Who Else</SectionTitle>
         <motion.p variants={fadeUp} custom={2} className="font-sans text-sm leading-[1.8] text-muted max-w-[60ch] mb-12">
           Nobody else is doing exactly this: male R&amp;B vulnerability, independent ownership,
           narrative IP from day one, and Detroit roots. That gap is the opportunity.
         </motion.p>
 
-        <motion.div variants={fadeUp} custom={3} className="hidden md:grid grid-cols-[160px_1fr_1fr] gap-8 pb-3 border-b border-white/10 text-xs font-sans tracking-[0.15em] uppercase text-white/30">
-          <div>Artist</div>
-          <div>Model</div>
-          <div>Relevance to FREE</div>
+        <motion.div variants={fadeUp} custom={3}>
+          <details className="group" open>
+            <summary className="cursor-pointer text-xs font-sans tracking-[0.15em] uppercase text-white/40 hover:text-white/60 transition-colors mb-6 list-none flex items-center gap-2">
+              <span className="text-accent group-open:rotate-90 transition-transform inline-block">&#9654;</span>
+              11 comparables &mdash; click to collapse
+            </summary>
+            <ComparablesTable />
+          </details>
         </motion.div>
 
-        <CompRow name="Beyonc&eacute;" detail="Visual albums (Lemonade 4x Plat, Black Is King). Self-distributed concert film ($44M worldwide). Platform-exclusive premieres." relevance="The template for visual album as narrative IP. FREE echoes this at indie scale." i={4} />
-        <CompRow name="The Weeknd" detail="Multi-album cinematic universe (After Hours 3x Plat / Dawn FM / Hurry Up Tomorrow). HBO series. Feature film." relevance="Most direct comp for serialized narrative. Proves male R&B supports cinematic world-building." i={5} />
-        <CompRow name="Brent Faiyaz" detail="Fully independent. Wasteland debuted #2 Billboard via Lost Kids label. Platinum. Owns masters." relevance="Most direct independent male R&B comp. Proved indie structure works commercially." i={6} />
-        <CompRow name="Frank Ocean" detail="Visual album as contract escape. Blonde Platinum on Boys Don't Cry label. Limited-edition magazine." relevance="Template for visual content as strategy. FREE's creative bible parallels Ocean's magazine." i={7} />
-        <CompRow name="Childish Gambino" detail="Album + screenplay + free short film. Because the Internet led to Atlanta (FX). This Is America: Diamond." relevance="Closest blueprint for free short film + written narrative as IP funnel." i={8} />
-        <CompRow name="Daniel Caesar" detail="Independent via Golden Child Recordings. Get You 7x Platinum." relevance="Direct comp for indie male R&B vulnerability lane." i={9} />
-        <CompRow name="SZA" detail="SOS 8x Platinum. Cohesive visual identity with ocean motifs." relevance="Shows visual cohesion drives fan engagement." i={10} />
-        <CompRow name="Tyler, the Creator" detail="Music + Golf Wang fashion + Camp Flog Gnaw festival + animation. Owns masters." relevance="Artist-as-ecosystem. Each album gets distinct visual world." i={11} />
-
-        <motion.div variants={fadeUp} custom={12} className="mt-10 border border-accent/20 bg-accent/5 p-6">
+        <motion.div variants={fadeUp} custom={4} className="mt-10 border border-accent/20 bg-accent/5 p-6">
           <span className="text-xs font-sans tracking-[0.15em] uppercase text-accent block mb-2">The White Space</span>
           <p className="font-sans text-xs text-muted leading-relaxed">
-            Most of these artists are on major labels, lean hip-hop, or don&rsquo;t have narrative IP baked in from the start.
-            FREE built the Other World universe before the first track dropped. Independent. Male R&amp;B. Visual mythology
-            from day one. That combination doesn&rsquo;t exist yet.
+            Most of these artists are on major labels, lean hip-hop, or built their narrative IP after
+            gaining traction. FREE built the Other World universe before the first track dropped.
+            Independent. Male R&amp;B. Visual mythology from day one. That combination does not exist yet.
           </p>
         </motion.div>
       </Section>
 
-      {/* ─── 9. PROJECTIONS ─── */}
-      <Section id="projections">
+      {/* ═══ 11. CASE STUDIES ═══ */}
+      <Section id="case-studies">
+        <SectionLabel>Case Studies</SectionLabel>
+        <SectionTitle>Proof Points</SectionTitle>
+
+        <motion.div variants={fadeUp} custom={2}>
+          <details className="group" open>
+            <summary className="cursor-pointer text-xs font-sans tracking-[0.15em] uppercase text-white/40 hover:text-white/60 transition-colors mb-8 list-none flex items-center gap-2">
+              <span className="text-accent group-open:rotate-90 transition-transform inline-block">&#9654;</span>
+              4 case studies &mdash; click to collapse
+            </summary>
+            <div className="space-y-10">
+              {caseStudies.map((cs, i) => (
+                <div key={cs.artist} className="border border-white/10 p-6 md:p-8">
+                  <div className="flex items-baseline gap-4 mb-1">
+                    <span className="font-mono text-sm text-accent/30">{String(i + 1).padStart(2, '0')}</span>
+                    <span className="font-display text-lg text-heading">{cs.artist}</span>
+                  </div>
+                  <span className="font-sans text-xs text-white/30 block mb-4 ml-10">{cs.project}</span>
+                  <p className="font-sans text-xs text-muted leading-relaxed mb-4">{cs.finding}</p>
+                  <div className="border-l-2 border-accent/30 pl-4">
+                    <span className="font-sans text-xs text-white/40 italic leading-relaxed block">
+                      {cs.relevance}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </details>
+        </motion.div>
+
+        <motion.div variants={fadeUp} custom={3} className="mt-12 border border-white/10 p-6 md:p-8">
+          <span className="text-xs font-sans tracking-[0.15em] uppercase text-white/30 block mb-4">What to take from each</span>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 font-sans text-xs text-muted leading-relaxed">
+            <div><span className="text-heading">Brent Faiyaz</span> &mdash; Stay independent, own masters, build visual brand consistency, let quality create demand.</div>
+            <div><span className="text-heading">Frank Ocean</span> &mdash; Use visual content strategically, create physical narrative objects, embrace scarcity.</div>
+            <div><span className="text-heading">Beyonce</span> &mdash; Music-driven visual narratives can be pitched to streaming platforms as premium content.</div>
+            <div><span className="text-heading">Childish Gambino</span> &mdash; Free short film + written narrative = disproportionate press + IP foundation that opens film/TV doors.</div>
+          </div>
+          <p className="font-mono text-[10px] text-white/20 mt-4">
+            RIAA certifications verified via riaa.com, Feb 2026.
+          </p>
+        </motion.div>
+      </Section>
+
+      {/* ═══ 12. CONTACT ═══ */}
+      <Section id="contact" className="border-t-0">
         <SectionLabel>Projections</SectionLabel>
         <SectionTitle>Revenue Path</SectionTitle>
 
-        {/* Year 1 */}
-        <motion.div variants={fadeUp} custom={2} className="mb-16">
-          <span className="text-xs font-sans tracking-[0.15em] uppercase text-white/30 block mb-6">Year 1 &mdash; Building Phase</span>
-          <div className="grid grid-cols-4 gap-4 pb-3 border-b border-white/10 text-xs font-sans tracking-[0.1em] uppercase text-white/30">
-            <div>Stream</div><div className="text-right">Conservative</div><div className="text-right">Base</div><div className="text-right">Aggressive</div>
-          </div>
-          <RevenueRow stream="Streaming" conservative="$500" base="$2,000" aggressive="$8,000" i={3} />
-          <RevenueRow stream="YouTube" conservative="$200" base="$1,000" aggressive="$5,000" i={4} />
-          <RevenueRow stream="Merch" conservative="$500" base="$2,500" aggressive="$10,000" i={5} />
-          <RevenueRow stream="Live" conservative="$1,000" base="$5,000" aggressive="$15,000" i={6} />
-          <RevenueRow stream="Sync" conservative="$0" base="$2,500" aggressive="$10,000" i={7} />
-          <RevenueRow stream="Brand deals" conservative="$0" base="$1,500" aggressive="$5,000" i={8} />
-          <RevenueRow stream="Patreon / direct" conservative="$200" base="$1,000" aggressive="$4,000" i={9} />
-          <motion.div variants={fadeUp} custom={10} className="grid grid-cols-4 gap-4 pt-4 mt-2 border-t border-white/10 text-sm font-medium">
-            <div className="text-heading">Total Year 1</div>
-            <div className="font-mono text-white/40 text-right">$2,450</div>
-            <div className="font-mono text-heading text-right">$15,700</div>
-            <div className="font-mono text-accent text-right">$58,000</div>
-          </motion.div>
+        <motion.div variants={fadeUp} custom={2}>
+          <Year1Projections />
+          <Year23Projections />
         </motion.div>
 
-        {/* Year 2-3 */}
-        <motion.div variants={fadeUp} custom={11}>
-          <span className="text-xs font-sans tracking-[0.15em] uppercase text-white/30 block mb-6">Year 2&ndash;3 &mdash; Growth Phase (Annual)</span>
-          <div className="grid grid-cols-4 gap-4 pb-3 border-b border-white/10 text-xs font-sans tracking-[0.1em] uppercase text-white/30">
-            <div>Stream</div><div className="text-right">Conservative</div><div className="text-right">Base</div><div className="text-right">Aggressive</div>
+        <motion.div variants={fadeUp} custom={3} className="border border-white/10 p-6 md:p-8 mb-20">
+          <span className="text-xs font-sans tracking-[0.15em] uppercase text-white/30 block mb-4">Key assumptions</span>
+          <div className="font-sans text-xs text-muted leading-relaxed space-y-2">
+            <p>Year 1: 125K-2M total streams, 50K-500K video views, 5-15 local/regional shows.</p>
+            <p>Year 2-3: Monthly Spotify listeners grow to 2K-25K. YouTube subscribers grow to 2K-15K. At least one additional album released (OTHERLAND).</p>
+            <p>Base scenario achieves positive ROI within Year 1 from combined revenue streams at $5K-$15K production cost per micro-visual album.</p>
           </div>
-          <RevenueRow stream="Streaming" conservative="$2,000" base="$10,000" aggressive="$50,000" i={12} />
-          <RevenueRow stream="YouTube" conservative="$1,200" base="$6,000" aggressive="$30,000" i={13} />
-          <RevenueRow stream="Merch (IP)" conservative="$2,000" base="$10,000" aggressive="$40,000" i={14} />
-          <RevenueRow stream="Live" conservative="$5,000" base="$20,000" aggressive="$75,000" i={15} />
-          <RevenueRow stream="Sync" conservative="$2,000" base="$10,000" aggressive="$50,000" i={16} />
-          <RevenueRow stream="Brand deals" conservative="$2,000" base="$10,000" aggressive="$50,000" i={17} />
-          <RevenueRow stream="Patreon" conservative="$1,000" base="$5,000" aggressive="$20,000" i={18} />
-          <RevenueRow stream="Film revenue" conservative="$500" base="$2,000" aggressive="$10,000" i={19} />
-          <motion.div variants={fadeUp} custom={20} className="grid grid-cols-4 gap-4 pt-4 mt-2 border-t border-white/10 text-sm font-medium">
-            <div className="text-heading">Total Year 2&ndash;3</div>
-            <div className="font-mono text-white/40 text-right">$15,700</div>
-            <div className="font-mono text-heading text-right">$73,000</div>
-            <div className="font-display text-xl text-accent text-right">$325K</div>
-          </motion.div>
+          <p className="font-mono text-[10px] text-white/20 mt-4">
+            All projections are modeled estimates based on Spotify Loud &amp; Clear 2024, IFPI 2024, RIAA 2024, and industry benchmarks.
+          </p>
         </motion.div>
-      </Section>
 
-      {/* ─── 10. THE ROAD ─── */}
-      <Section id="road">
-        <SectionLabel>The Road</SectionLabel>
-        <SectionTitle>What Comes Next</SectionTitle>
-
-        <div className="flex items-center gap-6 mb-12">
-          <div className="flex-1 h-px bg-white/10" />
-          <span className="text-xs font-sans tracking-[0.2em] uppercase text-white/20">Roadmap</span>
-          <div className="flex-1 h-px bg-white/10" />
-        </div>
-
-        <div className="space-y-16 mb-20">
-          {/* Released */}
-          <div className="grid grid-cols-2 gap-8">
-            {[
-              { src: '/images/logotype-finexme.png', alt: 'FINExME', status: 'Released \u2014 2024', desc: '7-track debut. Act I complete. Fine By Me Film produced.' },
-              { src: '/images/logotype-sinenoctis.png', alt: 'SINE NOCTIS', status: 'Released \u2014 2024/2026', desc: '3-track EP. Act II. ANTE, VESPERA, NOCTEM trailer series.' },
-            ].map((item, i) => (
-              <motion.div key={item.alt} variants={fadeUp} custom={i + 2}>
-                <div className="relative w-full h-12 mb-4">
-                  <Image src={item.src} alt={item.alt} fill className="object-contain object-left" sizes="200px" />
-                </div>
-                <span className="font-mono text-xs text-accent/60 block mb-1">{item.status}</span>
-                <p className="font-sans text-xs text-muted">{item.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Future */}
-          <div className="grid grid-cols-3 gap-8">
-            {[
-              { src: '/images/logotype-otherland.png', alt: 'OTHERLAND', status: 'In Development', desc: 'Next full-length album' },
-              { src: '/images/logotype-neverdyin.png', alt: 'NEVERDYIN', status: 'Early Concept', desc: 'Origins and reincarnation' },
-              { src: '/images/logotype-sexsymbol.png', alt: 'SEX SYMBOL (THE ALBUM)', status: 'Postponed \u2014 The Culmination', desc: 'Entirely produced by Worst Choice' },
-            ].map((item, i) => (
-              <motion.div key={item.alt} variants={fadeUp} custom={i + 4}>
-                <div className="relative w-full aspect-[3/1] mb-4">
-                  <Image src={item.src} alt={item.alt} fill className="object-contain opacity-40" sizes="(max-width: 768px) 30vw, 250px" />
-                </div>
-                <span className="font-mono text-xs text-white/30 block mb-1">{item.status}</span>
-                <p className="font-sans text-xs text-muted">{item.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </Section>
-
-      {/* ─── 11. CONTACT ─── */}
-      <Section id="contact" className="border-t-0">
-        <div className="text-center max-w-2xl mx-auto">
+        {/* Contact CTA */}
+        <div className="text-center max-w-2xl mx-auto pt-16 border-t border-white/10">
           <motion.h2
             variants={fadeUp}
-            custom={0}
+            custom={4}
             className="font-sans text-5xl md:text-6xl lg:text-7xl italic text-heading leading-[0.9] mb-8"
           >
-            Prometheus doesn&rsquo;t wait for permission.
+            The fire is already lit.
           </motion.h2>
-          <motion.p variants={fadeUp} custom={1} className="font-sans text-sm text-muted mb-16 max-w-[40ch] mx-auto">
+          <motion.p variants={fadeUp} custom={5} className="font-sans text-sm text-muted mb-16 max-w-[40ch] mx-auto">
             FREE is building in public. The visual universe is live. The music is written.
-            This is about funding what&rsquo;s already working.
+            This is about funding what is already working.
           </motion.p>
 
-          <motion.div variants={fadeUp} custom={2} className="flex flex-wrap justify-center gap-4 md:gap-6 mb-16">
+          <motion.div variants={fadeUp} custom={6} className="flex flex-wrap justify-center gap-4 md:gap-6 mb-16">
             <a
               href="https://www.instagram.com/freenotavailable/"
               target="_blank"
@@ -647,9 +789,17 @@ export default function EkthesisPage() {
             >
               Apple Music
             </a>
+            <a
+              href="https://www.youtube.com/@OWJV/videos"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-8 py-3 border border-white/15 text-xs font-sans tracking-[0.15em] uppercase text-white/70 hover:text-white hover:border-white/40 hover:bg-white/5 transition-all duration-300 min-w-[160px]"
+            >
+              YouTube
+            </a>
           </motion.div>
 
-          <motion.div variants={fadeUp} custom={3} className="flex flex-col items-center gap-6 pt-8 border-t border-white/5">
+          <motion.div variants={fadeUp} custom={7} className="flex flex-col items-center gap-6 pt-8 border-t border-white/5">
             <div className="relative w-10 h-10 opacity-30">
               <Image src="/images/owjv-cherub.png" alt="OWJV emblem" fill className="object-contain" sizes="40px" />
             </div>
