@@ -1,0 +1,35 @@
+import Image from 'next/image'
+
+export default function Footer() {
+  return (
+    <footer className="relative py-16 md:py-24 border-t border-white/5">
+      <div className="max-w-6xl mx-auto px-6 md:px-10 flex flex-col items-center gap-8">
+        {/* OWJV cherub logo */}
+        <div className="relative w-12 h-12 md:w-16 md:h-16 opacity-40">
+          <Image
+            src="/images/owjv-cherub.png"
+            alt="OWJV"
+            fill
+            className="object-contain"
+            sizes="64px"
+          />
+        </div>
+
+        {/* Text credits */}
+        <div className="flex flex-col items-center gap-2 text-center">
+          <p className="text-xs font-sans tracking-[0.15em] uppercase text-white/30">
+            Creative Minds Coalition
+          </p>
+          <p className="text-xs font-sans tracking-[0.2em] uppercase text-white/20">
+            OWJV
+          </p>
+        </div>
+
+        {/* Copyright */}
+        <p className="text-[10px] font-sans tracking-[0.1em] text-white/15">
+          &copy; {new Date().getFullYear()} FREE. All rights reserved.
+        </p>
+      </div>
+    </footer>
+  )
+}

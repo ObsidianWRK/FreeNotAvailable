@@ -1,0 +1,164 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-display: var(--font-display);
+  --font-sans: var(--font-sans);
+}
+
+@theme {
+  --color-canvas: #0a0a08;
+  --color-surface: #111110;
+  --color-border: #2a2926;
+  --color-muted: #b5afa5;
+  --color-body: #ddd8d0;
+  --color-heading: #f2ede8;
+  --color-accent: #c0392b;
+  --color-accent-hover: #e74c3c;
+
+  --text-display: clamp(3rem, 8vw, 7rem);
+  --text-subhead: clamp(1.25rem, 3vw, 2rem);
+
+  --section-padding: clamp(4rem, 10vw, 10rem);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--color-canvas);
+  color: var(--color-body);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  transition: background-color 0.8s ease, color 0.8s ease;
+}
+
+section[id] {
+  scroll-margin-top: 5rem;
+}
+
+/* Film grain overlay — CSS noise tile, NOT SVG turbulence */
+.film-grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.04;
+  background-image: url('/textures/grain-200x200.png');
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  animation: grain-shift 0.5s steps(1) infinite;
+  will-change: opacity;
+}
+
+@keyframes grain-shift {
+  0%  { background-position: 0% 0%; }
+  20% { background-position: -15% -10%; }
+  40% { background-position: -5% 25%; }
+  60% { background-position: -20% 10%; }
+  80% { background-position: -15% -20%; }
+}
+
+/* Fade-in animation triggered by data attribute */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-view {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.fade-in-view[data-in-view="true"] {
+  animation: fade-up 0.6s var(--ease-out-expo) forwards;
+}
+
+/* Cinematic vignette */
+.vignette::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 40%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+}
+
+/* Gallery hover */
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.gallery-item img {
+  transform: scale(1.05);
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.gallery-item:hover img {
+  transform: scale(1.0);
+}
+
+.gallery-caption {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: 1.5rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.gallery-item:hover .gallery-caption {
+  opacity: 1;
+}
+
+/* Section transition variables */
+:root {
+  --section-bg: #0a0a08;
+  --section-text: #f2ede8;
+  --section-accent: #c0392b;
+}
+
+/* Responsive: disable parallax on touch */
+@media (pointer: coarse) {
+  .parallax-container {
+    transform: none !important;
+  }
+  .gallery-caption {
+    opacity: 1;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+  .fade-in-view { opacity: 1; transform: none; }
+  .film-grain-overlay { animation: none; }
+}
+
+/* Custom utilities */
+@utility section-padding {
+  padding-block: var(--section-padding);
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
