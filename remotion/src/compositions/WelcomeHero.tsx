@@ -6,7 +6,6 @@ import {
   staticFile,
   useCurrentFrame,
   interpolate,
-  Easing,
 } from "remotion";
 import { TextOverlay } from "../components/TextOverlay";
 import { FilmGrain } from "../components/FilmGrain";

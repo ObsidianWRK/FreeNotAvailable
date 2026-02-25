@@ -226,7 +226,7 @@ export default function FilmsPage() {
             src="/images/fine-by-me-still.avif"
             alt="Fine By Me film still"
             fill
-            preload
+            priority
             sizes="100vw"
             className="object-cover object-center"
             quality={85}

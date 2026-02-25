@@ -10,7 +10,7 @@ import Link from 'next/link'
 
 type AnchorLink = { kind: 'anchor'; label: string; hash: string }
 type RouteLink = { kind: 'route'; label: string; href: string }
-type NavLink = AnchorLink | RouteLink
+
 
 const ANCHOR_LINKS: AnchorLink[] = [
   { kind: 'anchor', label: 'ACT I', hash: '#finexme' },
@@ -59,7 +59,7 @@ export default function Nav() {
           fill
           className="object-contain"
           sizes="80px"
-          preload
+          priority
         />
       </Link>
 

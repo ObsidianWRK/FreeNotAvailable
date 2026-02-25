@@ -726,8 +726,8 @@ export default function EkthesisPage() {
         </motion.div>
       </Section>
 
-      {/* ═══ 12. CONTACT ═══ */}
-      <Section id="contact" className="border-t-0">
+      {/* ═══ 12. PROJECTIONS + CONTACT ═══ */}
+      <Section id="projections" className="border-t-0">
         <SectionLabel>Projections</SectionLabel>
         <SectionTitle>Revenue Path</SectionTitle>
 
@@ -749,7 +749,7 @@ export default function EkthesisPage() {
         </motion.div>
 
         {/* Contact CTA */}
-        <div className="text-center max-w-2xl mx-auto pt-16 border-t border-white/10">
+        <div id="contact" className="text-center max-w-2xl mx-auto pt-16 border-t border-white/10">
           <motion.h2
             variants={fadeUp}
             custom={4}
