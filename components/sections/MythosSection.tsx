@@ -17,7 +17,7 @@ export default function MythosSection() {
       <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-10">
         {/* Section heading */}
         <div className="mb-16 md:mb-24">
-          <span className="text-xs font-sans tracking-[0.2em] uppercase text-white/40 block mb-6">
+          <span className="text-xs font-sans tracking-[0.2em] uppercase text-[#c0392b] block mb-6">
             Mythos
           </span>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl italic text-[#f2ede8] leading-[0.95]">

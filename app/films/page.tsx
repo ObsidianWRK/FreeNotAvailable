@@ -1,0 +1,339 @@
+import Image from 'next/image'
+import Link from 'next/link'
+
+/* ------------------------------------------------------------------ */
+/*  Data                                                               */
+/* ------------------------------------------------------------------ */
+
+const FINEXME_FILMS = [
+  {
+    title: 'Fine By Me',
+    slug: 'fine-by-me',
+    role: 'Film',
+    description:
+      'The first visual from the Other World. Shot on a gravel lot near Detroit\u2019s Ambassador Bridge, Fine By Me establishes FREE as The Faceless Man and The Lady In Black as the executor of consequence. The white BMW is his chariot through this night-world. The camera is a spy \u2014 long lenses, over-the-shoulder angles, and partial occlusions make every frame feel like a stolen moment.',
+    image: '/images/dusk-silhouette-two.avif',
+    alt: 'Dusk silhouette from Fine By Me',
+    hasVideo: true,
+  },
+  {
+    title: 'AT NO COST',
+    slug: 'at-no-cost',
+    role: 'First Trailer',
+    description:
+      'The prologue. Full-color, high-intensity reds and blacks. FREE\u2019s face is completely concealed. The Lady In Black is present as the unnamed counterpart, already framed as omen rather than love interest.',
+    image: '/images/red-portrait.avif',
+    alt: 'Red-lit portrait from AT NO COST trailer',
+    hasVideo: false,
+  },
+  {
+    title: 'PILGRIM',
+    slug: 'pilgrim',
+    role: 'Visual',
+    description:
+      'The unseen final chapter where the consequences land. By Pilgrim, FREE is spiritually dead \u2014 destroyed by his indulgence. Whether that death is literal or emotional is left ambiguous.',
+    image: '/images/pilgrim-card.avif',
+    alt: 'PILGRIM title card',
+    hasVideo: false,
+  },
+]
+
+const SINENOCTIS_FILMS = [
+  {
+    title: 'ANTE',
+    slug: 'ante',
+    role: 'Teaser',
+    description:
+      'The liminal corridor between worlds. FREE emerging from a dark doorway in downtown Birmingham, face still obscured. The footage is tight, grayscale, intimate. The doorway is his portal into the new world \u2014 the threshold between death and reincarnation.',
+    image: '/images/ante-doorway.avif',
+    alt: 'Stone archway doorway from ANTE teaser',
+  },
+  {
+    title: 'VESPERA',
+    slug: 'vespera',
+    role: 'Teaser II',
+    description:
+      'Evening/dusk/evening star. FREE\u2019s first evening wandering this new world. Less shock, more numb, heavy melancholy. He drifts before the next set of temptations draws him in.',
+    image: '/images/sn-architecture.avif',
+    alt: 'European architecture at night from VESPERA',
+  },
+  {
+    title: 'NOCTEM',
+    slug: 'noctem',
+    role: 'Trailer',
+    description:
+      'The plunge into the new night. This is where FREE begins to actively participate in this incarnation \u2014 making choices, setting up for what comes next.',
+    image: '/images/bokeh-night.avif',
+    alt: 'Bokeh night photography from NOCTEM trailer',
+  },
+  {
+    title: 'SINE NOCTIS',
+    slug: 'sine-noctis',
+    role: 'Full Visual',
+    description:
+      'A double visual for Van Gogh and Thin Ice Freestyle. The jacket replaces the BMW as the protective shell. FREE\u2019s face remains partially obscured through the corridors, streets, and stairwells of a single voyeuristic night.',
+    image: '/images/jacket-portrait.avif',
+    alt: 'Alpinestars jacket portrait from SINE NOCTIS visual',
+  },
+]
+
+/* ------------------------------------------------------------------ */
+/*  Play Button SVG                                                    */
+/* ------------------------------------------------------------------ */
+
+function PlayIcon() {
+  return (
+    <svg
+      width="48"
+      height="48"
+      viewBox="0 0 48 48"
+      fill="none"
+      aria-hidden="true"
+      className="opacity-60 group-hover:opacity-100 transition-opacity duration-300"
+    >
+      <circle cx="24" cy="24" r="23" stroke="currentColor" strokeWidth="1" />
+      <polygon points="19,15 35,24 19,33" fill="currentColor" />
+    </svg>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/*  Film Card                                                          */
+/* ------------------------------------------------------------------ */
+
+function FilmCard({
+  title,
+  role,
+  description,
+  image,
+  alt,
+  hasVideo,
+  index,
+  grayscale,
+  accentColor,
+}: {
+  title: string
+  role: string
+  description: string
+  image: string
+  alt: string
+  hasVideo?: boolean
+  index: number
+  grayscale?: boolean
+  accentColor?: string
+}) {
+  const isReversed = index % 2 !== 0
+  const labelColor = accentColor ?? 'rgba(255,255,255,0.4)'
+
+  return (
+    <article
+      className={`grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center ${
+        index > 0 ? 'mt-24 md:mt-32' : ''
+      }`}
+    >
+      {/* Image side */}
+      <div className={`relative ${isReversed ? 'lg:order-2' : ''}`}>
+        <div className="relative aspect-[16/10] overflow-hidden">
+          <Image
+            src={image}
+            alt={alt}
+            fill
+            className={`object-cover ${grayscale ? 'grayscale' : ''}`}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+          />
+          <div className="absolute inset-0 vignette" />
+        </div>
+
+        {/* Video placeholder overlay */}
+        {hasVideo && (
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 group cursor-pointer">
+            <div className="absolute inset-0 bg-black/30" />
+            <div className="relative z-10 flex flex-col items-center gap-3 text-white/70">
+              <PlayIcon />
+              <span className="text-xs font-sans tracking-[0.2em] uppercase">
+                Coming Soon
+              </span>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Text side */}
+      <div className={isReversed ? 'lg:order-1' : ''}>
+        <span
+          className="text-xs font-sans tracking-[0.2em] uppercase block mb-4"
+          style={{ color: labelColor }}
+        >
+          {role}
+        </span>
+        <h3 className="font-display text-3xl md:text-4xl lg:text-5xl italic text-heading mb-6 tracking-wide">
+          {title}
+        </h3>
+        <p className="font-sans text-sm md:text-base leading-[1.85] text-muted max-w-[55ch]">
+          {description}
+        </p>
+      </div>
+    </article>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/*  Page                                                               */
+/* ------------------------------------------------------------------ */
+
+export default function FilmsPage() {
+  return (
+    <div className="min-h-screen bg-canvas text-body">
+      {/* ---- Hero ---- */}
+      <section
+        data-section-id="films-hero"
+        className="relative min-h-[70vh] flex flex-col items-center justify-center overflow-hidden"
+        aria-label="Films"
+      >
+        {/* Background */}
+        <div className="absolute inset-0">
+          <Image
+            src="/images/fine-by-me-still.avif"
+            alt="Fine By Me film still"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center"
+            quality={85}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-canvas" />
+        </div>
+        <div className="absolute inset-0 vignette" />
+
+        <div className="relative z-10 text-center px-6">
+          <h1 className="font-display text-[clamp(3.5rem,10vw,8rem)] italic text-heading tracking-[0.04em] leading-none">
+            FILMS
+          </h1>
+          <p className="mt-4 font-display text-lg md:text-xl italic text-white/50 tracking-wide">
+            The visual extensions of the Other World
+          </p>
+        </div>
+      </section>
+
+      {/* ---- FINExME Era ---- */}
+      <section
+        data-section-id="films-finexme"
+        className="relative section-padding"
+        aria-label="FINExME Era Films"
+      >
+        {/* Ambient red glow */}
+        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_top,rgba(192,57,43,0.1)_0%,transparent_60%)]" />
+
+        <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-10">
+          {/* Era label */}
+          <div className="mb-16 md:mb-24">
+            <span className="text-xs font-sans tracking-[0.2em] uppercase text-[#c0392b]/80 block mb-4">
+              Act I
+            </span>
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl italic text-heading tracking-wide">
+              FINExME Era
+            </h2>
+            <div className="mt-4 w-16 h-px bg-[#c0392b]/40" />
+          </div>
+
+          {/* Film entries */}
+          {FINEXME_FILMS.map((film, i) => (
+            <FilmCard
+              key={film.slug}
+              {...film}
+              index={i}
+              accentColor="rgba(192,57,43,0.8)"
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* ---- SINE NOCTIS Era ---- */}
+      <section
+        data-section-id="films-sinenoctis"
+        className="relative section-padding"
+        aria-label="SINE NOCTIS Era Films"
+      >
+        <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-10">
+          {/* Era label */}
+          <div className="mb-16 md:mb-24">
+            <span className="text-xs font-sans tracking-[0.2em] uppercase text-white/40 block mb-4">
+              Act II
+            </span>
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl italic text-[#e8e8e8]/90 tracking-wide">
+              SINE NOCTIS Era
+            </h2>
+            <div className="mt-4 w-16 h-px bg-white/20" />
+          </div>
+
+          {/* Film entries */}
+          {SINENOCTIS_FILMS.map((film, i) => (
+            <FilmCard
+              key={film.slug}
+              {...film}
+              index={i}
+              grayscale
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* ---- Recognition / Opportunities ---- */}
+      <section
+        data-section-id="films-recognition"
+        className="relative section-padding border-t border-white/5"
+        aria-label="Recognition and Opportunities"
+      >
+        <div className="max-w-3xl mx-auto px-6 md:px-10 text-center">
+          <h2 className="font-display text-3xl md:text-4xl italic text-heading mb-12 tracking-wide">
+            Recognition
+          </h2>
+
+          <div className="space-y-8 text-sm md:text-base leading-[1.85] text-muted">
+            <p>
+              Film Independent&rsquo;s Sony Music Vision Fellowship &mdash; a $10K grant
+              for filmmakers with music-driven projects &mdash; is the first institutional
+              target for this body of work.
+            </p>
+            <p>
+              Sundance, SXSW, and Tribeca form the submission pipeline for the
+              completed short films as they leave development.
+            </p>
+          </div>
+
+          <div className="mt-16 pt-12 border-t border-white/5">
+            <p className="font-display text-xl md:text-2xl italic text-white/30 tracking-wide max-w-[40ch] mx-auto leading-relaxed">
+              Every film is a Greek vignette. Every vignette expands the Other World.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ---- Footer / back link ---- */}
+      <footer className="relative py-16 md:py-24 border-t border-white/5">
+        <div className="max-w-6xl mx-auto px-6 md:px-10 flex flex-col items-center gap-8">
+          <Link
+            href="/"
+            className="font-sans text-xs tracking-[0.2em] uppercase text-white/40 hover:text-white/70 transition-colors"
+          >
+            &larr; Back to the Other World
+          </Link>
+
+          <div className="relative w-12 h-12 md:w-16 md:h-16 opacity-40">
+            <Image
+              src="/images/owjv-cherub.png"
+              alt="OWJV"
+              fill
+              className="object-contain"
+              sizes="64px"
+            />
+          </div>
+
+          <p className="text-[10px] font-sans tracking-[0.1em] text-white/15">
+            &copy; {new Date().getFullYear()} FREE. All rights reserved.
+          </p>
+        </div>
+      </footer>
+    </div>
+  )
+}

@@ -107,7 +107,7 @@ export default function FineXMeSection() {
               <ol className="space-y-4">
                 {TRACKLIST.map(({ num, title }) => (
                   <li key={num} className="flex items-baseline gap-4 group">
-                    <span className="text-xs font-sans text-white/25 tabular-nums">{num}</span>
+                    <span className="text-xs font-sans text-[#c0392b]/40 tabular-nums">{num}</span>
                     <span className="font-display text-lg md:text-xl italic text-[#f5e6e0]/80 group-hover:text-[#f5e6e0] transition-colors">
                       {title}
                     </span>
@@ -158,7 +158,7 @@ export default function FineXMeSection() {
         </div>
         <div className="absolute inset-0 vignette" />
         <div className="relative z-10 text-center">
-          <span className="font-display text-6xl md:text-8xl italic text-white/20 tracking-[0.2em]">
+          <span className="font-display text-6xl md:text-8xl italic text-[#c0392b]/20 tracking-[0.2em]" style={{ textShadow: '0 0 40px rgba(192, 57, 43, 0.15), 0 0 80px rgba(192, 57, 43, 0.08)' }}>
             ANTE
           </span>
         </div>

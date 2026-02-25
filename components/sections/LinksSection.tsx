@@ -1,8 +1,8 @@
 const LINKS = [
-  { label: 'Spotify', href: 'https://open.spotify.com' },
-  { label: 'Apple Music', href: 'https://music.apple.com' },
+  { label: 'Spotify', href: 'https://open.spotify.com/artist/13Z1MsZ0A9Ddox3DZcu9zk' },
+  { label: 'Apple Music', href: 'https://music.apple.com/us/artist/free/1715333809' },
   { label: 'YouTube', href: 'https://youtube.com' },
-  { label: 'Instagram', href: 'https://instagram.com' },
+  { label: 'Instagram', href: 'https://www.instagram.com/freenotavailable/' },
 ]
 
 export default function LinksSection() {
@@ -15,7 +15,7 @@ export default function LinksSection() {
     >
       <div className="relative z-10 max-w-2xl mx-auto px-6 md:px-10 text-center">
         {/* Heading */}
-        <span className="text-xs font-sans tracking-[0.2em] uppercase text-white/40 block mb-6">
+        <span className="text-xs font-sans tracking-[0.2em] uppercase text-[#c0392b]/80 block mb-6">
           Listen
         </span>
         <h2 className="font-display text-3xl md:text-4xl italic text-[#f2ede8] mb-4">
@@ -33,7 +33,7 @@ export default function LinksSection() {
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-8 py-3 border border-white/15 text-xs font-sans tracking-[0.15em] uppercase text-white/70 hover:text-white hover:border-white/40 hover:bg-white/5 transition-all duration-300 min-w-[160px]"
+              className="inline-flex items-center justify-center px-8 py-3 border border-white/15 text-xs font-sans tracking-[0.15em] uppercase text-white/70 hover:text-[#e74c3c] hover:border-[#c0392b]/40 hover:bg-[#c0392b]/5 transition-all duration-300 min-w-[160px]"
             >
               {label}
             </a>

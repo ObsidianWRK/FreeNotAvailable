@@ -3,10 +3,15 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-const NAV_LINKS = [
+const ANCHOR_LINKS = [
   { label: 'ACT I', href: '#finexme' },
   { label: 'ACT II', href: '#sinenoctis' },
   { label: 'MYTHOS', href: '#mythos' },
+]
+
+const ROUTE_LINKS = [
+  { label: 'FILMS', href: '/films' },
+  { label: 'EKTHESIS', href: '/ekthesis' },
 ]
 
 export default function Nav() {
@@ -37,8 +42,8 @@ export default function Nav() {
       </Link>
 
       {/* Desktop nav */}
-      <ul className="hidden md:flex gap-8">
-        {NAV_LINKS.map(({ label, href }) => (
+      <ul className="hidden md:flex gap-6 lg:gap-8">
+        {ANCHOR_LINKS.map(({ label, href }) => (
           <li key={href}>
             <a
               href={href}
@@ -46,6 +51,17 @@ export default function Nav() {
             >
               {label}
             </a>
+          </li>
+        ))}
+        <li className="w-px h-4 bg-white/10 self-center" aria-hidden="true" />
+        {ROUTE_LINKS.map(({ label, href }) => (
+          <li key={href}>
+            <Link
+              href={href}
+              className="text-xs font-sans tracking-[0.15em] uppercase text-[#c0392b]/70 hover:text-[#c0392b] transition-colors"
+            >
+              {label}
+            </Link>
           </li>
         ))}
       </ul>
@@ -82,7 +98,7 @@ export default function Nav() {
       {menuOpen && (
         <div id="mobile-nav-menu" className="absolute top-full left-0 right-0 bg-black/95 backdrop-blur-xl border-b border-white/5 md:hidden">
           <ul className="flex flex-col p-6 gap-6">
-            {NAV_LINKS.map(({ label, href }) => (
+            {ANCHOR_LINKS.map(({ label, href }) => (
               <li key={href}>
                 <a
                   href={href}
@@ -91,6 +107,18 @@ export default function Nav() {
                 >
                   {label}
                 </a>
+              </li>
+            ))}
+            <li className="h-px bg-white/10" aria-hidden="true" />
+            {ROUTE_LINKS.map(({ label, href }) => (
+              <li key={href}>
+                <Link
+                  href={href}
+                  onClick={() => setMenuOpen(false)}
+                  className="text-sm tracking-[0.15em] uppercase text-[#c0392b]/70 hover:text-[#c0392b]"
+                >
+                  {label}
+                </Link>
               </li>
             ))}
           </ul>

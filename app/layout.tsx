@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { displayFont, bodyFont } from './fonts'
+import { displayFont, bodyFont, monoFont } from './fonts'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -43,7 +43,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${displayFont.variable} ${bodyFont.variable} dark`}
+      className={`${displayFont.variable} ${bodyFont.variable} ${monoFont.variable} dark`}
     >
       <head>
         <link rel="preload" as="image" href="/textures/grain-200x200.png" />
