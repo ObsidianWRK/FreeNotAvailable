@@ -4,6 +4,7 @@
   --font-display: var(--font-geist-sans);
   --font-sans: var(--font-sans);
   --font-mono: var(--font-geist-mono);
+  --font-pixel: var(--font-geist-pixel-square);
 }
 
 @theme {
@@ -15,6 +16,7 @@
   --color-heading: #f2ede8;
   --color-accent: #c0392b;
   --color-accent-hover: #e74c3c;
+  --color-warm: #d4a574;
 
   --text-display: clamp(3rem, 8vw, 7rem);
   --text-subhead: clamp(1.25rem, 3vw, 2rem);

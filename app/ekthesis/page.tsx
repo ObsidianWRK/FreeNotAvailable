@@ -67,7 +67,7 @@ function SectionTitle({
     <motion.h2
       variants={fadeUp}
       custom={1}
-      className={`font-display text-4xl md:text-5xl lg:text-6xl italic text-heading leading-[0.95] mb-12 ${className}`}
+      className={`font-sans text-4xl md:text-5xl lg:text-6xl italic text-heading leading-[0.95] mb-12 ${className}`}
     >
       {children}
     </motion.h2>
@@ -167,7 +167,7 @@ export default function EkthesisPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3, ease: EASE }}
-          className="font-display text-[clamp(4rem,12vw,10rem)] leading-[0.85] tracking-tight text-heading text-center"
+          className="font-pixel text-[clamp(4rem,12vw,10rem)] leading-[0.85] tracking-tight text-heading text-center"
         >
           EKTHESIS
         </motion.h1>
@@ -210,7 +210,7 @@ export default function EkthesisPage() {
           <motion.h2
             variants={fadeUp}
             custom={1}
-            className="font-display text-3xl md:text-5xl italic text-heading leading-[1.05] max-w-[24ch] mb-12"
+            className="font-sans text-3xl md:text-5xl italic text-heading leading-[1.05] max-w-[24ch] mb-12"
           >
             In today&rsquo;s R&amp;B landscape, men rarely make music that{' '}
             <span className="text-accent">yearns</span> anymore.
@@ -355,7 +355,7 @@ export default function EkthesisPage() {
         <motion.h2
           variants={fadeUp}
           custom={1}
-          className="font-display text-3xl md:text-4xl lg:text-5xl italic text-heading leading-[1.05] max-w-[26ch] mb-6"
+          className="font-sans text-3xl md:text-4xl lg:text-5xl italic text-heading leading-[1.05] max-w-[26ch] mb-6"
         >
           R&amp;B is the largest genre ecosystem in America
         </motion.h2>
@@ -404,7 +404,7 @@ export default function EkthesisPage() {
         <motion.h2
           variants={fadeUp}
           custom={1}
-          className="font-display text-4xl md:text-5xl lg:text-6xl italic text-heading leading-[0.95] mb-16"
+          className="font-sans text-4xl md:text-5xl lg:text-6xl italic text-heading leading-[0.95] mb-16"
         >
           Why <span className="text-accent">Now</span>
         </motion.h2>
@@ -433,7 +433,7 @@ export default function EkthesisPage() {
       <Section id="model">
         <SectionLabel>The Model</SectionLabel>
         <SectionTitle className="max-w-[24ch]">Music &times; Film</SectionTitle>
-        <motion.p variants={fadeUp} custom={2} className="font-display text-xl md:text-2xl italic text-heading/80 max-w-[36ch] mb-16 leading-snug">
+        <motion.p variants={fadeUp} custom={2} className="font-sans text-xl md:text-2xl italic text-heading/80 max-w-[36ch] mb-16 leading-snug">
           Each project is a Greek vignette — songs as scenes, albums as seasons.
         </motion.p>
 
@@ -613,7 +613,7 @@ export default function EkthesisPage() {
           <motion.h2
             variants={fadeUp}
             custom={0}
-            className="font-display text-5xl md:text-6xl lg:text-7xl italic text-heading leading-[0.9] mb-8"
+            className="font-sans text-5xl md:text-6xl lg:text-7xl italic text-heading leading-[0.9] mb-8"
           >
             Prometheus doesn&rsquo;t wait for permission.
           </motion.h2>

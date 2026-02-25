@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import FadeInView from '@/components/ui/FadeInView'
 
 const FUTURE_PROJECTS = [
   { src: '/images/logotype-otherland.png', alt: 'OTHERLAND', label: 'Otherland' },
@@ -17,25 +18,25 @@ export default function MythosSection() {
       <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-10">
         {/* Section heading */}
         <div className="mb-16 md:mb-24">
-          <span className="text-xs font-sans tracking-[0.2em] uppercase text-[#c0392b] block mb-6">
+          <span className="text-xs font-pixel tracking-[0.2em] uppercase text-[#c0392b] block mb-6">
             Mythos
           </span>
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl italic text-[#f2ede8] leading-[0.95]">
+          <h2 className="font-sans text-4xl md:text-5xl lg:text-6xl italic text-[#f2ede8] leading-[0.95]">
             Other World Mythos
           </h2>
         </div>
 
         {/* Mythology explanation */}
-        <div className="max-w-2xl mb-20 md:mb-28 space-y-8">
+        <FadeInView className="max-w-2xl mb-20 md:mb-28 space-y-8">
           <p className="font-sans text-sm md:text-base leading-[1.8] text-[#b5afa5] max-w-[65ch]">
             Every FREE project is a Greek vignette dressed in modern skin.
-            FREE is Prometheus&mdash;the one who steals fire not for the sake of
+            FREE is <span className="text-warm">Prometheus</span>&mdash;the one who steals fire not for the sake of
             mankind, but to burn through every intimate encounter without
             restraint. He overindulges, gives too much of himself, and gets
             punished for it. Then he reincarnates and does it again.
           </p>
           <p className="font-sans text-sm md:text-base leading-[1.8] text-[#b5afa5] max-w-[65ch]">
-            The Lady In Black is the Eagle. She is consequence personified&mdash;the
+            The Lady In Black is the <span className="text-warm">Eagle</span>. She is consequence personified&mdash;the
             figure who arrives when the bill comes due. She doesn&rsquo;t speak. She
             doesn&rsquo;t negotiate. She executes. In every era she wears a
             different face but the same intent: to collect what FREE owes
@@ -48,12 +49,12 @@ export default function MythosSection() {
             hot reds, SINE NOCTIS in strict monochrome&mdash;as if reincarnation
             resets the palette along with the protagonist.
           </p>
-        </div>
+        </FadeInView>
 
         {/* Divider */}
         <div className="flex items-center gap-6 mb-20 md:mb-28">
           <div className="flex-1 h-px bg-white/10" />
-          <span className="text-xs font-sans tracking-[0.2em] uppercase text-white/20">What Comes Next</span>
+          <span className="text-xs font-sans tracking-[0.2em] uppercase text-warm">What Comes Next</span>
           <div className="flex-1 h-px bg-white/10" />
         </div>
 

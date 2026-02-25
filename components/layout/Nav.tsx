@@ -59,7 +59,7 @@ export default function Nav() {
           fill
           className="object-contain"
           sizes="80px"
-          priority
+          preload
         />
       </Link>
 
