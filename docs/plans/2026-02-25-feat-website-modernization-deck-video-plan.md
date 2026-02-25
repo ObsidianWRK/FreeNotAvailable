@@ -1,7 +1,7 @@
 ---
 title: "feat: Website Modernization, Ekthesis Deck Expansion, Films Audit & Video Clips"
 type: feat
-status: active
+status: completed
 date: 2026-02-25
 deepened: 2026-02-25
 ---
