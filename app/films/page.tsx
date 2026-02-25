@@ -14,7 +14,7 @@ const FINEXME_FILMS = [
       'The first visual from the Other World. Shot on a gravel lot near Detroit\u2019s Ambassador Bridge, Fine By Me establishes FREE as The Faceless Man and The Lady In Black as the executor of consequence. The white BMW is his chariot through this night-world. The camera is a spy \u2014 long lenses, over-the-shoulder angles, and partial occlusions make every frame feel like a stolen moment.',
     image: '/images/dusk-silhouette-two.avif',
     alt: 'Dusk silhouette from Fine By Me',
-    hasVideo: true,
+    videoUrl: 'https://www.youtube.com/watch?v=hNwNaHOud-U',
   },
   {
     title: 'AT NO COST',
@@ -24,7 +24,7 @@ const FINEXME_FILMS = [
       'The prologue. Full-color, high-intensity reds and blacks. FREE\u2019s face is completely concealed. The Lady In Black is present as the unnamed counterpart, already framed as omen rather than love interest.',
     image: '/images/red-portrait.avif',
     alt: 'Red-lit portrait from AT NO COST trailer',
-    hasVideo: false,
+    videoUrl: 'https://www.youtube.com/watch?v=Bpc8srzl8jA',
   },
   {
     title: 'PILGRIM',
@@ -34,7 +34,7 @@ const FINEXME_FILMS = [
       'The unseen final chapter where the consequences land. By Pilgrim, FREE is spiritually dead \u2014 destroyed by his indulgence. Whether that death is literal or emotional is left ambiguous.',
     image: '/images/pilgrim-card.avif',
     alt: 'PILGRIM title card',
-    hasVideo: false,
+    videoUrl: 'https://www.youtube.com/watch?v=FBL3WTUDTOg',
   },
 ]
 
@@ -47,6 +47,7 @@ const SINENOCTIS_FILMS = [
       'The liminal corridor between worlds. FREE emerging from a dark doorway in downtown Birmingham, face still obscured. The footage is tight, grayscale, intimate. The doorway is his portal into the new world \u2014 the threshold between death and reincarnation.',
     image: '/images/ante-doorway.avif',
     alt: 'Stone archway doorway from ANTE teaser',
+    videoUrl: 'https://www.youtube.com/watch?v=0MZYQ8p_QEU',
   },
   {
     title: 'VESPERA',
@@ -56,6 +57,7 @@ const SINENOCTIS_FILMS = [
       'Evening/dusk/evening star. FREE\u2019s first evening wandering this new world. Less shock, more numb, heavy melancholy. He drifts before the next set of temptations draws him in.',
     image: '/images/sn-architecture.avif',
     alt: 'European architecture at night from VESPERA',
+    videoUrl: 'https://www.youtube.com/watch?v=UHIgUJa2fI4',
   },
   {
     title: 'NOCTEM',
@@ -65,6 +67,7 @@ const SINENOCTIS_FILMS = [
       'The plunge into the new night. This is where FREE begins to actively participate in this incarnation \u2014 making choices, setting up for what comes next.',
     image: '/images/bokeh-night.avif',
     alt: 'Bokeh night photography from NOCTEM trailer',
+    videoUrl: 'https://www.youtube.com/watch?v=PSIpF980ZAE',
   },
   {
     title: 'SINE NOCTIS',
@@ -107,7 +110,7 @@ function FilmCard({
   description,
   image,
   alt,
-  hasVideo,
+  videoUrl,
   index,
   grayscale,
   accentColor,
@@ -117,7 +120,7 @@ function FilmCard({
   description: string
   image: string
   alt: string
-  hasVideo?: boolean
+  videoUrl?: string
   index: number
   grayscale?: boolean
   accentColor?: string
@@ -125,38 +128,46 @@ function FilmCard({
   const isReversed = index % 2 !== 0
   const labelColor = accentColor ?? 'rgba(255,255,255,0.4)'
 
+  const imageContent = (
+    <div className={`relative ${isReversed ? 'lg:order-2' : ''}`}>
+      <div className="relative aspect-[16/10] overflow-hidden group">
+        <Image
+          src={image}
+          alt={alt}
+          fill
+          className={`object-cover transition-transform duration-700 group-hover:scale-105 ${grayscale ? 'grayscale' : ''}`}
+          sizes="(max-width: 1024px) 100vw, 50vw"
+        />
+        <div className="absolute inset-0 vignette" />
+
+        {/* Play overlay */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
+          <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300" />
+          <div className="relative z-10 flex flex-col items-center gap-3 text-white/60 group-hover:text-white/90 transition-colors duration-300">
+            <PlayIcon />
+            <span className="text-xs font-sans tracking-[0.2em] uppercase">
+              {videoUrl ? 'Watch' : 'Coming Soon'}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+
   return (
     <article
       className={`grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center ${
         index > 0 ? 'mt-24 md:mt-32' : ''
       }`}
     >
-      {/* Image side */}
-      <div className={`relative ${isReversed ? 'lg:order-2' : ''}`}>
-        <div className="relative aspect-[16/10] overflow-hidden">
-          <Image
-            src={image}
-            alt={alt}
-            fill
-            className={`object-cover ${grayscale ? 'grayscale' : ''}`}
-            sizes="(max-width: 1024px) 100vw, 50vw"
-          />
-          <div className="absolute inset-0 vignette" />
-        </div>
-
-        {/* Video placeholder overlay */}
-        {hasVideo && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 group cursor-pointer">
-            <div className="absolute inset-0 bg-black/30" />
-            <div className="relative z-10 flex flex-col items-center gap-3 text-white/70">
-              <PlayIcon />
-              <span className="text-xs font-sans tracking-[0.2em] uppercase">
-                Coming Soon
-              </span>
-            </div>
-          </div>
-        )}
-      </div>
+      {/* Image side — link to YouTube if available */}
+      {videoUrl ? (
+        <a href={videoUrl} target="_blank" rel="noopener noreferrer" className="block">
+          {imageContent}
+        </a>
+      ) : (
+        imageContent
+      )}
 
       {/* Text side */}
       <div className={isReversed ? 'lg:order-1' : ''}>
@@ -167,11 +178,30 @@ function FilmCard({
           {role}
         </span>
         <h3 className="font-display text-3xl md:text-4xl lg:text-5xl italic text-heading mb-6 tracking-wide">
-          {title}
+          {videoUrl ? (
+            <a href={videoUrl} target="_blank" rel="noopener noreferrer" className="hover:text-[#c0392b] transition-colors duration-300">
+              {title}
+            </a>
+          ) : (
+            title
+          )}
         </h3>
         <p className="font-sans text-sm md:text-base leading-[1.85] text-muted max-w-[55ch]">
           {description}
         </p>
+        {videoUrl && (
+          <a
+            href={videoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 mt-6 text-xs font-sans tracking-[0.15em] uppercase text-[#c0392b]/70 hover:text-[#c0392b] transition-colors"
+          >
+            Watch on YouTube
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+              <path d="M2 10L10 2M10 2H4M10 2v6" />
+            </svg>
+          </a>
+        )}
       </div>
     </article>
   )
@@ -240,7 +270,12 @@ export default function FilmsPage() {
           {FINEXME_FILMS.map((film, i) => (
             <FilmCard
               key={film.slug}
-              {...film}
+              title={film.title}
+              role={film.role}
+              description={film.description}
+              image={film.image}
+              alt={film.alt}
+              videoUrl={film.videoUrl}
               index={i}
               accentColor="rgba(192,57,43,0.8)"
             />
@@ -270,7 +305,12 @@ export default function FilmsPage() {
           {SINENOCTIS_FILMS.map((film, i) => (
             <FilmCard
               key={film.slug}
-              {...film}
+              title={film.title}
+              role={film.role}
+              description={film.description}
+              image={film.image}
+              alt={film.alt}
+              videoUrl={(film as Record<string, string>).videoUrl}
               index={i}
               grayscale
             />

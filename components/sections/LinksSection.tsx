@@ -1,7 +1,7 @@
 const LINKS = [
   { label: 'Spotify', href: 'https://open.spotify.com/artist/13Z1MsZ0A9Ddox3DZcu9zk' },
   { label: 'Apple Music', href: 'https://music.apple.com/us/artist/free/1715333809' },
-  { label: 'YouTube', href: 'https://youtube.com' },
+  { label: 'YouTube', href: 'https://www.youtube.com/@OWJV/videos' },
   { label: 'Instagram', href: 'https://www.instagram.com/freenotavailable/' },
 ]
 
