@@ -41,26 +41,30 @@ section[id] {
   scroll-margin-top: 5rem;
 }
 
-/* Film grain overlay — CSS noise tile, NOT SVG turbulence */
+/* Film grain overlay — CSS noise tile, compositor-thread animation */
 .film-grain-overlay {
   position: fixed;
-  inset: 0;
   pointer-events: none;
   z-index: 50;
   opacity: 0.04;
   background-image: url('/textures/grain-200x200.png');
   background-repeat: repeat;
   background-size: 200px 200px;
+  /* Oversized so transform shifts don't expose edges */
+  width: calc(100% + 40px);
+  height: calc(100% + 40px);
+  top: -20px;
+  left: -20px;
   animation: grain-shift 0.5s steps(1) infinite;
-  will-change: background-position;
+  will-change: transform;
 }
 
 @keyframes grain-shift {
-  0%  { background-position: 0% 0%; }
-  20% { background-position: -15% -10%; }
-  40% { background-position: -5% 25%; }
-  60% { background-position: -20% 10%; }
-  80% { background-position: -15% -20%; }
+  0%  { transform: translate(0px, 0px); }
+  20% { transform: translate(-15px, -10px); }
+  40% { transform: translate(-5px, 20px); }
+  60% { transform: translate(-20px, 10px); }
+  80% { transform: translate(-15px, -15px); }
 }
 
 /* Fade-in animation triggered by data attribute */
