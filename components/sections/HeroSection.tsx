@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import FadeInView from '@/components/ui/FadeInView'
 
 export default function HeroSection() {
   return (
@@ -14,7 +15,7 @@ export default function HeroSection() {
           src="/images/hero-cover.avif"
           alt="FREE — FINExME and SINE NOCTIS"
           fill
-          priority
+          preload
           sizes="100vw"
           className="object-cover object-center"
           quality={85}
@@ -36,15 +37,17 @@ export default function HeroSection() {
             sizes="(max-width: 768px) 192px, 256px"
           />
         </div>
-        <p className="font-display text-lg md:text-xl italic text-white/60 tracking-wide">
-          Welcome to the Other World
-        </p>
+        <FadeInView delay={0.3}>
+          <p className="font-sans text-lg md:text-xl italic text-warm tracking-wide">
+            Welcome to the Other World
+          </p>
+        </FadeInView>
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
+      <FadeInView delay={0.6} className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
         <div className="w-px h-12 bg-white/30 animate-pulse" />
-      </div>
+      </FadeInView>
     </section>
   )
 }

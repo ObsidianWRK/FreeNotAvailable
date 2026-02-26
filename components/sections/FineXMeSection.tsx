@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import FadeInView from '@/components/ui/FadeInView'
 
 const TRACKLIST = [
   { num: '01', title: 'Fine By Me' },
@@ -34,7 +35,7 @@ export default function FineXMeSection() {
         <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-10">
           {/* Chapter label */}
           <div className="mb-16 md:mb-24">
-            <span className="text-xs font-sans tracking-[0.2em] uppercase text-[#c0392b]/80 block mb-6">
+            <span className="text-xs font-pixel tracking-[0.2em] uppercase text-[#c0392b]/80 block mb-6">
               Act I
             </span>
             <div className="relative w-64 md:w-80 h-12 md:h-16">
@@ -49,8 +50,8 @@ export default function FineXMeSection() {
           </div>
 
           {/* Manifesto text */}
-          <div className="max-w-2xl mb-20 md:mb-28">
-            <p className="font-display text-2xl md:text-3xl italic leading-relaxed text-[#f5e6e0]/90 mb-8">
+          <FadeInView className="max-w-2xl mb-20 md:mb-28">
+            <p className="font-sans text-2xl md:text-3xl italic leading-relaxed text-[#f5e6e0]/90 mb-8">
               In today&rsquo;s R&amp;B landscape, men rarely make music that yearns anymore.
             </p>
             <p className="font-sans text-sm md:text-base leading-[1.8] text-[#f5e6e0]/60 max-w-[65ch]">
@@ -61,7 +62,7 @@ export default function FineXMeSection() {
               breathes in warm reds and amber, every beat a slow pulse in a room where
               someone just left.
             </p>
-          </div>
+          </FadeInView>
 
           {/* Cover art */}
           <div className="relative mb-20 md:mb-28">
@@ -108,7 +109,7 @@ export default function FineXMeSection() {
                 {TRACKLIST.map(({ num, title }) => (
                   <li key={num} className="flex items-baseline gap-4 group">
                     <span className="text-xs font-sans text-[#c0392b]/40 tabular-nums">{num}</span>
-                    <span className="font-display text-lg md:text-xl italic text-[#f5e6e0]/80 group-hover:text-[#f5e6e0] transition-colors">
+                    <span className="font-sans text-lg md:text-xl italic text-[#f5e6e0]/80 group-hover:text-[#f5e6e0] transition-colors">
                       {title}
                     </span>
                     <span className="flex-1 border-b border-white/5" />
@@ -158,7 +159,7 @@ export default function FineXMeSection() {
         </div>
         <div className="absolute inset-0 vignette" />
         <div className="relative z-10 text-center">
-          <span className="font-display text-6xl md:text-8xl italic text-[#c0392b]/20 tracking-[0.2em]" style={{ textShadow: '0 0 40px rgba(192, 57, 43, 0.15), 0 0 80px rgba(192, 57, 43, 0.08)' }}>
+          <span className="font-sans text-6xl md:text-8xl italic text-[#c0392b]/20 tracking-[0.2em]" style={{ textShadow: '0 0 40px rgba(192, 57, 43, 0.15), 0 0 80px rgba(192, 57, 43, 0.08)' }}>
             ANTE
           </span>
         </div>

@@ -177,7 +177,7 @@ function FilmCard({
         >
           {role}
         </span>
-        <h3 className="font-display text-3xl md:text-4xl lg:text-5xl italic text-heading mb-6 tracking-wide">
+        <h3 className="font-sans text-3xl md:text-4xl lg:text-5xl italic text-heading mb-6 tracking-wide">
           {videoUrl ? (
             <a href={videoUrl} target="_blank" rel="noopener noreferrer" className="hover:text-[#c0392b] transition-colors duration-300">
               {title}
@@ -236,10 +236,10 @@ export default function FilmsPage() {
         <div className="absolute inset-0 vignette" />
 
         <div className="relative z-10 text-center px-6">
-          <h1 className="font-display text-[clamp(3.5rem,10vw,8rem)] italic text-heading tracking-[0.04em] leading-none">
+          <h1 className="font-pixel text-[clamp(3.5rem,10vw,8rem)] text-heading tracking-[0.04em] leading-none">
             FILMS
           </h1>
-          <p className="mt-4 font-display text-lg md:text-xl italic text-white/50 tracking-wide">
+          <p className="mt-4 font-sans text-lg md:text-xl italic text-white/50 tracking-wide">
             The visual extensions of the Other World
           </p>
         </div>
@@ -260,7 +260,7 @@ export default function FilmsPage() {
             <span className="text-xs font-sans tracking-[0.2em] uppercase text-[#c0392b]/80 block mb-4">
               Act I
             </span>
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl italic text-heading tracking-wide">
+            <h2 className="font-sans text-4xl md:text-5xl lg:text-6xl italic text-heading tracking-wide">
               FINExME Era
             </h2>
             <div className="mt-4 w-16 h-px bg-[#c0392b]/40" />
@@ -295,7 +295,7 @@ export default function FilmsPage() {
             <span className="text-xs font-sans tracking-[0.2em] uppercase text-white/40 block mb-4">
               Act II
             </span>
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl italic text-[#e8e8e8]/90 tracking-wide">
+            <h2 className="font-sans text-4xl md:text-5xl lg:text-6xl italic text-[#e8e8e8]/90 tracking-wide">
               SINE NOCTIS Era
             </h2>
             <div className="mt-4 w-16 h-px bg-white/20" />
@@ -325,7 +325,7 @@ export default function FilmsPage() {
         aria-label="Recognition and Opportunities"
       >
         <div className="max-w-3xl mx-auto px-6 md:px-10 text-center">
-          <h2 className="font-display text-3xl md:text-4xl italic text-heading mb-12 tracking-wide">
+          <h2 className="font-sans text-3xl md:text-4xl italic text-heading mb-12 tracking-wide">
             Recognition
           </h2>
 
@@ -342,7 +342,7 @@ export default function FilmsPage() {
           </div>
 
           <div className="mt-16 pt-12 border-t border-white/5">
-            <p className="font-display text-xl md:text-2xl italic text-white/30 tracking-wide max-w-[40ch] mx-auto leading-relaxed">
+            <p className="font-sans text-xl md:text-2xl italic text-white/30 tracking-wide max-w-[40ch] mx-auto leading-relaxed">
               Every film is a Greek vignette. Every vignette expands the Other World.
             </p>
           </div>

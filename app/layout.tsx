@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { displayFont, bodyFont, monoFont } from './fonts'
+import { displayFont, bodyFont, monoFont, pixelFont } from './fonts'
 import Nav from '@/components/layout/Nav'
 import './globals.css'
 
@@ -44,7 +44,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${displayFont.variable} ${bodyFont.variable} ${monoFont.variable} dark`}
+      className={`${displayFont.variable} ${bodyFont.variable} ${monoFont.variable} ${pixelFont.variable} dark`}
     >
       <head>
         <link rel="preload" as="image" href="/textures/grain-200x200.png" />

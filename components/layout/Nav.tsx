@@ -10,7 +10,7 @@ import Link from 'next/link'
 
 type AnchorLink = { kind: 'anchor'; label: string; hash: string }
 type RouteLink = { kind: 'route'; label: string; href: string }
-type NavLink = AnchorLink | RouteLink
+
 
 const ANCHOR_LINKS: AnchorLink[] = [
   { kind: 'anchor', label: 'ACT I', hash: '#finexme' },
@@ -20,6 +20,7 @@ const ANCHOR_LINKS: AnchorLink[] = [
 
 const ROUTE_LINKS: RouteLink[] = [
   { kind: 'route', label: 'FILMS', href: '/films' },
+  { kind: 'route', label: 'CLIPS', href: '/clips' },
   { kind: 'route', label: 'EKTHESIS', href: '/ekthesis' },
 ]
 

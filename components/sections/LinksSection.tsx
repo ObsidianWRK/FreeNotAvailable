@@ -1,3 +1,5 @@
+import FadeInView from '@/components/ui/FadeInView'
+
 const LINKS = [
   { label: 'Spotify', href: 'https://open.spotify.com/artist/13Z1MsZ0A9Ddox3DZcu9zk' },
   { label: 'Apple Music', href: 'https://music.apple.com/us/artist/free/1715333809' },
@@ -15,15 +17,17 @@ export default function LinksSection() {
     >
       <div className="relative z-10 max-w-2xl mx-auto px-6 md:px-10 text-center">
         {/* Heading */}
-        <span className="text-xs font-sans tracking-[0.2em] uppercase text-[#c0392b]/80 block mb-6">
-          Listen
-        </span>
-        <h2 className="font-display text-3xl md:text-4xl italic text-[#f2ede8] mb-4">
-          Find FREE everywhere
-        </h2>
-        <p className="font-sans text-sm text-white/40 mb-12 md:mb-16">
-          Streaming now on all platforms.
-        </p>
+        <FadeInView>
+          <span className="text-xs font-pixel tracking-[0.2em] uppercase text-warm block mb-6">
+            Listen
+          </span>
+          <h2 className="font-sans text-3xl md:text-4xl italic text-[#f2ede8] mb-4">
+            Find FREE everywhere
+          </h2>
+          <p className="font-sans text-sm text-white/40 mb-12 md:mb-16">
+            Streaming now on all platforms.
+          </p>
+        </FadeInView>
 
         {/* Link buttons */}
         <div className="flex flex-wrap justify-center gap-4 md:gap-6">
