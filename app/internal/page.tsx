@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
+import Image from 'next/image'
 import Footer from '@/components/layout/Footer'
 
 /* ------------------------------------------------------------------ */
@@ -123,6 +124,46 @@ function KeyValue({ label, children }: { label: string; children: React.ReactNod
   )
 }
 
+function VisualImage({
+  src,
+  alt,
+  caption,
+  aspect = 'video',
+  className = '',
+}: {
+  src: string
+  alt: string
+  caption?: string
+  aspect?: 'video' | 'square' | 'portrait' | 'landscape'
+  className?: string
+}) {
+  const aspectClass = {
+    video: 'aspect-video',
+    square: 'aspect-square',
+    portrait: 'aspect-[3/4]',
+    landscape: 'aspect-[16/9]',
+  }[aspect]
+
+  return (
+    <figure className={`my-8 ${className}`}>
+      <div className={`relative w-full ${aspectClass} overflow-hidden`}>
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 800px"
+        />
+      </div>
+      {caption && (
+        <figcaption className="mt-3 text-xs font-sans tracking-[0.1em] uppercase text-white/25 text-center">
+          {caption}
+        </figcaption>
+      )}
+    </figure>
+  )
+}
+
 /* ------------------------------------------------------------------ */
 /*  Page Content                                                       */
 /* ------------------------------------------------------------------ */
@@ -227,6 +268,21 @@ function InternalContent() {
             A visual bible to accompany FREE on his journey.
           </p>
 
+          <div className="grid grid-cols-2 gap-4 my-10">
+            <figure>
+              <div className="relative aspect-square overflow-hidden">
+                <Image src="/images/finexme-cover.webp" alt="FINExME cover art" fill className="object-cover" sizes="400px" />
+              </div>
+              <figcaption className="mt-2 text-xs font-sans tracking-[0.1em] uppercase text-[#c0392b]/50 text-center">FINExME</figcaption>
+            </figure>
+            <figure>
+              <div className="relative aspect-square overflow-hidden">
+                <Image src="/images/sinenoctis-cover.webp" alt="SINE NOCTIS cover art" fill className="object-cover" sizes="400px" />
+              </div>
+              <figcaption className="mt-2 text-xs font-sans tracking-[0.1em] uppercase text-white/25 text-center">SINE NOCTIS</figcaption>
+            </figure>
+          </div>
+
           <Paragraph>
             Each project is a self-contained Greek-style tale about FREE, whose love life and vices
             replay the Prometheus myth in modern, nocturnal settings. Every era is a new
@@ -310,22 +366,32 @@ function InternalContent() {
             <div>
               <SubTitle>Color Logic</SubTitle>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                <div className="border-l-2 border-[#c0392b]/60 pl-6">
-                  <span className="text-xs font-sans tracking-[0.2em] uppercase text-[#c0392b]/70 block mb-2">
-                    FINExME
-                  </span>
-                  <p className="font-sans text-sm leading-[1.85] text-muted">
-                    Hot reds and blacks, full color, present-tense sin.
-                  </p>
+                <div>
+                  <div className="relative aspect-[4/5] overflow-hidden mb-4">
+                    <Image src="/images/finexme-cover.webp" alt="FINExME — hot reds and blacks" fill className="object-cover" sizes="400px" />
+                  </div>
+                  <div className="border-l-2 border-[#c0392b]/60 pl-6">
+                    <span className="text-xs font-sans tracking-[0.2em] uppercase text-[#c0392b]/70 block mb-2">
+                      FINExME
+                    </span>
+                    <p className="font-sans text-sm leading-[1.85] text-muted">
+                      Hot reds and blacks, full color, present-tense sin.
+                    </p>
+                  </div>
                 </div>
-                <div className="border-l-2 border-white/20 pl-6">
-                  <span className="text-xs font-sans tracking-[0.2em] uppercase text-white/40 block mb-2">
-                    SINE NOCTIS
-                  </span>
-                  <p className="font-sans text-sm leading-[1.85] text-muted">
-                    Black-and-white/greyscale, memory and reflection, a colder chapter where the past
-                    feels distant and already mythologized.
-                  </p>
+                <div>
+                  <div className="relative aspect-[4/5] overflow-hidden mb-4">
+                    <Image src="/images/sinenoctis-cover.webp" alt="SINE NOCTIS — greyscale memory" fill className="object-cover" sizes="400px" />
+                  </div>
+                  <div className="border-l-2 border-white/20 pl-6">
+                    <span className="text-xs font-sans tracking-[0.2em] uppercase text-white/40 block mb-2">
+                      SINE NOCTIS
+                    </span>
+                    <p className="font-sans text-sm leading-[1.85] text-muted">
+                      Black-and-white/greyscale, memory and reflection, a colder chapter where the past
+                      feels distant and already mythologized.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -418,6 +484,14 @@ function InternalContent() {
               </Bullet>
             </ul>
           </div>
+
+          <VisualImage
+            src="/images/bmw-dusk.webp"
+            alt="AT NO COST — FREE silhouetted against the BMW on a gravel lot at dusk"
+            caption="At No Cost — First Trailer"
+            aspect="landscape"
+          />
+
           <Paragraph>
             <strong className="text-heading/80">Narrative implication:</strong> &ldquo;At no
             cost&rdquo; plays on the idea of &ldquo;free&rdquo; as both lack of price and lack of
@@ -451,6 +525,29 @@ function InternalContent() {
               </Bullet>
             </ul>
           </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-8">
+            <VisualImage
+              src="/images/fine-by-me-still.webp"
+              alt="FINE BY ME — FREE standing in red light on the lot"
+              caption="The Faceless Man"
+              aspect="landscape"
+              className="my-0"
+            />
+            <VisualImage
+              src="/images/red-portrait.webp"
+              alt="FINE BY ME — intimate red-lit embrace"
+              caption="The Lady In Black"
+              aspect="landscape"
+              className="my-0"
+            />
+          </div>
+          <VisualImage
+            src="/images/fine-by-me-sunset.webp"
+            alt="FINE BY ME — silhouette through car at sunset"
+            caption="Fine By Me — Visual"
+            aspect="landscape"
+          />
+
           <Paragraph>
             <strong className="text-heading/80">Final image:</strong> FREE and The Lady In Black
             embrace outside the car. The car &mdash; his armor &mdash; is left behind, and the embrace
@@ -480,6 +577,13 @@ function InternalContent() {
               stripped of the BMW, stripped of color.
             </Bullet>
           </ul>
+
+          <VisualImage
+            src="/images/pilgrim-card.webp"
+            alt="PILGRIM — BMW dashboard at night, red glow"
+            caption="Pilgrim — Final Song of FINExME"
+            aspect="portrait"
+          />
         </div>
       </section>
 
@@ -517,6 +621,12 @@ function InternalContent() {
               </Bullet>
             </ul>
           </div>
+
+          <VisualImage
+            src="/images/ante-doorway.webp"
+            alt="ANTE — FREE emerging from a dark doorway in downtown Birmingham"
+            caption="Ante — The Doorway Between Worlds"
+          />
 
           <Paragraph>
             <strong className="text-heading/80">Emotional tone:</strong> Disorientation, quiet shock,
@@ -557,6 +667,13 @@ function InternalContent() {
             Strict black-and-white/greyscale to represent memory, reflection, and a sense that we are
             observing the aftermath of a story rather than living it in real time.
           </KeyValue>
+
+          <VisualImage
+            src="/images/jacket-portrait.webp"
+            alt="SINE NOCTIS — the Alpinestars leather jacket, FREE's new armor"
+            caption="The Jacket — SINE NOCTIS Armor"
+            aspect="portrait"
+          />
 
           <Divider />
 
@@ -630,6 +747,29 @@ function InternalContent() {
                 then cut to black on a breath, drum hit, or vocal fragment.
               </Bullet>
             </ul>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-8">
+            <VisualImage
+              src="/images/sn-architecture.webp"
+              alt="VESPERA — FREE walking past European architecture in grayscale"
+              caption="Parisian Street Loop"
+              className="my-0"
+            />
+            <VisualImage
+              src="/images/sn-scene.webp"
+              alt="VESPERA — stairwell with diagonal railing, deep blacks"
+              caption="Parking Structure"
+              aspect="portrait"
+              className="my-0"
+            />
+            <VisualImage
+              src="/images/vespera-closing.webp"
+              alt="VESPERA — silhouette beneath a streetlamp, bokeh background"
+              caption="Closing Shot"
+              aspect="portrait"
+              className="my-0"
+            />
           </div>
 
           <div className="mb-6">
@@ -706,6 +846,13 @@ function InternalContent() {
               repeat the pattern and &ldquo;die&rdquo; again by the time the EP&rsquo;s arc completes.
             </Bullet>
           </ul>
+
+          <VisualImage
+            src="/images/sn-full-visual.webp"
+            alt="SINE NOCTIS — full visual still, FREE head lowered in the night corridor"
+            caption="SINE NOCTIS — Full Visual"
+            aspect="portrait"
+          />
         </div>
       </section>
 
@@ -740,6 +887,9 @@ function InternalContent() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
             <div className="border border-[#c0392b]/20 p-6">
+              <div className="relative aspect-square overflow-hidden mb-4 -mx-6 -mt-6">
+                <Image src="/images/finexme-cover.webp" alt="FINExME cover art" fill className="object-cover" sizes="400px" />
+              </div>
               <span className="text-xs font-sans tracking-[0.2em] uppercase text-[#c0392b]/70 block mb-3">
                 The FINExME Cover
               </span>
@@ -753,6 +903,9 @@ function InternalContent() {
             </div>
 
             <div className="border border-white/10 p-6">
+              <div className="relative aspect-square overflow-hidden mb-4 -mx-6 -mt-6">
+                <Image src="/images/sinenoctis-cover.webp" alt="SINE NOCTIS cover art" fill className="object-cover" sizes="400px" />
+              </div>
               <span className="text-xs font-sans tracking-[0.2em] uppercase text-white/40 block mb-3">
                 The SINE NOCTIS Cover
               </span>
@@ -811,12 +964,18 @@ function InternalContent() {
 
           <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="border border-white/5 p-5">
+              <div className="relative aspect-[2/1] overflow-hidden mb-3 -mx-5 -mt-5">
+                <Image src="/images/finexme-backcover.webp" alt="FINExME back cover" fill className="object-cover" sizes="400px" />
+              </div>
               <span className="text-xs font-sans tracking-[0.15em] uppercase text-white/30 block mb-2">
                 FINExME Back Cover
               </span>
               <p className="font-sans text-sm text-muted">The golden standard.</p>
             </div>
             <div className="border border-white/5 p-5">
+              <div className="relative aspect-[2/1] overflow-hidden mb-3 -mx-5 -mt-5">
+                <Image src="/images/sinenoctis-backcover.webp" alt="SINE NOCTIS back cover" fill className="object-cover" sizes="400px" />
+              </div>
               <span className="text-xs font-sans tracking-[0.15em] uppercase text-white/30 block mb-2">
                 SINE NOCTIS Back Cover
               </span>
@@ -865,28 +1024,32 @@ function InternalContent() {
               {[
                 {
                   title: 'SINE NOCTIS',
+                  logo: '/images/logotype-sinenoctis.png',
                   description:
                     'The current EP being presented, which will receive a sequel of the same name before the next album.',
                 },
                 {
                   title: 'OTHERLAND',
+                  logo: '/images/logotype-otherland.png',
                   description: 'The next full-length album we are building toward.',
                 },
                 {
                   title: 'NEVERDYIN',
+                  logo: '/images/logotype-neverdyin.png',
                   description:
                     'A developing concept tied to origins as an artist, exploring the reincarnation motif prevalent in this larger narrative.',
                 },
                 {
                   title: 'SEX SYMBOL (THE ALBUM)',
+                  logo: '/images/logotype-sexsymbol.png',
                   description:
                     'The culmination of everything Choice and I have designed over the past seven years. The most important piece in the catalog, intentionally postponed. Entirely produced by Worst Choice.',
                 },
               ].map((item) => (
                 <div key={item.title} className="border border-white/5 p-5">
-                  <span className="font-sans text-sm italic text-heading block mb-2">
-                    {item.title}
-                  </span>
+                  <div className="relative h-10 mb-4">
+                    <Image src={item.logo} alt={`${item.title} logotype`} fill className="object-contain object-left" sizes="300px" />
+                  </div>
                   <p className="font-sans text-xs leading-[1.85] text-muted">
                     {item.description}
                   </p>
@@ -896,6 +1059,11 @@ function InternalContent() {
           </div>
 
           <SubTitle>Logo Usage</SubTitle>
+          <div className="my-6 border border-white/5 bg-white/[0.02] p-8 flex items-center justify-center">
+            <div className="relative w-48 h-16">
+              <Image src="/images/logotype-free.png" alt="FREE logotype" fill className="object-contain" sizes="200px" />
+            </div>
+          </div>
           <Paragraph>
             Continue using the original FREE logo (created by Choice). Although the PSD file is
             missing, the available screenshot can be vectored.
@@ -907,21 +1075,31 @@ function InternalContent() {
             that narrative world:
           </Paragraph>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-            <div className="border-l-2 border-[#c0392b]/60 pl-6">
-              <span className="text-xs font-sans tracking-[0.2em] uppercase text-[#c0392b]/70 block mb-2">
-                FINExME
-              </span>
-              <p className="font-sans text-sm text-muted">
-                The BMW (a symbol of movement and identity).
-              </p>
+            <div>
+              <div className="relative aspect-video overflow-hidden mb-4">
+                <Image src="/images/bmw-red-wheel.webp" alt="FINExME focal motif — the BMW" fill className="object-cover" sizes="400px" />
+              </div>
+              <div className="border-l-2 border-[#c0392b]/60 pl-6">
+                <span className="text-xs font-sans tracking-[0.2em] uppercase text-[#c0392b]/70 block mb-2">
+                  FINExME
+                </span>
+                <p className="font-sans text-sm text-muted">
+                  The BMW (a symbol of movement and identity).
+                </p>
+              </div>
             </div>
-            <div className="border-l-2 border-white/20 pl-6">
-              <span className="text-xs font-sans tracking-[0.2em] uppercase text-white/40 block mb-2">
-                SINE NOCTIS
-              </span>
-              <p className="font-sans text-sm text-muted">
-                The Alpinestars Jacket (representing shelter and resilience).
-              </p>
+            <div>
+              <div className="relative aspect-video overflow-hidden mb-4">
+                <Image src="/images/jacket-closeup.webp" alt="SINE NOCTIS focal motif — the Alpinestars Jacket" fill className="object-cover" sizes="400px" />
+              </div>
+              <div className="border-l-2 border-white/20 pl-6">
+                <span className="text-xs font-sans tracking-[0.2em] uppercase text-white/40 block mb-2">
+                  SINE NOCTIS
+                </span>
+                <p className="font-sans text-sm text-muted">
+                  The Alpinestars Jacket (representing shelter and resilience).
+                </p>
+              </div>
             </div>
           </div>
 
