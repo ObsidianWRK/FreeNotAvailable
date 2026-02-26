@@ -1,5 +1,5 @@
 'use client'
-import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 
 const PALETTES: Record<string, { background: string; foreground: string; accent: string }> = {
   hero: { background: '#0a0a08', foreground: '#f2ede8', accent: '#b5afa5' },
@@ -10,12 +10,8 @@ const PALETTES: Record<string, { background: string; foreground: string; accent:
   links: { background: '#0a0a08', foreground: '#f2ede8', accent: '#c0392b' },
 }
 
-interface ScrollContextValue { activeSection: string }
-const ScrollContext = createContext<ScrollContextValue>({ activeSection: 'hero' })
-export const useActiveSection = () => useContext(ScrollContext)
-
 export default function ScrollController({ children }: { children: ReactNode }) {
-  const [activeSection, setActiveSection] = useState('hero')
+  const [, setActiveSection] = useState('hero')
   const visibleSections = useRef<Map<string, number>>(new Map())
 
   useEffect(() => {
@@ -57,10 +53,8 @@ export default function ScrollController({ children }: { children: ReactNode }) 
   }, [])
 
   return (
-    <ScrollContext.Provider value={{ activeSection }}>
-      <div style={{ backgroundColor: 'var(--section-bg)', color: 'var(--section-text)', transition: 'background-color 0.8s ease, color 0.8s ease' }}>
-        {children}
-      </div>
-    </ScrollContext.Provider>
+    <div style={{ backgroundColor: 'var(--section-bg)', color: 'var(--section-text)', transition: 'background-color 0.8s ease, color 0.8s ease' }}>
+      {children}
+    </div>
   )
 }

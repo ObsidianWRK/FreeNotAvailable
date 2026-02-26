@@ -6,8 +6,7 @@ import { SineNoctisTeaser } from "./compositions/SineNoctisTeaser";
 import { ArtistIntro } from "./compositions/ArtistIntro";
 import { Manifesto } from "./compositions/Manifesto";
 import { FilmReel } from "./compositions/FilmReel";
-
-const FPS = 30;
+import { FPS } from "./constants";
 
 export const RemotionRoot: React.FC = () => {
   return (

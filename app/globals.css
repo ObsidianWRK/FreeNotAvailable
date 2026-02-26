@@ -9,17 +9,11 @@
 
 @theme {
   --color-canvas: #0a0a08;
-  --color-surface: #111110;
-  --color-border: #2a2926;
   --color-muted: #b5afa5;
   --color-body: #ddd8d0;
   --color-heading: #f2ede8;
   --color-accent: #c0392b;
-  --color-accent-hover: #e74c3c;
   --color-warm: #d4a574;
-
-  --text-display: clamp(3rem, 8vw, 7rem);
-  --text-subhead: clamp(1.25rem, 3vw, 2rem);
 
   --section-padding: clamp(4rem, 10vw, 10rem);
 
@@ -140,11 +134,8 @@ section[id] {
   --section-accent: #c0392b;
 }
 
-/* Responsive: disable parallax on touch */
+/* Touch devices: always show gallery captions */
 @media (pointer: coarse) {
-  .parallax-container {
-    transform: none !important;
-  }
   .gallery-caption {
     opacity: 1;
   }
@@ -164,8 +155,4 @@ section[id] {
 /* Custom utilities */
 @utility section-padding {
   padding-block: var(--section-padding);
-}
-
-@utility text-balance {
-  text-wrap: balance;
 }

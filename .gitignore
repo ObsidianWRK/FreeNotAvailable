@@ -38,6 +38,7 @@ next-env.d.ts
 /assets/
 /public/clips/
 
+
 # remotion
 remotion/output/
 remotion/assets/

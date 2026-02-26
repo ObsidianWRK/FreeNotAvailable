@@ -2,11 +2,11 @@ import Link from 'next/link'
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-6 bg-[#0a0a08]">
+    <div className="min-h-screen flex flex-col items-center justify-center px-6 bg-canvas">
       <p className="text-xs font-sans tracking-[0.2em] uppercase text-white/30 mb-8">
         404
       </p>
-      <h1 className="font-sans text-4xl md:text-6xl italic text-[#f2ede8] mb-4 text-center">
+      <h1 className="font-sans text-4xl md:text-6xl italic text-heading mb-4 text-center">
         FREE is not available
       </h1>
       <p className="font-sans text-sm text-white/40 mb-12 text-center max-w-md">

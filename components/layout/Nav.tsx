@@ -83,8 +83,8 @@ export default function Nav() {
               href={link.href}
               className={`text-xs font-sans tracking-[0.15em] uppercase transition-colors ${
                 isActiveRoute(link)
-                  ? 'text-[#c0392b]'
-                  : 'text-[#c0392b]/70 hover:text-[#c0392b]'
+                  ? 'text-accent'
+                  : 'text-accent/70 hover:text-accent'
               }`}
             >
               {link.label}
@@ -144,8 +144,8 @@ export default function Nav() {
                   onClick={() => setMenuOpen(false)}
                   className={`text-sm tracking-[0.15em] uppercase ${
                     isActiveRoute(link)
-                      ? 'text-[#c0392b]'
-                      : 'text-[#c0392b]/70 hover:text-[#c0392b]'
+                      ? 'text-accent'
+                      : 'text-accent/70 hover:text-accent'
                   }`}
                 >
                   {link.label}

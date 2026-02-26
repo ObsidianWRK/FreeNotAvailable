@@ -10,6 +10,7 @@ import {
 import { TextOverlay } from "../components/TextOverlay";
 import { FilmGrain } from "../components/FilmGrain";
 import { LogoOverlay } from "../components/LogoOverlay";
+import { FPS } from "../constants";
 
 // Film Reel - Quick cuts showreel
 // 1920x1080, 16:9 landscape, 60s @ 30fps = 1800 frames
@@ -37,16 +38,19 @@ const CLIPS = [
   { src: "NOCTEM.mp4", startSec: 45, durFrames: 90 },
 ];
 
+// Precompute sequence offsets so we avoid mutation inside render
+const CLIP_OFFSETS = CLIPS.reduce<number[]>((acc, clip, i) => {
+  acc.push(i === 0 ? 0 : acc[i - 1] + CLIPS[i - 1].durFrames);
+  return acc;
+}, []);
+
 export const FilmReel: React.FC = () => {
   const frame = useCurrentFrame();
-
-  let sequenceStart = 0;
 
   return (
     <AbsoluteFill style={{ backgroundColor: "#000" }}>
       {CLIPS.map((clip, i) => {
-        const from = sequenceStart;
-        sequenceStart += clip.durFrames;
+        const from = CLIP_OFFSETS[i];
 
         // Quick hard cuts with brief fade
         const crossfade = 4;
@@ -70,7 +74,7 @@ export const FilmReel: React.FC = () => {
             <AbsoluteFill style={{ opacity: clipOpacity }}>
               <OffthreadVideo
                 src={staticFile(clip.src)}
-                startFrom={clip.startSec * 30}
+                startFrom={clip.startSec * FPS}
                 style={{
                   width: "100%",
                   height: "100%",

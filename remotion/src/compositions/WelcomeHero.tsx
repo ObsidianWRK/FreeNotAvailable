@@ -10,6 +10,7 @@ import {
 import { TextOverlay } from "../components/TextOverlay";
 import { FilmGrain } from "../components/FilmGrain";
 import { LogoOverlay } from "../components/LogoOverlay";
+import { FPS } from "../constants";
 
 // "Welcome to the Other World" - Hero montage
 // 1080x1920, 9:16 vertical, 30s @ 30fps = 900 frames
@@ -23,16 +24,19 @@ const CLIPS = [
   { src: "FREE - FLO.mp4", startSec: 4, durFrames: 150 },
 ];
 
+// Precompute sequence offsets so we avoid mutation inside render
+const CLIP_OFFSETS = CLIPS.reduce<number[]>((acc, clip, i) => {
+  acc.push(i === 0 ? 0 : acc[i - 1] + CLIPS[i - 1].durFrames);
+  return acc;
+}, []);
+
 export const WelcomeHero: React.FC = () => {
   const frame = useCurrentFrame();
-
-  let sequenceStart = 0;
 
   return (
     <AbsoluteFill style={{ backgroundColor: "#000" }}>
       {CLIPS.map((clip, i) => {
-        const from = sequenceStart;
-        sequenceStart += clip.durFrames;
+        const from = CLIP_OFFSETS[i];
 
         const crossfade = 15;
         const clipOpacity = interpolate(
@@ -52,7 +56,7 @@ export const WelcomeHero: React.FC = () => {
             <AbsoluteFill style={{ opacity: clipOpacity }}>
               <OffthreadVideo
                 src={staticFile(clip.src)}
-                startFrom={clip.startSec * 30}
+                startFrom={clip.startSec * FPS}
                 style={{
                   width: "100%",
                   height: "100%",
