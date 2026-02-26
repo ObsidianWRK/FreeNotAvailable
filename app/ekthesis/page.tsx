@@ -6,7 +6,8 @@ import { useRef } from 'react'
 import type { CaseStudy, StatItem } from '@/lib/content/types'
 import ComparablesTable from './ComparablesTable'
 import PlatformGrid from './PlatformGrid'
-import { StreamingRatesTable, SyncRangesTable, Year1Projections, Year23Projections } from './RevenueTable'
+import { StreamingRatesTable, SyncRangesTable } from './RevenueTable'
+import RevenueChart from './RevenueChart'
 
 /* ─── Animation helpers ─── */
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number]
@@ -732,8 +733,7 @@ export default function EkthesisPage() {
         <SectionTitle>Revenue Path</SectionTitle>
 
         <motion.div variants={fadeUp} custom={2}>
-          <Year1Projections />
-          <Year23Projections />
+          <RevenueChart />
         </motion.div>
 
         <motion.div variants={fadeUp} custom={3} className="border border-white/10 p-6 md:p-8 mb-20">

@@ -11,13 +11,6 @@ export interface ComparableArtist {
   readonly relevance: string
 }
 
-export interface RevenueProjection {
-  readonly period: string
-  readonly conservative: string
-  readonly base: string
-  readonly aggressive: string
-}
-
 export interface RevenueStream {
   readonly name: string
   readonly typicalRange: string
