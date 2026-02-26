@@ -141,6 +141,13 @@ section[id] {
   }
 }
 
+/* Touch devices: always show streaming icons */
+@media (hover: none) {
+  .group .group-hover\:opacity-100 {
+    opacity: 1;
+  }
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

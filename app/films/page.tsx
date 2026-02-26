@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Footer from '@/components/layout/Footer'
 
@@ -93,80 +93,6 @@ function toEmbedUrl(watchUrl: string): string {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Video Modal                                                         */
-/* ------------------------------------------------------------------ */
-
-function VideoModal({
-  videoUrl,
-  title,
-  onClose,
-}: {
-  videoUrl: string
-  title: string
-  onClose: () => void
-}) {
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
-    document.addEventListener('keydown', onKey)
-    document.body.style.overflow = 'hidden'
-    return () => {
-      document.removeEventListener('keydown', onKey)
-      document.body.style.overflow = ''
-    }
-  }, [onClose])
-
-  return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm"
-      onClick={onClose}
-    >
-      <div
-        className="relative w-full max-w-5xl mx-4"
-        onClick={e => e.stopPropagation()}
-      >
-        {/* Close button */}
-        <button
-          onClick={onClose}
-          className="absolute -top-10 right-0 text-white/50 hover:text-white transition-colors text-xs font-sans tracking-[0.2em] uppercase flex items-center gap-2"
-          aria-label="Close video"
-        >
-          Close
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-            <path d="M1 1l10 10M11 1L1 11" />
-          </svg>
-        </button>
-
-        {/* 16/9 iframe */}
-        <div className="relative aspect-video bg-black">
-          <iframe
-            src={toEmbedUrl(videoUrl)}
-            title={title}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            className="absolute inset-0 w-full h-full"
-          />
-        </div>
-
-        {/* Watch on YouTube link */}
-        <div className="mt-3 flex justify-end">
-          <a
-            href={videoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-xs font-sans tracking-[0.15em] uppercase text-[#c0392b]/70 hover:text-[#c0392b] transition-colors"
-          >
-            Watch on YouTube
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-              <path d="M2 10L10 2M10 2H4M10 2v6" />
-            </svg>
-          </a>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-/* ------------------------------------------------------------------ */
 /*  Play Button SVG                                                    */
 /* ------------------------------------------------------------------ */
 
@@ -200,7 +126,6 @@ function FilmCard({
   index,
   grayscale,
   accentColor,
-  onPlay,
 }: {
   title: string
   role: string
@@ -211,33 +136,65 @@ function FilmCard({
   index: number
   grayscale?: boolean
   accentColor?: string
-  onPlay?: () => void
 }) {
+  const [playing, setPlaying] = useState(false)
   const isReversed = index % 2 !== 0
   const labelColor = accentColor ?? 'rgba(255,255,255,0.4)'
+
+  useEffect(() => {
+    if (!playing) return
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setPlaying(false) }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [playing])
 
   const imageContent = (
     <div className={`relative ${isReversed ? 'lg:order-2' : ''}`}>
       <div className="relative aspect-[16/10] overflow-hidden group">
-        <Image
-          src={image}
-          alt={alt}
-          fill
-          className={`object-cover transition-transform duration-700 group-hover:scale-105 ${grayscale ? 'grayscale' : ''}`}
-          sizes="(max-width: 1024px) 100vw, 50vw"
-        />
-        <div className="absolute inset-0 vignette" />
+        {playing && videoUrl ? (
+          <>
+            <iframe
+              src={toEmbedUrl(videoUrl)}
+              title={title}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="absolute inset-0 w-full h-full"
+            />
+            {/* Close button */}
+            <button
+              onClick={() => setPlaying(false)}
+              className="absolute top-3 right-3 z-10 text-white/50 hover:text-white transition-colors text-xs font-sans tracking-[0.2em] uppercase flex items-center gap-1.5 bg-black/60 backdrop-blur-sm px-3 py-1.5 focus-visible:ring-1 focus-visible:ring-accent/50 focus-visible:outline-none"
+              aria-label="Close video"
+            >
+              Close
+              <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+                <path d="M1 1l10 10M11 1L1 11" />
+              </svg>
+            </button>
+          </>
+        ) : (
+          <>
+            <Image
+              src={image}
+              alt={alt}
+              fill
+              className={`object-cover transition-transform duration-700 group-hover:scale-105 ${grayscale ? 'grayscale' : ''}`}
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+            <div className="absolute inset-0 vignette" />
 
-        {/* Play overlay */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
-          <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300" />
-          <div className="relative z-10 flex flex-col items-center gap-3 text-white/60 group-hover:text-white/90 transition-colors duration-300">
-            <PlayIcon />
-            <span className="text-xs font-sans tracking-[0.2em] uppercase">
-              {videoUrl ? 'Watch' : 'Coming Soon'}
-            </span>
-          </div>
-        </div>
+            {/* Play overlay */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300" />
+              <div className="relative z-10 flex flex-col items-center gap-3 text-white/60 group-hover:text-white/90 transition-colors duration-300">
+                <PlayIcon />
+                <span className="text-xs font-sans tracking-[0.2em] uppercase">
+                  {videoUrl ? 'Watch' : 'Coming Soon'}
+                </span>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   )
@@ -249,8 +206,8 @@ function FilmCard({
       }`}
     >
       {/* Image side */}
-      {videoUrl ? (
-        <button onClick={onPlay} className="block text-left w-full cursor-pointer" aria-label={`Watch ${title}`}>
+      {videoUrl && !playing ? (
+        <button onClick={() => setPlaying(true)} className="block text-left w-full cursor-pointer focus-visible:ring-1 focus-visible:ring-accent/50 focus-visible:outline-none" aria-label={`Watch ${title}`}>
           {imageContent}
         </button>
       ) : (
@@ -267,7 +224,7 @@ function FilmCard({
         </span>
         <h3 className="font-sans text-3xl md:text-4xl lg:text-5xl italic text-heading mb-6 tracking-wide">
           {videoUrl ? (
-            <button onClick={onPlay} className="hover:text-[#c0392b] transition-colors duration-300 text-left">
+            <button onClick={() => setPlaying(true)} className="hover:text-[#c0392b] transition-colors duration-300 text-left cursor-pointer focus-visible:ring-1 focus-visible:ring-accent/50 focus-visible:outline-none">
               {title}
             </button>
           ) : (
@@ -278,15 +235,29 @@ function FilmCard({
           {description}
         </p>
         {videoUrl && (
-          <button
-            onClick={onPlay}
-            className="inline-flex items-center gap-2 mt-6 text-xs font-sans tracking-[0.15em] uppercase text-[#c0392b]/70 hover:text-[#c0392b] transition-colors"
-          >
-            Watch Now
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-              <path d="M2 10L10 2M10 2H4M10 2v6" />
-            </svg>
-          </button>
+          playing ? (
+            <a
+              href={videoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 mt-6 text-xs font-sans tracking-[0.15em] uppercase text-[#c0392b]/70 hover:text-[#c0392b] transition-colors focus-visible:ring-1 focus-visible:ring-accent/50 focus-visible:outline-none"
+            >
+              Watch on YouTube
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+                <path d="M2 10L10 2M10 2H4M10 2v6" />
+              </svg>
+            </a>
+          ) : (
+            <button
+              onClick={() => setPlaying(true)}
+              className="inline-flex items-center gap-2 mt-6 text-xs font-sans tracking-[0.15em] uppercase text-[#c0392b]/70 hover:text-[#c0392b] transition-colors cursor-pointer focus-visible:ring-1 focus-visible:ring-accent/50 focus-visible:outline-none"
+            >
+              Watch Now
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+                <path d="M2 10L10 2M10 2H4M10 2v6" />
+              </svg>
+            </button>
+          )
         )}
       </div>
     </article>
@@ -298,26 +269,8 @@ function FilmCard({
 /* ------------------------------------------------------------------ */
 
 export default function FilmsPage() {
-  const [activeVideo, setActiveVideo] = useState<{ url: string; title: string } | null>(null)
-
-  const openVideo = useCallback((url: string, title: string) => {
-    setActiveVideo({ url, title })
-  }, [])
-
-  const closeVideo = useCallback(() => {
-    setActiveVideo(null)
-  }, [])
-
   return (
     <div className="min-h-screen bg-canvas text-body">
-      {/* Video Modal */}
-      {activeVideo && (
-        <VideoModal
-          videoUrl={activeVideo.url}
-          title={activeVideo.title}
-          onClose={closeVideo}
-        />
-      )}
 
       {/* ---- Hero ---- */}
       <section
@@ -383,7 +336,6 @@ export default function FilmsPage() {
               videoUrl={film.videoUrl}
               index={i}
               accentColor="rgba(192,57,43,0.8)"
-              onPlay={film.videoUrl ? () => openVideo(film.videoUrl!, film.title) : undefined}
             />
           ))}
         </div>
@@ -416,10 +368,9 @@ export default function FilmsPage() {
               description={film.description}
               image={film.image}
               alt={film.alt}
-              videoUrl={(film as Record<string, string>).videoUrl}
+              videoUrl={'videoUrl' in film ? film.videoUrl : undefined}
               index={i}
               grayscale
-              onPlay={(film as Record<string, string>).videoUrl ? () => openVideo((film as Record<string, string>).videoUrl, film.title) : undefined}
             />
           ))}
         </div>

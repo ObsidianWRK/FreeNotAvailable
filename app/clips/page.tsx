@@ -1,14 +1,30 @@
-import Image from 'next/image'
+'use client'
 
-const CLIPS = [
+import Image from 'next/image'
+import { type ReactNode } from 'react'
+
+type Clip = {
+  id: string
+  title: string
+  description: ReactNode
+  format: string
+  duration: string
+  platforms: readonly string[]
+  era: 'finexme' | 'sinenoctis' | 'neutral'
+  thumbnail: string
+  video: string
+  aspectClass: string
+}
+
+const CLIPS: readonly Clip[] = [
   {
     id: 'WelcomeHero',
     title: 'Welcome to the Other World',
-    description: 'Hero montage. Crossfade cuts across six films, text overlay fades in. Sets the tone for the entire universe.',
+    description: <>Crossfade cuts from all six films. Text fades in over silence. Thirty seconds to set the <em className="text-[#d4a574]">entire mythology</em> in motion.</>,
     format: '9:16 Vertical',
     duration: '30s',
     platforms: ['TikTok', 'Instagram Reels', 'YouTube Shorts'],
-    era: 'neutral' as const,
+    era: 'neutral',
     thumbnail: '/images/hero-cover.avif',
     video: '/clips/WelcomeHero.mp4',
     aspectClass: 'aspect-[9/16]',
@@ -16,11 +32,11 @@ const CLIPS = [
   {
     id: 'FinexmeHighlight',
     title: 'FINExME Highlight',
-    description: 'Best moments from the FINExME era. Red color wash, warm tones, the BMW, the night drives. Act I distilled.',
+    description: <>The red wash, the BMW, the night drives. <a href="/#finexme" className="text-[#c0392b] italic hover:underline focus-visible:ring-1 focus-visible:ring-accent/50 focus-visible:outline-none rounded-sm">Act I</a> distilled into its sharpest thirty seconds.</>,
     format: '9:16 Vertical',
     duration: '30s',
     platforms: ['TikTok', 'Instagram Reels', 'YouTube Shorts'],
-    era: 'finexme' as const,
+    era: 'finexme',
     thumbnail: '/images/red-portrait.avif',
     video: '/clips/FinexmeHighlight.mp4',
     aspectClass: 'aspect-[9/16]',
@@ -28,11 +44,11 @@ const CLIPS = [
   {
     id: 'SineNoctisTeaser',
     title: 'SINE NOCTIS Teaser',
-    description: 'The descent into greyscale. ANTE, VESPERA, NOCTEM — the three-part SINE NOCTIS trilogy cut for short-form.',
+    description: <>The three-part descent: <a href="/films#ante" className="text-[#d0d0d0] italic hover:underline focus-visible:ring-1 focus-visible:ring-white/50 focus-visible:outline-none rounded-sm">ANTE</a>, <a href="/films#vespera" className="text-[#d0d0d0] italic hover:underline focus-visible:ring-1 focus-visible:ring-white/50 focus-visible:outline-none rounded-sm">VESPERA</a>, <a href="/films#noctem" className="text-[#d0d0d0] italic hover:underline focus-visible:ring-1 focus-visible:ring-white/50 focus-visible:outline-none rounded-sm">NOCTEM</a>. Greyscale cuts from the <em className="text-[#d0d0d0]">SINE NOCTIS</em> trilogy, recut for short-form.</>,
     format: '9:16 Vertical',
     duration: '30s',
     platforms: ['TikTok', 'Instagram Reels', 'YouTube Shorts'],
-    era: 'sinenoctis' as const,
+    era: 'sinenoctis',
     thumbnail: '/images/crouching-smoke.avif',
     video: '/clips/SineNoctisTeaser.mp4',
     aspectClass: 'aspect-[9/16]',
@@ -40,11 +56,11 @@ const CLIPS = [
   {
     id: 'ArtistIntro',
     title: 'Artist Introduction',
-    description: 'Who is FREE? Bio text over portrait footage. The cold croon of the early 2010s. Detroit. The space where deflection meets self-reflection.',
+    description: <>Portrait footage over bio text. Detroit. The <em className="text-[#d4a574]">cold croon</em> of the early 2010s. Where deflection meets self-reflection.</>,
     format: '9:16 Vertical',
     duration: '45s',
     platforms: ['TikTok', 'Instagram Reels', 'YouTube Shorts'],
-    era: 'neutral' as const,
+    era: 'neutral',
     thumbnail: '/images/jacket-portrait.avif',
     video: '/clips/ArtistIntro.mp4',
     aspectClass: 'aspect-[9/16]',
@@ -52,11 +68,11 @@ const CLIPS = [
   {
     id: 'Manifesto',
     title: 'The Manifesto',
-    description: 'One statement. Full screen. "Men rarely make music that yearns anymore." Blurred background, minimal type treatment.',
+    description: <>Full screen. One statement. Blurred background, minimal type. &ldquo;<em className="text-[#d4a574]">Men rarely make music that yearns anymore.</em>&rdquo;</>,
     format: '9:16 Vertical',
     duration: '30s',
     platforms: ['TikTok', 'Instagram Reels', 'YouTube Shorts'],
-    era: 'neutral' as const,
+    era: 'neutral',
     thumbnail: '/images/bokeh-night.avif',
     video: '/clips/Manifesto.mp4',
     aspectClass: 'aspect-[9/16]',
@@ -64,18 +80,18 @@ const CLIPS = [
   {
     id: 'FilmReel',
     title: 'Film Reel',
-    description: 'Quick-cut showreel across all eleven source videos. Hard cuts, slow zoom, no text. Let the work speak.',
+    description: <>Hard cuts, slow zoom, no text. Sixty seconds across all <a href="/films" className="text-[#d4a574] italic hover:underline focus-visible:ring-1 focus-visible:ring-warm/50 focus-visible:outline-none rounded-sm">eleven source films</a>. Let the work speak.</>,
     format: '16:9 Landscape',
     duration: '60s',
     platforms: ['YouTube', 'Website'],
-    era: 'neutral' as const,
+    era: 'neutral',
     thumbnail: '/images/fine-by-me-still.avif',
     video: '/clips/FilmReel.mp4',
     aspectClass: 'aspect-video',
   },
-] as const
+]
 
-function ClipCard({ clip }: { clip: typeof CLIPS[number] }) {
+function ClipCard({ clip }: { clip: Clip }) {
   const borderColor = clip.era === 'finexme'
     ? 'border-[#c0392b]/30 hover:border-[#c0392b]/60'
     : clip.era === 'sinenoctis'
@@ -98,10 +114,19 @@ function ClipCard({ clip }: { clip: typeof CLIPS[number] }) {
           controls
           playsInline
           preload="metadata"
+          onError={(e) => {
+            const target = e.currentTarget
+            target.style.display = 'none'
+            const fallback = target.parentElement?.querySelector('.video-fallback')
+            if (fallback) (fallback as HTMLElement).style.display = 'flex'
+          }}
           className={`w-full h-full object-cover ${
             clip.era === 'sinenoctis' ? 'grayscale' : ''
           }`}
         />
+        <div className="video-fallback hidden absolute inset-0 items-center justify-center bg-black/80 text-white/40 text-xs font-sans tracking-wider uppercase">
+          Video unavailable
+        </div>
       </div>
 
       {/* Info */}
@@ -170,15 +195,24 @@ export default function ClipsPage() {
               controls
               playsInline
               preload="metadata"
+              onError={(e) => {
+                const target = e.currentTarget
+                target.style.display = 'none'
+                const fallback = target.parentElement?.querySelector('.video-fallback')
+                if (fallback) (fallback as HTMLElement).style.display = 'flex'
+              }}
               className="w-full h-full object-cover"
             />
+            <div className="video-fallback hidden absolute inset-0 items-center justify-center bg-black/80 text-white/40 text-xs font-sans tracking-wider uppercase">
+              Video unavailable
+            </div>
           </div>
           <div className="p-5 md:p-6">
             <div className="flex items-baseline justify-between mb-2">
               <h3 className="font-sans text-lg text-heading">Film Reel</h3>
               <span className="text-[10px] font-sans tracking-[0.2em] uppercase text-[#d4a574]">16:9 / 60s</span>
             </div>
-            <p className="font-sans text-sm text-muted">Quick-cut showreel across all eleven source videos. Hard cuts, slow zoom, no text. Let the work speak.</p>
+            <p className="font-sans text-sm text-muted">Hard cuts, slow zoom, no text. Sixty seconds across all <a href="/films" className="text-[#d4a574] italic hover:underline focus-visible:ring-1 focus-visible:ring-warm/50 focus-visible:outline-none rounded-sm">eleven source films</a>. Let the work speak.</p>
           </div>
         </div>
       </section>

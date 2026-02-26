@@ -399,25 +399,37 @@ export default function EkthesisPage() {
         </motion.div>
 
         {/* Revenue streams list */}
-        <motion.div variants={fadeUp} custom={4} className="border border-white/10 p-6 md:p-10">
-          <span className="text-xs font-sans tracking-[0.15em] uppercase text-white/30 block mb-6">Revenue Streams</span>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-2 text-sm">
-            {[
-              'Streaming royalties (Spotify, Apple Music, TIDAL, etc.)',
-              'YouTube ad revenue (long-form films)',
-              'Sync licensing (TV, film, ads, games)',
-              'Live performance / touring',
-              'Merchandise (Other World IP-driven)',
-              'Brand deals (music + visual content)',
-              'Patreon / Bandcamp (direct fan support)',
-              'Film festivals / platform acquisitions',
-            ].map((s) => (
-              <div key={s} className="flex items-start gap-2 py-2 border-b border-white/5 last:border-0">
-                <span className="text-accent/40 mt-0.5">+</span>
-                <span className="font-sans text-xs text-muted">{s}</span>
+        <motion.div variants={fadeUp} custom={4}>
+          <details className="group border border-white/10">
+            <summary className="list-none flex items-center gap-2 cursor-pointer p-6 md:p-10 select-none hover:text-white/60 focus-visible:ring-1 focus-visible:ring-accent/50 focus-visible:outline-none">
+              <span
+                className="text-accent text-xs transition-transform duration-200 group-open:rotate-90"
+                aria-hidden="true"
+              >&#9654;</span>
+              <span className="text-xs font-sans tracking-[0.15em] uppercase text-white/40">
+                8 Revenue Streams — click to expand
+              </span>
+            </summary>
+            <div className="px-6 md:px-10 pb-6 md:pb-10">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-2 text-sm">
+                {[
+                  'Streaming royalties (Spotify, Apple Music, TIDAL, etc.)',
+                  'YouTube ad revenue (long-form films)',
+                  'Sync licensing (TV, film, ads, games)',
+                  'Live performance / touring',
+                  'Merchandise (Other World IP-driven)',
+                  'Brand deals (music + visual content)',
+                  'Patreon / Bandcamp (direct fan support)',
+                  'Film festivals / platform acquisitions',
+                ].map((s) => (
+                  <div key={s} className="flex items-start gap-2 py-2 border-b border-white/5 last:border-0">
+                    <span className="text-accent/40 mt-0.5">+</span>
+                    <span className="font-sans text-xs text-muted">{s}</span>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
+          </details>
         </motion.div>
       </Section>
 
