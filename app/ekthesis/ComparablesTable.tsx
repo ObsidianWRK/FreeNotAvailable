@@ -6,7 +6,7 @@ const comparables = [
   {
     name: 'Beyonce',
     category: 'visual',
-    achievement: 'Visual albums (Lemonade 4x Plat, Black Is King on Disney+). Self-distributed concert film. Platform-exclusive premieres via Parkwood Entertainment.',
+    achievement: 'Visual albums (Lemonade 4x Plat, Black Is King on Disney+). Self-distributed concert film. Premieres through Parkwood, her own label.',
     relevance: 'The template for visual album as narrative IP. FREE runs a version of this at indie scale.',
   },
   {
@@ -25,13 +25,13 @@ const comparables = [
     name: 'Tyler, the Creator',
     category: 'franchise',
     achievement: 'Music + Golf Wang fashion + Camp Flog Gnaw festival + animation (The Jellies). Call Me If You Get Lost 2x Plat. Owns masters.',
-    relevance: 'Artist-as-ecosystem model. Each album gets distinct visual world and character persona.',
+    relevance: 'Artist-as-universe model. Every album gets its own visual world and character.',
   },
   {
     name: 'Brent Faiyaz',
     category: 'indie-rb',
     achievement: 'Fully independent. Wasteland debuted #2 Billboard 200 on Lost Kids label. Certified Platinum. Later via UnitedMasters.',
-    relevance: 'Most direct independent male R&B comp. Proved indie structure delivers commercial results.',
+    relevance: 'Most direct independent male R&B comp. Proved you can go Platinum without a label.',
   },
   {
     name: 'pgLang',
@@ -49,13 +49,13 @@ const comparables = [
     name: 'Daniel Caesar',
     category: 'indie-rb',
     achievement: 'Independent via Golden Child Recordings. Get You 7x Platinum. Freudian certified Platinum.',
-    relevance: 'Direct comp for indie male R&B vulnerability lane. Emotional openness as commercial strength.',
+    relevance: 'Direct comp for indie male R&B vulnerability lane. Proved being honest pays.',
   },
   {
     name: 'Frank Ocean',
     category: 'visual',
     achievement: 'Endless visual album fulfilled Def Jam contract. Blonde Platinum on Boys Don\'t Cry label. Limited-edition magazine.',
-    relevance: 'Pioneered visual album as strategic business tool. FREE\'s creative bible parallels Ocean\'s magazine.',
+    relevance: 'Used the visual album as a strategic business move. FREE\'s creative bible parallels Ocean\'s magazine.',
   },
   {
     name: 'EMPIRE Distribution',
@@ -67,7 +67,7 @@ const comparables = [
     name: 'Detroit Sound Conservancy',
     category: 'franchise',
     achievement: '501(c)(3) nonprofit preserving Detroit\'s musical heritage. Operates Graystone Jazz Museum. Blues, Jazz, Techno, Soul programs.',
-    relevance: 'The Detroit creative ecosystem FREE operates in. Heritage anchor for the brand.',
+    relevance: 'The Detroit creative scene FREE comes out of. Heritage anchor for the brand.',
   },
 ] as const satisfies readonly ComparableArtist[]
 

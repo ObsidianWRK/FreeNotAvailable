@@ -104,7 +104,7 @@ const caseStudies = [
     artist: 'Frank Ocean',
     project: 'Endless / Blonde (2016)',
     finding: 'Released 45-minute visual album Endless on Apple Music to fulfill Def Jam contract. Next day, independently released Blonde via Boys Don\'t Cry label. Blonde went Platinum. Limited-edition magazine ($80) sold out at pop-ups, now resells at $300-500+.',
-    relevance: 'Used a visual album as a business move, not just art. FREE\'s creative bible parallels Ocean\'s magazine: a physical narrative object.',
+    relevance: 'Used a visual album as a business move. Art that doubled as an exit strategy. FREE\'s creative bible parallels Ocean\'s magazine: a physical narrative object.',
   },
   {
     artist: 'Beyonce',
@@ -246,8 +246,8 @@ export default function EkthesisPage() {
           </p>
           <p>
             Visual storytelling is the edge. Audio-only artists get lost in the feed.
-            Short films give algorithms something to push, give editors something to write about,
-            and give sync supervisors proof the music works on screen.
+            Short films feed the algorithm, give editors a story, and show sync supervisors
+            the music works on screen.
           </p>
         </motion.div>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
@@ -264,7 +264,7 @@ export default function EkthesisPage() {
           </p>
           <p className="font-sans text-xs text-muted leading-relaxed mt-3">
             Spotify Canvas data: +5% streams, +145% shares, +20% playlist adds versus tracks without Canvas.
-            That is just a looping video. A full narrative short film compounds the effect.
+            That is just a looping video. A full short film hits harder.
           </p>
         </motion.div>
       </Section>
@@ -385,10 +385,10 @@ export default function EkthesisPage() {
 
         <motion.div variants={fadeUp} custom={3} className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
           {[
-            { label: 'Create', desc: 'Original music scored to narrative short films. Each film doubles as a sync demo reel.', color: 'text-accent' },
+            { label: 'Make', desc: 'Original music scored to narrative short films. Each film doubles as a sync demo reel.', color: 'text-accent' },
             { label: 'Circulate', desc: 'Films play festivals, YouTube, social. Music supervisors find the music already working on screen.', color: 'text-heading' },
             { label: 'Convert', desc: 'Sync inquiries come from the films. Brand deals follow. People who watch stick around longer than casual listeners.', color: 'text-heading' },
-            { label: 'Compound', desc: 'Revenue funds the next film. Catalog grows. Sync pool grows. The whole body of work gets more valuable.', color: 'text-heading' },
+            { label: 'Grow', desc: 'Revenue funds the next film. Catalog grows. Sync pool grows. The whole body of work gets more valuable.', color: 'text-heading' },
           ].map((step) => (
             <div key={step.label} className="border border-white/10 p-6 hover:border-white/20 transition-colors">
               <span className={`text-xs font-sans tracking-[0.15em] uppercase block mb-3 ${step.color}`}>{step.label}</span>
@@ -428,7 +428,7 @@ export default function EkthesisPage() {
           custom={1}
           className="font-sans text-3xl md:text-4xl lg:text-5xl italic text-heading leading-[1.05] max-w-[26ch] mb-6"
         >
-          R&amp;B is the largest genre ecosystem in America
+          R&amp;B is the biggest genre in America
         </motion.h2>
         <motion.p variants={fadeUp} custom={2} className="font-sans text-sm leading-[1.8] text-muted max-w-[60ch] mb-16">
           Combined R&amp;B/Hip-Hop has been the #1 genre in US music consumption every year
@@ -504,10 +504,10 @@ export default function EkthesisPage() {
 
       {/* ═══ 8. PLATFORM LANDSCAPE ═══ */}
       <Section id="platforms">
-        <SectionLabel>Platform Landscape</SectionLabel>
+        <SectionLabel>Platforms</SectionLabel>
         <SectionTitle className="max-w-[24ch]">Where It Lives</SectionTitle>
         <motion.p variants={fadeUp} custom={2} className="font-sans text-sm leading-[1.8] text-muted max-w-[60ch] mb-12">
-          Discovery has decentralized. 80%+ of artists earning $1M+ on Spotify never hit the
+          People don&rsquo;t find music the same way anymore. 80%+ of artists earning $1M+ on Spotify never hit the
           Global Daily Top 50. Playlists and algorithms do the work now, not radio.
           Social platforms are where fans hear it first, then they go find it on a DSP.
         </motion.p>
@@ -529,7 +529,7 @@ export default function EkthesisPage() {
         <SectionTitle className="max-w-[24ch]">The Numbers</SectionTitle>
         <motion.p variants={fadeUp} custom={2} className="font-sans text-sm leading-[1.8] text-muted max-w-[60ch] mb-12">
           Revenue comes from eight channels. Streaming is the baseline. Sync licensing,
-          brand deals, and live performance are where the margins live. Fan-direct platforms
+          brand deals, and live performance are where the real money is. Fan-direct platforms
           (Patreon, Bandcamp) deliver the highest per-fan revenue.
         </motion.p>
 
@@ -657,8 +657,8 @@ export default function EkthesisPage() {
         <SectionLabel>Comparables</SectionLabel>
         <SectionTitle>Who Else</SectionTitle>
         <motion.p variants={fadeUp} custom={2} className="font-sans text-sm leading-[1.8] text-muted max-w-[60ch] mb-12">
-          Nobody else is doing exactly this: male R&amp;B vulnerability, independent ownership,
-          narrative IP from day one, and Detroit roots. That gap is the opportunity.
+          Nobody else is running this exact play. Vulnerable male R&amp;B, fully independent,
+          with a visual mythology that existed before the first song dropped. That&rsquo;s the gap.
         </motion.p>
 
         <motion.div variants={fadeUp} custom={3}>
@@ -718,7 +718,7 @@ export default function EkthesisPage() {
             <div><span className="text-heading">Brent Faiyaz</span> &mdash; Stay independent, own masters, build visual brand consistency, let quality create demand.</div>
             <div><span className="text-heading">Frank Ocean</span> &mdash; Use visual content strategically, create physical narrative objects, embrace scarcity.</div>
             <div><span className="text-heading">Beyonce</span> &mdash; Music-driven visual narratives can be pitched to streaming platforms as premium content.</div>
-            <div><span className="text-heading">Childish Gambino</span> &mdash; Free short film + written narrative = disproportionate press + IP foundation that opens film/TV doors.</div>
+            <div><span className="text-heading">Childish Gambino</span> &mdash; Free short film + written narrative = way more press than you&rsquo;d expect, and a real path into film/TV.</div>
           </div>
           <p className="font-mono text-[10px] text-white/20 mt-4">
             RIAA certifications verified via riaa.com, Feb 2026.

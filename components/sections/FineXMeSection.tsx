@@ -52,7 +52,7 @@ export default function FineXMeSection() {
           {/* Manifesto text */}
           <FadeInView className="max-w-2xl mb-20 md:mb-28">
             <p className="font-sans text-2xl md:text-3xl italic leading-relaxed text-[#f5e6e0]/90 mb-8">
-              In today&rsquo;s R&amp;B landscape, men rarely make music that yearns anymore.
+              In today&rsquo;s R&amp;B, men rarely make music that yearns anymore.
             </p>
             <p className="font-sans text-sm md:text-base leading-[1.8] text-[#f5e6e0]/60 max-w-[65ch]">
               FREE occupies the grey area where deflection meets self-reflection.

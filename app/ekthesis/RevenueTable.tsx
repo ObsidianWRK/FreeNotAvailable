@@ -6,7 +6,7 @@ import type { RevenueProjection, RevenueStream } from '@/lib/content/types'
 const streamingRates = [
   { name: 'Napster',       typicalRange: '~$0.019',  notes: 'Highest per-stream but smallest user base' },
   { name: 'TIDAL',         typicalRange: '~$0.013',  notes: 'Artist-centric model' },
-  { name: 'Apple Music',   typicalRange: '~$0.01',   notes: '~88-100M subscribers' },
+  { name: 'Apple Music',   typicalRange: '~$0.008',   notes: '~88-100M subscribers' },
   { name: 'Deezer',        typicalRange: '~$0.006',  notes: 'Artist-centric model launched 2024' },
   { name: 'Spotify',       typicalRange: '$0.003-$0.005', notes: '751M users, 290M paid. 1,000-stream minimum (2024)' },
   { name: 'Amazon Music',  typicalRange: '~$0.004',  notes: 'Varies by Unlimited vs Prime tier' },
@@ -20,7 +20,7 @@ const syncRanges = [
   { name: 'TV commercial (regional)',       typicalRange: '$5,000-$25,000' },
   { name: 'TV commercial (national)',       typicalRange: '$25,000-$100,000+',   notes: 'Major brand campaigns' },
   { name: 'Indie film placement',           typicalRange: '$500-$5,000',         notes: 'Often includes festival exposure' },
-  { name: 'Streaming original (Netflix etc)', typicalRange: '$3,000-$20,000',   notes: 'Fastest-growing segment' },
+  { name: 'Streaming original (Netflix etc)', typicalRange: '$3,000-$20,000',   notes: 'Outpacing traditional TV placements' },
   { name: 'Video games',                    typicalRange: '$2,500-$25,000',      notes: 'AAA titles pay top end' },
 ] as const satisfies readonly RevenueStream[]
 
@@ -159,7 +159,7 @@ export function Year23Projections() {
     <ProjectionTable
       title="Year 2-3 - Growth Phase (Annual)"
       rows={year23}
-      totals={{ conservative: '$15,700', base: '$73,000', aggressive: '$325K' }}
+      totals={{ conservative: '$15,700', base: '$73,000', aggressive: '$325,000' }}
     />
   )
 }

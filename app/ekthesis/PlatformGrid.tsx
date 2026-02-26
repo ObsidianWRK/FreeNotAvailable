@@ -18,14 +18,14 @@ const platforms = [
   {
     name: 'Apple Music',
     monthlyActiveUsers: '~88-100M subscribers',
-    revenueModel: '~$0.01/stream (highest major platform rate). Editorial-first curation. 30,000+ curated playlists.',
+    revenueModel: '~$0.008/stream avg. Editorial-first curation. 30,000+ curated playlists.',
     relevanceToFree: 'Higher per-stream payout rewards quality over volume. Editorial playlists favor artists who have a story to tell and visuals to show.',
   },
   {
     name: 'TIDAL',
     monthlyActiveUsers: 'Undisclosed (~5-10M est.)',
     revenueModel: '~$0.013/stream. Artist-owned platform (Block/Square). HiFi audio focus.',
-    relevanceToFree: 'Highest per-stream payout of major DSPs. Artist-ownership ethos aligns with FREE\'s independent model.',
+    relevanceToFree: 'Highest per-stream payout of major DSPs. Artist-owned platform. Same philosophy as FREE.',
   },
   {
     name: 'Vevo',
@@ -37,19 +37,19 @@ const platforms = [
     name: 'Patreon',
     monthlyActiveUsers: '10M+ paying members',
     revenueModel: '$3.5B+ paid to creators lifetime. 5-12% platform cut. Subscription tiers ($3-$25/mo typical).',
-    relevanceToFree: 'Direct fan monetization for exclusive BTS, early access, director\'s cuts. Highest per-fan revenue potential.',
+    relevanceToFree: 'Direct fan monetization for exclusive BTS, early access, director\'s cuts. Most money per fan of any platform.',
   },
   {
     name: 'Short of the Week',
     monthlyActiveUsers: '2,000+ films, 30,000 filmmakers',
     revenueModel: 'Curated editorial platform. Backed by Oscar-winning producer Michael Sugar. "Be Everywhere At Once" release strategy guides.',
-    relevanceToFree: 'Premier short film discovery platform. Staff Pick designation equals credibility for festival submissions and press.',
+    relevanceToFree: 'Premier short film discovery platform. A Staff Pick here opens doors at festivals and with press.',
   },
   {
     name: 'Gunpowder & Sky (DUST / ALTER)',
     monthlyActiveUsers: '7M+ combined YouTube subscribers',
     revenueModel: 'Genre-specific short film channels (sci-fi, horror). YouTube ad revenue share. Content acquisition.',
-    relevanceToFree: 'Model for genre-specific short film distribution at scale. Curated channels like these build real audiences around short-form narrative.',
+    relevanceToFree: 'Model for genre-specific short film distribution at scale. These channels prove short films can pull real numbers on YouTube.',
   },
 ] as const satisfies readonly PlatformComparable[]
 
