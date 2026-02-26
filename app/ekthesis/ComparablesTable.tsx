@@ -1,5 +1,3 @@
-'use client'
-
 import type { ComparableArtist } from '@/lib/content/types'
 
 const comparables = [

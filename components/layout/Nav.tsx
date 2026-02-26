@@ -22,7 +22,6 @@ const ROUTE_LINKS: RouteLink[] = [
   { kind: 'route', label: 'FILMS', href: '/films' },
   { kind: 'route', label: 'CLIPS', href: '/clips' },
   { kind: 'route', label: 'EKTHESIS', href: '/ekthesis' },
-  { kind: 'route', label: '(INTERNAL)', href: '/internal' },
 ]
 
 /* ------------------------------------------------------------------ */

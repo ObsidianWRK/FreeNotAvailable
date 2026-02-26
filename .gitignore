@@ -39,6 +39,9 @@ next-env.d.ts
 /public/clips/
 
 
+# Video masters (keep only optimized versions in git)
+public/clips/*-master.mp4
+
 # remotion
 remotion/output/
 remotion/assets/

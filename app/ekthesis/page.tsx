@@ -1,64 +1,24 @@
-'use client'
-
-import { motion, useScroll, useTransform } from 'motion/react'
 import Image from 'next/image'
-import { useRef } from 'react'
 import type { CaseStudy, StatItem } from '@/lib/content/types'
 import ComparablesTable from './ComparablesTable'
 import PlatformGrid from './PlatformGrid'
 import { StreamingRatesTable, SyncRangesTable } from './RevenueTable'
 import RevenueChart from './RevenueChart'
+import AnimatedSection from './AnimatedSection'
+import AnimatedElement from './AnimatedElement'
+import HeroParallax from './HeroParallax'
 
-/* ─── Animation helpers ─── */
-const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number]
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  visible: (i: number = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, delay: i * 0.1, ease: EASE },
-  }),
-}
-
-const stagger = {
-  visible: { transition: { staggerChildren: 0.08 } },
-}
-
-/* ─── Reusable section ─── */
-function Section({
-  children,
-  id,
-  className = '',
-}: {
-  children: React.ReactNode
-  id: string
-  className?: string
-}) {
-  return (
-    <motion.section
-      id={id}
-      data-section-id={id}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: '-80px' }}
-      variants={stagger}
-      className={`relative section-padding border-t border-white/5 ${className}`}
-    >
-      <div className="max-w-4xl mx-auto px-6 md:px-10">{children}</div>
-    </motion.section>
-  )
-}
+/* ─── Reusable label / title (server markup, animated via client island) ─── */
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <motion.span
-      variants={fadeUp}
+    <AnimatedElement
+      as="span"
       custom={0}
       className="text-xs font-sans tracking-[0.2em] uppercase text-white/40 block mb-6"
     >
       {children}
-    </motion.span>
+    </AnimatedElement>
   )
 }
 
@@ -70,26 +30,26 @@ function SectionTitle({
   className?: string
 }) {
   return (
-    <motion.h2
-      variants={fadeUp}
+    <AnimatedElement
+      as="h2"
       custom={1}
       className={`font-sans text-4xl md:text-5xl lg:text-6xl italic text-heading leading-[0.95] mb-12 ${className}`}
     >
       {children}
-    </motion.h2>
+    </AnimatedElement>
   )
 }
 
 /* ─── Stat ─── */
 function Stat({ value, label, source, accent, i = 0 }: StatItem & { accent?: boolean; i?: number }) {
   return (
-    <motion.div variants={fadeUp} custom={i}>
+    <AnimatedElement custom={i}>
       <span className={`block font-display text-4xl md:text-5xl ${accent ? 'text-accent' : 'text-heading'}`}>
         {value}
       </span>
       <span className="font-sans text-xs text-muted mt-2 block">{label}</span>
       {source && <span className="font-mono text-[9px] text-white/15 mt-1 block">{source}</span>}
-    </motion.div>
+    </AnimatedElement>
   )
 }
 
@@ -125,60 +85,14 @@ const caseStudies = [
 /*  EKTHESIS PAGE — 12 SECTIONS               */
 /* ═══════════════════════════════════════════ */
 export default function EkthesisPage() {
-  const heroRef = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] })
-  const heroOpacity = useTransform(scrollYProgress, [0, 1], [1, 0])
-
   return (
     <main className="bg-canvas min-h-screen">
 
       {/* ═══ 1. TITLE ═══ */}
-      <motion.section
-        ref={heroRef}
-        data-section-id="title"
-        style={{ opacity: heroOpacity }}
-        className="min-h-screen flex flex-col items-center justify-center px-6 relative"
-      >
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.4 }}
-          transition={{ duration: 1.5 }}
-          className="relative w-10 h-10 mb-12"
-        >
-          <Image src="/images/owjv-cherub.png" alt="OWJV emblem" fill className="object-contain" sizes="40px" />
-        </motion.div>
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.3, ease: EASE }}
-          className="font-pixel text-[clamp(4rem,12vw,10rem)] leading-[0.85] tracking-tight text-heading text-center"
-        >
-          EKTHESIS
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="font-mono text-[clamp(0.75rem,2vw,1rem)] text-muted mt-6 text-center tracking-wider"
-        >
-          A proposition for the Other World
-        </motion.p>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 1 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
-        >
-          <motion.div
-            animate={{ y: [0, 6, 0] }}
-            transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
-            className="w-px h-14 bg-white/20"
-          />
-        </motion.div>
-      </motion.section>
+      <HeroParallax />
 
       {/* ═══ 2. THE ARTIST ═══ */}
-      <Section id="artist" className="overflow-hidden">
+      <AnimatedSection id="artist" className="overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src="/images/hero-cover.avif"
@@ -191,15 +105,15 @@ export default function EkthesisPage() {
         </div>
         <div className="relative z-10">
           <SectionLabel>The Artist</SectionLabel>
-          <motion.h2
-            variants={fadeUp}
+          <AnimatedElement
+            as="h2"
             custom={1}
             className="font-sans text-3xl md:text-5xl italic text-heading leading-[1.05] max-w-[24ch] mb-12"
           >
             Male R&amp;B artists rarely create music rooted in{' '}
             <span className="text-accent">longing</span> anymore. The bruises haven&rsquo;t gone anywhere.
-          </motion.h2>
-          <motion.div variants={fadeUp} custom={2} className="font-sans text-sm md:text-base leading-[1.8] text-muted max-w-[60ch] space-y-5 mb-12">
+          </AnimatedElement>
+          <AnimatedElement custom={2} className="font-sans text-sm md:text-base leading-[1.8] text-muted max-w-[60ch] space-y-5 mb-12">
             <p>
               FREE is a songwriter in the space where deflection meets self-reflection.
               His sound draws from early 2010s R&amp;B: a cold croon. Product of the 90s, shaped
@@ -210,8 +124,8 @@ export default function EkthesisPage() {
               sit behind it: Creative Minds Coalition and OWJV (Other World Joint Venture).
               Every release lives inside a visual mythology built before the first track dropped.
             </p>
-          </motion.div>
-          <motion.div variants={fadeUp} custom={3} className="grid grid-cols-3 gap-6">
+          </AnimatedElement>
+          <AnimatedElement custom={3} className="grid grid-cols-3 gap-6">
             <div>
               <span className="font-display text-5xl md:text-6xl text-accent block">10</span>
               <span className="font-sans text-xs text-muted mt-1 block">released tracks across 2 projects</span>
@@ -224,21 +138,21 @@ export default function EkthesisPage() {
               <span className="font-display text-5xl md:text-6xl text-heading block">5</span>
               <span className="font-sans text-xs text-muted mt-1 block">planned projects in the Other World arc</span>
             </div>
-          </motion.div>
+          </AnimatedElement>
         </div>
-      </Section>
+      </AnimatedSection>
 
       {/* ═══ 3. THE THESIS ═══ */}
-      <Section id="thesis">
+      <AnimatedSection id="thesis">
         <SectionLabel>The Thesis</SectionLabel>
-        <motion.h2
-          variants={fadeUp}
+        <AnimatedElement
+          as="h2"
           custom={1}
           className="font-sans text-3xl md:text-4xl lg:text-5xl italic text-heading leading-[1.05] max-w-[28ch] mb-6"
         >
           Male vulnerability is <span className="text-accent">underserved</span> in R&amp;B.
-        </motion.h2>
-        <motion.div variants={fadeUp} custom={2} className="font-sans text-sm leading-[1.8] text-muted max-w-[60ch] space-y-5 mb-16">
+        </AnimatedElement>
+        <AnimatedElement custom={2} className="font-sans text-sm leading-[1.8] text-muted max-w-[60ch] space-y-5 mb-16">
           <p>
             R&amp;B/Hip-Hop has been the #1 genre in US music consumption every year since 2017,
             holding roughly 28% of the market. R&amp;B standalone accounts for about 10-11%.
@@ -250,14 +164,14 @@ export default function EkthesisPage() {
             Short films feed the algorithm, give editors a story, and show sync supervisors
             the music works on screen.
           </p>
-        </motion.div>
+        </AnimatedElement>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
           <Stat value="~28%" label="R&B/Hip-Hop share of US consumption" source="MRC Data/Luminate" accent i={3} />
           <Stat value="10-11%" label="R&B standalone share" source="RIAA via Statista" i={4} />
           <Stat value="+5%" label="Streams with Spotify Canvas" source="Spotify for Artists" i={5} />
           <Stat value="+145%" label="Shares with Spotify Canvas" source="Spotify for Artists" accent i={6} />
         </div>
-        <motion.div variants={fadeUp} custom={7} className="mt-12 border border-white/10 p-6">
+        <AnimatedElement custom={7} className="mt-12 border border-white/10 p-6">
           <span className="text-xs font-sans tracking-[0.15em] uppercase text-white/30 block mb-4">Visual album press multiplier</span>
           <p className="font-sans text-xs text-muted leading-relaxed">
             Visual albums pull 3-5x more press than audio-only releases. Music writers cover the sound,
@@ -267,17 +181,17 @@ export default function EkthesisPage() {
             Spotify Canvas data: +5% streams, +145% shares, +20% playlist adds versus tracks without Canvas.
             That is just a looping video. A full short film hits harder.
           </p>
-        </motion.div>
-      </Section>
+        </AnimatedElement>
+      </AnimatedSection>
 
       {/* ═══ 4. THE UNIVERSE ═══ */}
-      <Section id="universe">
+      <AnimatedSection id="universe">
         <SectionLabel>The Universe</SectionLabel>
         <SectionTitle>Other World</SectionTitle>
 
         {/* Released projects */}
         <div className="space-y-16 mb-20">
-          <motion.div variants={fadeUp} custom={2} className="flex flex-col md:flex-row gap-6 md:gap-10">
+          <AnimatedElement custom={2} className="flex flex-col md:flex-row gap-6 md:gap-10">
             <div className="relative w-40 h-40 shrink-0">
               <Image src="/images/finexme-cover.avif" alt="FINExME album cover" fill className="object-cover" sizes="160px" />
             </div>
@@ -301,9 +215,9 @@ export default function EkthesisPage() {
                 <a href="https://music.apple.com/us/album/finexme/1724039694" target="_blank" rel="noopener noreferrer" className="font-sans text-xs tracking-[0.15em] uppercase text-white/40 hover:text-accent transition-colors">Apple Music</a>
               </div>
             </div>
-          </motion.div>
+          </AnimatedElement>
 
-          <motion.div variants={fadeUp} custom={3} className="flex flex-col md:flex-row gap-6 md:gap-10">
+          <AnimatedElement custom={3} className="flex flex-col md:flex-row gap-6 md:gap-10">
             <div className="relative w-40 h-40 shrink-0">
               <Image src="/images/jacket-portrait.avif" alt="FREE in the SINE NOCTIS era" fill className="object-cover grayscale" sizes="160px" />
             </div>
@@ -323,11 +237,11 @@ export default function EkthesisPage() {
                 <div>Focal motif: The Alpinestars Jacket (shelter and resilience)</div>
               </div>
             </div>
-          </motion.div>
+          </AnimatedElement>
         </div>
 
         {/* Film content */}
-        <motion.div variants={fadeUp} custom={4} className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+        <AnimatedElement custom={4} className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
           <div className="border border-white/10 p-6">
             <span className="font-sans text-xs tracking-[0.15em] uppercase text-accent/60 block mb-3">Film</span>
             <span className="font-display text-lg text-heading block mb-2">Fine By Me Film</span>
@@ -344,10 +258,10 @@ export default function EkthesisPage() {
               descent leading into the full visual for VAN GOGH and THIN ICE FREESTYLE.
             </p>
           </div>
-        </motion.div>
+        </AnimatedElement>
 
         {/* Future roadmap */}
-        <motion.div variants={fadeUp} custom={5}>
+        <AnimatedElement custom={5}>
           <span className="text-xs font-sans tracking-[0.15em] uppercase text-white/30 block mb-6">What comes next</span>
           <div className="grid grid-cols-3 gap-8">
             {[
@@ -364,14 +278,14 @@ export default function EkthesisPage() {
               </div>
             ))}
           </div>
-        </motion.div>
-      </Section>
+        </AnimatedElement>
+      </AnimatedSection>
 
       {/* ═══ 5. THE MODEL ═══ */}
-      <Section id="model">
+      <AnimatedSection id="model">
         <SectionLabel>The Model</SectionLabel>
         <SectionTitle className="max-w-[24ch]">Music &times; Film</SectionTitle>
-        <motion.div variants={fadeUp} custom={2} className="font-sans text-sm leading-[1.8] text-muted max-w-[60ch] space-y-5 mb-16">
+        <AnimatedElement custom={2} className="font-sans text-sm leading-[1.8] text-muted max-w-[60ch] space-y-5 mb-16">
           <p>
             Every music release gets a narrative short film. The film doubles as a sync
             demo reel. Music supervisors watch the music work on screen instead of
@@ -382,9 +296,9 @@ export default function EkthesisPage() {
             Spotify Canvas alone adds +5% streams, +145% shares, +20% playlist adds.
             Canvas is a looping video. A real short film does more.
           </p>
-        </motion.div>
+        </AnimatedElement>
 
-        <motion.div variants={fadeUp} custom={3} className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+        <AnimatedElement custom={3} className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
           {[
             { label: 'Make', desc: 'Original music scored to narrative short films. Each film doubles as a sync demo reel.', color: 'text-accent' },
             { label: 'Circulate', desc: 'Films play festivals, YouTube, social. Music supervisors find the music already working on screen.', color: 'text-heading' },
@@ -396,10 +310,10 @@ export default function EkthesisPage() {
               <p className="font-sans text-xs text-muted leading-relaxed">{step.desc}</p>
             </div>
           ))}
-        </motion.div>
+        </AnimatedElement>
 
         {/* Revenue streams list */}
-        <motion.div variants={fadeUp} custom={4}>
+        <AnimatedElement custom={4}>
           <details className="group border border-white/10">
             <summary className="list-none flex items-center gap-2 cursor-pointer p-6 md:p-10 select-none hover:text-white/60 focus-visible:ring-1 focus-visible:ring-accent/50 focus-visible:outline-none">
               <span
@@ -430,24 +344,24 @@ export default function EkthesisPage() {
               </div>
             </div>
           </details>
-        </motion.div>
-      </Section>
+        </AnimatedElement>
+      </AnimatedSection>
 
       {/* ═══ 6. MARKET OPPORTUNITY ═══ */}
-      <Section id="market">
+      <AnimatedSection id="market">
         <SectionLabel>Market Opportunity</SectionLabel>
-        <motion.h2
-          variants={fadeUp}
+        <AnimatedElement
+          as="h2"
           custom={1}
           className="font-sans text-3xl md:text-4xl lg:text-5xl italic text-heading leading-[1.05] max-w-[26ch] mb-6"
         >
           R&amp;B is the biggest genre in America
-        </motion.h2>
-        <motion.p variants={fadeUp} custom={2} className="font-sans text-sm leading-[1.8] text-muted max-w-[60ch] mb-16">
+        </AnimatedElement>
+        <AnimatedElement as="p" custom={2} className="font-sans text-sm leading-[1.8] text-muted max-w-[60ch] mb-16">
           Combined R&amp;B/Hip-Hop has been the #1 genre in US music consumption every year
           since 2017. Independent artists now earn half of all Spotify royalties. Distribution
           is cheaper, tools are better, and the middlemen are optional.
-        </motion.p>
+        </AnimatedElement>
 
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 mb-16">
           <Stat value="$29.6B" label="Global recorded music revenue (2024)" source="IFPI 2024" accent i={3} />
@@ -458,7 +372,7 @@ export default function EkthesisPage() {
           <Stat value="$10B+" label="Total Spotify payouts in 2024 (record year)" source="Spotify Loud & Clear 2024" i={8} />
         </div>
 
-        <motion.div variants={fadeUp} custom={9} className="border border-white/10 p-6 md:p-10">
+        <AnimatedElement custom={9} className="border border-white/10 p-6 md:p-10">
           <span className="text-xs font-sans tracking-[0.15em] uppercase text-white/30 block mb-6">Independent artist benchmarks (Spotify)</span>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
@@ -475,11 +389,11 @@ export default function EkthesisPage() {
             </div>
           </div>
           <p className="font-mono text-[10px] text-white/20 mt-6">Source: Spotify Loud &amp; Clear 2024, loudandclear.byspotify.com</p>
-        </motion.div>
-      </Section>
+        </AnimatedElement>
+      </AnimatedSection>
 
       {/* ═══ 7. AUDIENCE ═══ */}
-      <Section id="audience">
+      <AnimatedSection id="audience">
         <SectionLabel>Audience</SectionLabel>
         <SectionTitle className="max-w-[22ch]">Who Listens</SectionTitle>
 
@@ -490,7 +404,7 @@ export default function EkthesisPage() {
           <Stat value="40.3%" label="TikTok users aged 25-34 (largest cohort)" source="demandsage.com 2025" i={5} />
         </div>
 
-        <motion.div variants={fadeUp} custom={6} className="font-sans text-sm leading-[1.8] text-muted max-w-[60ch] space-y-5 mb-12">
+        <AnimatedElement custom={6} className="font-sans text-sm leading-[1.8] text-muted max-w-[60ch] space-y-5 mb-12">
           <p>
             R&amp;B/Soul skews 18-34, with strong crossover appeal. The genre has broader
             self-reported appeal (~39%) than its streaming share (~9-11%) suggests. That gap
@@ -501,9 +415,9 @@ export default function EkthesisPage() {
             singable and the visuals translate to short-form clips. Average daily time on platform:
             53.8 minutes.
           </p>
-        </motion.div>
+        </AnimatedElement>
 
-        <motion.div variants={fadeUp} custom={7} className="border border-white/10 p-6">
+        <AnimatedElement custom={7} className="border border-white/10 p-6">
           <span className="text-xs font-sans tracking-[0.15em] uppercase text-white/30 block mb-4">Top markets</span>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-sans text-xs text-muted leading-relaxed">
             <div><span className="text-heading">United States</span> &mdash; Largest music market globally. R&amp;B/Hip-Hop #1 since 2017.</div>
@@ -512,20 +426,20 @@ export default function EkthesisPage() {
             <div><span className="text-heading">Asia-Pacific</span> &mdash; Fastest-growing streaming region at 14%+ CAGR.</div>
           </div>
           <p className="font-mono text-[10px] text-white/20 mt-4">Sources: Luminate/MRC Data, Spotify Loud &amp; Clear 2024, Grand View Research</p>
-        </motion.div>
-      </Section>
+        </AnimatedElement>
+      </AnimatedSection>
 
       {/* ═══ 8. PLATFORM LANDSCAPE ═══ */}
-      <Section id="platforms">
+      <AnimatedSection id="platforms">
         <SectionLabel>Platforms</SectionLabel>
         <SectionTitle className="max-w-[24ch]">Where It Lives</SectionTitle>
-        <motion.p variants={fadeUp} custom={2} className="font-sans text-sm leading-[1.8] text-muted max-w-[60ch] mb-12">
+        <AnimatedElement as="p" custom={2} className="font-sans text-sm leading-[1.8] text-muted max-w-[60ch] mb-12">
           People don&rsquo;t find music the same way anymore. 80%+ of artists earning $1M+ on Spotify never hit the
           Global Daily Top 50. Playlists and algorithms do the work now, not radio.
           Social platforms are where fans hear it first, then they go find it on a DSP.
-        </motion.p>
+        </AnimatedElement>
 
-        <motion.div variants={fadeUp} custom={3}>
+        <AnimatedElement custom={3}>
           <details className="group">
             <summary className="cursor-pointer text-xs font-sans tracking-[0.15em] uppercase text-white/40 hover:text-white/60 transition-colors mb-6 list-none flex items-center gap-2">
               <span className="text-accent group-open:rotate-90 transition-transform inline-block">&#9654;</span>
@@ -533,20 +447,20 @@ export default function EkthesisPage() {
             </summary>
             <PlatformGrid />
           </details>
-        </motion.div>
-      </Section>
+        </AnimatedElement>
+      </AnimatedSection>
 
       {/* ═══ 9. MONETIZATION ═══ */}
-      <Section id="monetization">
+      <AnimatedSection id="monetization">
         <SectionLabel>Monetization</SectionLabel>
         <SectionTitle className="max-w-[24ch]">The Numbers</SectionTitle>
-        <motion.p variants={fadeUp} custom={2} className="font-sans text-sm leading-[1.8] text-muted max-w-[60ch] mb-12">
+        <AnimatedElement as="p" custom={2} className="font-sans text-sm leading-[1.8] text-muted max-w-[60ch] mb-12">
           Revenue comes from eight channels. Streaming is the baseline. Sync licensing,
           brand deals, and live performance are where the real money is. Fan-direct platforms
           (Patreon, Bandcamp) deliver the highest per-fan revenue.
-        </motion.p>
+        </AnimatedElement>
 
-        <motion.div variants={fadeUp} custom={3}>
+        <AnimatedElement custom={3}>
           <StreamingRatesTable />
           <SyncRangesTable />
 
@@ -662,19 +576,19 @@ export default function EkthesisPage() {
               </div>
             </div>
           </details>
-        </motion.div>
-      </Section>
+        </AnimatedElement>
+      </AnimatedSection>
 
       {/* ═══ 10. COMPARABLES ═══ */}
-      <Section id="comparables">
+      <AnimatedSection id="comparables">
         <SectionLabel>Comparables</SectionLabel>
         <SectionTitle>Who Else</SectionTitle>
-        <motion.p variants={fadeUp} custom={2} className="font-sans text-sm leading-[1.8] text-muted max-w-[60ch] mb-12">
+        <AnimatedElement as="p" custom={2} className="font-sans text-sm leading-[1.8] text-muted max-w-[60ch] mb-12">
           Nobody else is running this exact play. Vulnerable male R&amp;B, fully independent,
           with a visual mythology that existed before the first song dropped. That&rsquo;s the gap.
-        </motion.p>
+        </AnimatedElement>
 
-        <motion.div variants={fadeUp} custom={3}>
+        <AnimatedElement custom={3}>
           <details className="group" open>
             <summary className="cursor-pointer text-xs font-sans tracking-[0.15em] uppercase text-white/40 hover:text-white/60 transition-colors mb-6 list-none flex items-center gap-2">
               <span className="text-accent group-open:rotate-90 transition-transform inline-block">&#9654;</span>
@@ -682,24 +596,24 @@ export default function EkthesisPage() {
             </summary>
             <ComparablesTable />
           </details>
-        </motion.div>
+        </AnimatedElement>
 
-        <motion.div variants={fadeUp} custom={4} className="mt-10 border border-accent/20 bg-accent/5 p-6">
+        <AnimatedElement custom={4} className="mt-10 border border-accent/20 bg-accent/5 p-6">
           <span className="text-xs font-sans tracking-[0.15em] uppercase text-accent block mb-2">The White Space</span>
           <p className="font-sans text-xs text-muted leading-relaxed">
             Most of these artists are on major labels, lean hip-hop, or built their narrative IP after
             gaining traction. FREE built the Other World universe before the first track dropped.
             Independent. Male R&amp;B. Visual mythology from day one. That combination does not exist yet.
           </p>
-        </motion.div>
-      </Section>
+        </AnimatedElement>
+      </AnimatedSection>
 
       {/* ═══ 11. CASE STUDIES ═══ */}
-      <Section id="case-studies">
+      <AnimatedSection id="case-studies">
         <SectionLabel>Case Studies</SectionLabel>
         <SectionTitle>Proof Points</SectionTitle>
 
-        <motion.div variants={fadeUp} custom={2}>
+        <AnimatedElement custom={2}>
           <details className="group" open>
             <summary className="cursor-pointer text-xs font-sans tracking-[0.15em] uppercase text-white/40 hover:text-white/60 transition-colors mb-8 list-none flex items-center gap-2">
               <span className="text-accent group-open:rotate-90 transition-transform inline-block">&#9654;</span>
@@ -723,9 +637,9 @@ export default function EkthesisPage() {
               ))}
             </div>
           </details>
-        </motion.div>
+        </AnimatedElement>
 
-        <motion.div variants={fadeUp} custom={3} className="mt-12 border border-white/10 p-6 md:p-8">
+        <AnimatedElement custom={3} className="mt-12 border border-white/10 p-6 md:p-8">
           <span className="text-xs font-sans tracking-[0.15em] uppercase text-white/30 block mb-4">What to take from each</span>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 font-sans text-xs text-muted leading-relaxed">
             <div><span className="text-heading">Brent Faiyaz</span> &mdash; Stay independent, own masters, build visual brand consistency, let quality create demand.</div>
@@ -736,19 +650,19 @@ export default function EkthesisPage() {
           <p className="font-mono text-[10px] text-white/20 mt-4">
             RIAA certifications verified via riaa.com, Feb 2026.
           </p>
-        </motion.div>
-      </Section>
+        </AnimatedElement>
+      </AnimatedSection>
 
       {/* ═══ 12. PROJECTIONS + CONTACT ═══ */}
-      <Section id="projections" className="border-t-0">
+      <AnimatedSection id="projections" className="border-t-0">
         <SectionLabel>Projections</SectionLabel>
         <SectionTitle>Revenue Path</SectionTitle>
 
-        <motion.div variants={fadeUp} custom={2}>
+        <AnimatedElement custom={2}>
           <RevenueChart />
-        </motion.div>
+        </AnimatedElement>
 
-        <motion.div variants={fadeUp} custom={3} className="border border-white/10 p-6 md:p-8 mb-20">
+        <AnimatedElement custom={3} className="border border-white/10 p-6 md:p-8 mb-20">
           <span className="text-xs font-sans tracking-[0.15em] uppercase text-white/30 block mb-4">Key assumptions</span>
           <div className="font-sans text-xs text-muted leading-relaxed space-y-2">
             <p>Year 1: 125K-2M total streams, 50K-500K video views, 5-15 local/regional shows.</p>
@@ -758,23 +672,23 @@ export default function EkthesisPage() {
           <p className="font-mono text-[10px] text-white/20 mt-4">
             All projections are modeled estimates based on Spotify Loud &amp; Clear 2024, IFPI 2024, RIAA 2024, and industry benchmarks.
           </p>
-        </motion.div>
+        </AnimatedElement>
 
         {/* Contact CTA */}
         <div id="contact" className="text-center max-w-2xl mx-auto pt-16 border-t border-white/10">
-          <motion.h2
-            variants={fadeUp}
+          <AnimatedElement
+            as="h2"
             custom={4}
             className="font-sans text-5xl md:text-6xl lg:text-7xl italic text-heading leading-[0.9] mb-8"
           >
             The fire is already lit.
-          </motion.h2>
-          <motion.p variants={fadeUp} custom={5} className="font-sans text-sm text-muted mb-16 max-w-[40ch] mx-auto">
+          </AnimatedElement>
+          <AnimatedElement as="p" custom={5} className="font-sans text-sm text-muted mb-16 max-w-[40ch] mx-auto">
             FREE is building in public. The visual universe is live. The music is written.
             This is about funding what is already working.
-          </motion.p>
+          </AnimatedElement>
 
-          <motion.div variants={fadeUp} custom={6} className="flex flex-wrap justify-center gap-4 md:gap-6 mb-16">
+          <AnimatedElement custom={6} className="flex flex-wrap justify-center gap-4 md:gap-6 mb-16">
             <a
               href="https://www.instagram.com/freenotavailable/"
               target="_blank"
@@ -807,18 +721,18 @@ export default function EkthesisPage() {
             >
               YouTube
             </a>
-          </motion.div>
+          </AnimatedElement>
 
-          <motion.div variants={fadeUp} custom={7} className="flex flex-col items-center gap-6 pt-8 border-t border-white/5">
+          <AnimatedElement custom={7} className="flex flex-col items-center gap-6 pt-8 border-t border-white/5">
             <div className="relative w-10 h-10 opacity-30">
               <Image src="/images/owjv-cherub.png" alt="OWJV emblem" fill className="object-contain" sizes="40px" />
             </div>
             <span className="text-xs font-sans tracking-[0.15em] uppercase text-white/30">
               &copy; 2024&ndash;2026 Creative Minds Coalition &times; OWJV &mdash; Detroit, MI
             </span>
-          </motion.div>
+          </AnimatedElement>
         </div>
-      </Section>
+      </AnimatedSection>
     </main>
   )
 }

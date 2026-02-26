@@ -1,69 +1,5 @@
-'use client'
-
-import { useState, useEffect, useCallback } from 'react'
 import Image from 'next/image'
 import Footer from '@/components/layout/Footer'
-
-/* ------------------------------------------------------------------ */
-/*  Password Gate                                                      */
-/* ------------------------------------------------------------------ */
-
-function PasswordGate({ onUnlock }: { onUnlock: () => void }) {
-  const [value, setValue] = useState('')
-  const [error, setError] = useState(false)
-
-  const submit = useCallback(
-    (e: React.FormEvent) => {
-      e.preventDefault()
-      if (value.toLowerCase().trim() === 'free') {
-        sessionStorage.setItem('internal-auth', '1')
-        onUnlock()
-      } else {
-        setError(true)
-        setValue('')
-      }
-    },
-    [value, onUnlock],
-  )
-
-  return (
-    <div className="min-h-screen bg-canvas flex items-center justify-center px-6">
-      <form onSubmit={submit} className="w-full max-w-xs text-center">
-        <h1 className="font-pixel text-2xl text-heading tracking-[0.04em] mb-2">
-          INTERNAL
-        </h1>
-        <p className="text-xs font-sans tracking-[0.15em] uppercase text-white/30 mb-10">
-          This page is private
-        </p>
-
-        <input
-          type="password"
-          value={value}
-          onChange={(e) => {
-            setValue(e.target.value)
-            setError(false)
-          }}
-          placeholder="Password"
-          autoFocus
-          className="w-full bg-transparent border border-white/10 focus:border-white/30 rounded-none px-4 py-3 text-sm font-sans text-heading placeholder:text-white/20 outline-none transition-colors"
-        />
-
-        {error && (
-          <p className="mt-3 text-xs font-sans text-accent/80">
-            Incorrect password.
-          </p>
-        )}
-
-        <button
-          type="submit"
-          className="mt-4 w-full border border-white/10 hover:border-white/30 px-4 py-3 text-xs font-sans tracking-[0.15em] uppercase text-white/50 hover:text-white transition-colors"
-        >
-          Enter
-        </button>
-      </form>
-    </div>
-  )
-}
 
 /* ------------------------------------------------------------------ */
 /*  Section helpers                                                    */
@@ -1123,17 +1059,5 @@ function InternalContent() {
 /* ------------------------------------------------------------------ */
 
 export default function InternalPage() {
-  const [unlocked, setUnlocked] = useState(false)
-
-  useEffect(() => {
-    if (sessionStorage.getItem('internal-auth') === '1') {
-      setUnlocked(true)
-    }
-  }, [])
-
-  if (!unlocked) {
-    return <PasswordGate onUnlock={() => setUnlocked(true)} />
-  }
-
   return <InternalContent />
 }

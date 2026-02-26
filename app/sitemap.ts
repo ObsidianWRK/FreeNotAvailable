@@ -3,28 +3,22 @@ import type { MetadataRoute } from 'next'
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: 'https://freenotavailable.vercel.app',
+      url: 'https://free-not-available.vercel.app',
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 1,
     },
     {
-      url: 'https://freenotavailable.vercel.app/films',
+      url: 'https://free-not-available.vercel.app/films',
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
-      url: 'https://freenotavailable.vercel.app/clips',
+      url: 'https://free-not-available.vercel.app/clips',
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.7,
-    },
-    {
-      url: 'https://freenotavailable.vercel.app/ekthesis',
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
     },
   ]
 }

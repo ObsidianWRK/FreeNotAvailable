@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { useEffect, useRef, type ReactNode } from 'react'
 
 const PALETTES: Record<string, { background: string; foreground: string; accent: string }> = {
   hero: { background: '#0a0a08', foreground: '#f2ede8', accent: '#b5afa5' },
@@ -11,7 +11,7 @@ const PALETTES: Record<string, { background: string; foreground: string; accent:
 }
 
 export default function ScrollController({ children }: { children: ReactNode }) {
-  const [, setActiveSection] = useState('hero')
+  const activeSectionRef = useRef('hero')
   const visibleSections = useRef<Map<string, number>>(new Map())
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export default function ScrollController({ children }: { children: ReactNode }) 
           if (ratio > highest) { highest = ratio; winner = id }
         }
         if (winner) {
-          setActiveSection(winner)
+          activeSectionRef.current = winner
           const palette = PALETTES[winner] || PALETTES.hero
           requestAnimationFrame(() => {
             const root = document.documentElement

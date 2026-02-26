@@ -1,5 +1,3 @@
-'use client'
-
 import type { RevenueStream } from '@/lib/content/types'
 
 /* ── Streaming payout rates ── */
