@@ -26,7 +26,7 @@ const CLIPS: readonly Clip[] = [
     platforms: ['TikTok', 'Instagram Reels', 'YouTube Shorts'],
     era: 'neutral',
     thumbnail: '/images/hero-cover.avif',
-    video: '/clips/WelcomeHero.mp4',
+    video: 'https://ttymkvave4pkwaku.public.blob.vercel-storage.com/clips/WelcomeHero.mp4',
     aspectClass: 'aspect-[9/16]',
   },
   {
@@ -38,7 +38,7 @@ const CLIPS: readonly Clip[] = [
     platforms: ['TikTok', 'Instagram Reels', 'YouTube Shorts'],
     era: 'finexme',
     thumbnail: '/images/red-portrait.avif',
-    video: '/clips/FinexmeHighlight.mp4',
+    video: 'https://ttymkvave4pkwaku.public.blob.vercel-storage.com/clips/FinexmeHighlight.mp4',
     aspectClass: 'aspect-[9/16]',
   },
   {
@@ -50,7 +50,7 @@ const CLIPS: readonly Clip[] = [
     platforms: ['TikTok', 'Instagram Reels', 'YouTube Shorts'],
     era: 'sinenoctis',
     thumbnail: '/images/crouching-smoke.avif',
-    video: '/clips/SineNoctisTeaser.mp4',
+    video: 'https://ttymkvave4pkwaku.public.blob.vercel-storage.com/clips/SineNoctisTeaser.mp4',
     aspectClass: 'aspect-[9/16]',
   },
   {
@@ -62,7 +62,7 @@ const CLIPS: readonly Clip[] = [
     platforms: ['TikTok', 'Instagram Reels', 'YouTube Shorts'],
     era: 'neutral',
     thumbnail: '/images/jacket-portrait.avif',
-    video: '/clips/ArtistIntro.mp4',
+    video: 'https://ttymkvave4pkwaku.public.blob.vercel-storage.com/clips/ArtistIntro.mp4',
     aspectClass: 'aspect-[9/16]',
   },
   {
@@ -74,7 +74,7 @@ const CLIPS: readonly Clip[] = [
     platforms: ['TikTok', 'Instagram Reels', 'YouTube Shorts'],
     era: 'neutral',
     thumbnail: '/images/bokeh-night.avif',
-    video: '/clips/Manifesto.mp4',
+    video: 'https://ttymkvave4pkwaku.public.blob.vercel-storage.com/clips/Manifesto.mp4',
     aspectClass: 'aspect-[9/16]',
   },
   {
@@ -86,7 +86,7 @@ const CLIPS: readonly Clip[] = [
     platforms: ['YouTube', 'Website'],
     era: 'neutral',
     thumbnail: '/images/fine-by-me-still.avif',
-    video: '/clips/FilmReel.mp4',
+    video: 'https://ttymkvave4pkwaku.public.blob.vercel-storage.com/clips/FilmReel.mp4',
     aspectClass: 'aspect-video',
   },
 ]
@@ -109,7 +109,6 @@ function ClipCard({ clip }: { clip: Clip }) {
       {/* Video Player */}
       <div className={`relative ${clip.aspectClass} overflow-hidden bg-black`}>
         <video
-          src={clip.video}
           poster={clip.thumbnail}
           controls
           playsInline
@@ -123,6 +122,7 @@ function ClipCard({ clip }: { clip: Clip }) {
           className={`w-full h-full object-cover ${
             clip.era === 'sinenoctis' ? 'grayscale' : ''
           }`}
+          src={clip.video}
         />
         <div className="video-fallback hidden absolute inset-0 items-center justify-center bg-black/80 text-white/40 text-xs font-sans tracking-wider uppercase">
           Video unavailable
@@ -190,7 +190,6 @@ export default function ClipsPage() {
         <div className="border border-[#d4a574]/20">
           <div className="relative aspect-video overflow-hidden bg-black">
             <video
-              src="/clips/FilmReel.mp4"
               poster="/images/fine-by-me-still.avif"
               controls
               playsInline
@@ -202,6 +201,7 @@ export default function ClipsPage() {
                 if (fallback) (fallback as HTMLElement).style.display = 'flex'
               }}
               className="w-full h-full object-cover"
+              src="https://ttymkvave4pkwaku.public.blob.vercel-storage.com/clips/FilmReel.mp4"
             />
             <div className="video-fallback hidden absolute inset-0 items-center justify-center bg-black/80 text-white/40 text-xs font-sans tracking-wider uppercase">
               Video unavailable

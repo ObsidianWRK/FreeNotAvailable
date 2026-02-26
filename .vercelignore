@@ -1,4 +1,4 @@
-# Same as .gitignore but WITHOUT public/clips/ so videos are deployed
+# Videos now served from Vercel Blob storage
 /node_modules
 /.pnp
 .pnp.js
@@ -22,3 +22,4 @@ remotion/output/
 remotion/assets/
 remotion/node_modules/
 remotion/public/
+/public/clips/
