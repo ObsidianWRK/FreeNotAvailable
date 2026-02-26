@@ -15,6 +15,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: 'https://freenotavailable.vercel.app/clips',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
       url: 'https://freenotavailable.vercel.app/ekthesis',
       lastModified: new Date(),
       changeFrequency: 'monthly',
