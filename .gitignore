@@ -36,6 +36,7 @@ next-env.d.ts
 
 # raw assets (too large for git)
 /assets/
+/public/clips/
 
 # remotion
 remotion/output/
