@@ -13,7 +13,6 @@ const GALLERY = [
   { src: '/images/noctem-staircase.avif', alt: 'Noctem staircase scene', caption: 'Noctem' },
   { src: '/images/sn-street-1.avif', alt: 'VESPERA street scene', caption: 'Vespera' },
   { src: '/images/continuity.avif', alt: 'Continuity - figure against vine wall', caption: 'Continuity' },
-  { src: '/images/seated-pendant.avif', alt: 'Seated figure under pendant light', caption: 'Pendant light' },
   { src: '/images/bokeh-night.avif', alt: 'Bokeh night photography', caption: 'Bokeh night' },
 ]
 

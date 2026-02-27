@@ -2,7 +2,7 @@ import Image from 'next/image'
 import FadeInView from '@/components/ui/FadeInView'
 
 const FUTURE_PROJECTS: { src?: string; alt: string; label: string }[] = [
-  { label: 'Sine Noctis 2', alt: 'SINE NOCTIS 2' },
+  { src: '/images/logotype-sinenoctis2.png', label: 'Sine Noctis 2', alt: 'SINE NOCTIS 2' },
   { src: '/images/logotype-otherland.png', alt: 'OTHERLAND', label: 'Otherland' },
   { src: '/images/logotype-sexsymbol.png', alt: 'SEX SYMBOL', label: 'Sex Symbol' },
 ]

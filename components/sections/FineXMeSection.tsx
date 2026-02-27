@@ -195,6 +195,8 @@ export default function FineXMeSection() {
             loop
             muted
             playsInline
+            poster="/images/ante-doorway.avif"
+            preload="auto"
             className="absolute inset-0 w-full h-full object-cover object-center"
             aria-hidden="true"
           >
