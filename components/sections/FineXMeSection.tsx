@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import FadeInView from '@/components/ui/FadeInView'
+import AutoplayVideo from '@/components/ui/AutoplayVideo'
 
 const TRACKLIST = [
   { num: '01', title: 'Fine By Me', spotify: 'https://open.spotify.com/track/1bDsTY39ICcA0DlBkiFDDv', apple: 'https://music.apple.com/us/album/fine-by-me/1724039694?i=1724039695' },
@@ -38,15 +39,9 @@ export default function FineXMeSection() {
             <span className="text-xs font-pixel tracking-[0.2em] uppercase text-[#c0392b]/80 block mb-6">
               Act I
             </span>
-            <div className="relative w-64 md:w-80 h-12 md:h-16">
-              <Image
-                src="/images/logotype-finexme.png"
-                alt="FINExME"
-                fill
-                className="object-contain object-left"
-                sizes="(max-width: 768px) 256px, 320px"
-              />
-            </div>
+            <h2 className="font-sans text-4xl md:text-5xl lg:text-6xl italic text-[#f5e6e0] tracking-wide">
+              FINExME
+            </h2>
           </div>
 
           {/* Manifesto text */}
@@ -183,18 +178,11 @@ export default function FineXMeSection() {
         aria-label="ANTE — threshold between eras"
       >
         <div className="absolute inset-0">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
+          <AutoplayVideo
+            src="/videos/ante-loop.mp4"
             poster="/images/ante-doorway.avif"
-            preload="auto"
             className="absolute inset-0 w-full h-full object-cover object-center"
-            aria-hidden="true"
-          >
-            <source src="/videos/ante-loop.mp4" type="video/mp4" />
-          </video>
+          />
           <div className="absolute inset-0 bg-gradient-to-b from-[#1a0505]/60 via-black/40 to-[#0f0f0f]/80" />
         </div>
         <div className="absolute inset-0 vignette" />

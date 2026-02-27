@@ -30,15 +30,9 @@ export default function SineNoctisSection() {
           <span className="text-xs font-pixel tracking-[0.2em] uppercase text-[#d0d0d0]/80 block mb-6">
             Act II
           </span>
-          <div className="relative w-72 md:w-96 h-12 md:h-16">
-            <Image
-              src="/images/logotype-sinenoctis.png"
-              alt="SINE NOCTIS"
-              fill
-              className="object-contain object-left"
-              sizes="(max-width: 768px) 288px, 384px"
-            />
-          </div>
+          <h2 className="font-sans text-4xl md:text-5xl lg:text-6xl italic text-[#e8e8e8] tracking-wide">
+            SINE NOCTIS
+          </h2>
         </div>
 
         {/* Cover art */}
