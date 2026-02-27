@@ -1,9 +1,10 @@
+import Image from 'next/image'
 import FadeInView from '@/components/ui/FadeInView'
 
-const FUTURE_PROJECTS = [
-  { label: 'Sine Noctis 2' },
-  { label: 'Otherland' },
-  { label: 'Sex Symbol' },
+const FUTURE_PROJECTS: { src?: string; alt: string; label: string }[] = [
+  { label: 'Sine Noctis 2', alt: 'SINE NOCTIS 2' },
+  { src: '/images/logotype-otherland.png', alt: 'OTHERLAND', label: 'Otherland' },
+  { src: '/images/logotype-sexsymbol.png', alt: 'SEX SYMBOL', label: 'Sex Symbol' },
 ]
 
 export default function MythosSection() {
@@ -59,9 +60,26 @@ export default function MythosSection() {
 
         {/* Future project logotypes */}
         <div className="grid grid-cols-3 gap-8 md:gap-16 items-center">
-          {FUTURE_PROJECTS.map(({ label }) => (
+          {FUTURE_PROJECTS.map(({ src, alt, label }) => (
             <div key={label} className="flex flex-col items-center gap-4">
-              <span className="font-sans text-lg md:text-xl italic tracking-[0.08em] text-white/30 hover:text-white/60 transition-opacity duration-500 text-center">
+              {src ? (
+                <div className="relative w-full aspect-[3/1]">
+                  <Image
+                    src={src}
+                    alt={alt}
+                    fill
+                    className="object-contain opacity-40 hover:opacity-70 transition-opacity duration-500"
+                    sizes="(max-width: 768px) 30vw, 250px"
+                  />
+                </div>
+              ) : (
+                <div className="w-full aspect-[3/1] flex items-center justify-center">
+                  <span className="font-sans text-xl md:text-2xl italic tracking-[0.06em] text-white/40 hover:text-white/70 transition-opacity duration-500">
+                    {alt}
+                  </span>
+                </div>
+              )}
+              <span className="text-[10px] md:text-xs font-sans tracking-[0.2em] uppercase text-white/20">
                 {label}
               </span>
             </div>

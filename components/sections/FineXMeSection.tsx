@@ -55,22 +55,26 @@ export default function FineXMeSection() {
               This is a collection of demos.
             </p>
             <p className="font-sans text-sm md:text-base leading-[1.8] text-[#f5e6e0]/60 max-w-[65ch] mb-6">
-              FINExME is a collection of demos&mdash;seven unfinished ideas recorded
-              during the early stages of the Other World. None of these songs were meant
-              to be finished. Fine By Me, Twins, and Chambers were originally practice
-              exercises&mdash;experiments in tone and texture written while FREE was still
-              learning how to use the recording equipment. Flo, Zodiac Killer, and Maybe
-              were freestyles captured in single takes, shaped more by instinct than by
-              plan. Pilgrim was the only track that approached something
-              intentional&mdash;a late-night draft that took on a weight none of the
-              others were designed to carry.
+              Released as a collection of demos, FINExME stands as both prelude and
+              promise&mdash;the earliest glimpse into FREE&rsquo;s evolving world. Labeled with the
+              note, &ldquo;This is a collection of demos and should be consumed as such,&rdquo; the
+              7-track project captures ideas in motion: fragments of brilliance shaped
+              alongside key collaborators Worst Choice and Ashton Woods. From the haunting
+              immediacy of the opener and title record, &ldquo;FINE BY ME,&rdquo; produced by Mookie
+              Magnolia and Woods, FREE announces himself with disarming honesty&mdash;marrying
+              pointed, confrontational lyricism with poetic self-awareness. The mood expands
+              on &ldquo;TWINS&rdquo; and &ldquo;CHAMBERS,&rdquo; two fan favorites whose nostalgic sampling and
+              layered textures pay homage to the late Worst Choice&rsquo;s unmistakable touch.
             </p>
             <p className="font-sans text-sm md:text-base leading-[1.8] text-[#f5e6e0]/60 max-w-[65ch]">
-              The project was never supposed to be released in this form. It exists
-              because the raw material had a quality that polishing would have
-              destroyed&mdash;half-finished melodies, open-ended production, and a vocal
-              delivery still unsure of its own conviction. FINExME is the sound of an
-              artist who hasn&rsquo;t yet decided what he wants to say, saying it anyway.
+              Deeper cuts like the Brando Heat chopped &ldquo;FLO&rdquo; and &ldquo;MAYBE?&rdquo; reveal the
+              emotional architecture of the project&rsquo;s second half&mdash;intimate, subdued, and
+              searching. But it&rsquo;s the penultimate track, &ldquo;PILGRIM,&rdquo; that distills the spirit
+              of FINExME: a jaded anthem that exposes FREE&rsquo;s most vulnerable dimensions while
+              sowing the thematic seeds that later projects will grow from. As a debut,
+              FINExME is both incomplete and essential&mdash;a compelling sketchbook of raw
+              emotion from the Detroit-born crooner who soon looks to transform those
+              fragments into a fully realized universe.
             </p>
           </FadeInView>
 
