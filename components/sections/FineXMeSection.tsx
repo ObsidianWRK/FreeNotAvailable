@@ -51,23 +51,16 @@ export default function FineXMeSection() {
 
           {/* Manifesto text */}
           <FadeInView className="max-w-2xl mb-20 md:mb-28">
-            <p className="font-sans text-sm md:text-base leading-[1.8] text-[#f5e6e0]/60 max-w-[65ch] mb-6">
-              FINExME is a collection of demos&mdash;seven unfinished ideas recorded
-              during the early stages of the Other World. None of these songs were meant
-              to be finished. Fine By Me, Twins, and Chambers were originally practice
-              exercises&mdash;experiments in tone and texture written while FREE was still
-              learning how to use the recording equipment. Flo, Zodiac Killer, and Maybe
-              were freestyles captured in single takes, shaped more by instinct than by
-              plan. Pilgrim was the only track that approached something
-              intentional&mdash;a late-night draft that took on a weight none of the
-              others were designed to carry.
+            <p className="font-sans text-2xl md:text-3xl italic leading-relaxed text-[#f5e6e0]/90 mb-8">
+              In today&rsquo;s R&amp;B, men rarely make music that yearns anymore.
             </p>
             <p className="font-sans text-sm md:text-base leading-[1.8] text-[#f5e6e0]/60 max-w-[65ch]">
-              The project was never supposed to be released in this form. It exists
-              because the raw material had a quality that polishing would have
-              destroyed&mdash;half-finished melodies, open-ended production, and a vocal
-              delivery still unsure of its own conviction. FINExME is the sound of an
-              artist who hasn&rsquo;t yet decided what he wants to say, saying it anyway.
+              FREE occupies the grey area where deflection meets self-reflection.
+              FINExME is an exercise in romantic fatalism&mdash;seven tracks that circle
+              the drain of a relationship with the kind of quiet obsession that makes you
+              check your phone at 2AM knowing nothing good is coming. The production
+              breathes in warm reds and amber, every beat a slow pulse in a room where
+              someone just left.
             </p>
           </FadeInView>
 
