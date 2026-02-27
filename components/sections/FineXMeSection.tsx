@@ -190,13 +190,16 @@ export default function FineXMeSection() {
         aria-label="ANTE — threshold between eras"
       >
         <div className="absolute inset-0">
-          <Image
-            src="/images/ante-doorway.avif"
-            alt="Stone archway — the threshold between eras"
-            fill
-            className="object-cover object-center"
-            sizes="100vw"
-          />
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover object-center"
+            aria-hidden="true"
+          >
+            <source src="/videos/ante-loop.mp4" type="video/mp4" />
+          </video>
           <div className="absolute inset-0 bg-gradient-to-b from-[#1a0505]/60 via-black/40 to-[#0f0f0f]/80" />
         </div>
         <div className="absolute inset-0 vignette" />

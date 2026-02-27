@@ -70,22 +70,15 @@ export default function SineNoctisSection() {
         </FadeInView>
 
         {/* Gallery grid — all grayscale */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-20 md:mb-28">
-          {GALLERY.map(({ src, alt, caption }, index) => (
-            <div
-              key={src}
-              className={`gallery-item ${
-                index === 0 || index === 2
-                  ? 'aspect-[3/4] md:row-span-2'
-                  : 'aspect-square'
-              }`}
-            >
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 mb-20 md:mb-28">
+          {GALLERY.map(({ src, alt, caption }) => (
+            <div key={src} className="gallery-item aspect-[3/4]">
               <Image
                 src={src}
                 alt={alt}
                 fill
                 className="object-cover grayscale hover:grayscale-[0.7] transition-all duration-700"
-                sizes="(max-width: 768px) 50vw, 25vw"
+                sizes="(max-width: 768px) 50vw, 33vw"
               />
               <div className="gallery-caption">
                 <span className="text-xs font-sans tracking-[0.1em] uppercase text-white/80">
