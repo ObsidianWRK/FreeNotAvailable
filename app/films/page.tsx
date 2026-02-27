@@ -10,16 +10,6 @@ import Footer from '@/components/layout/Footer'
 
 const FINEXME_FILMS = [
   {
-    title: 'Fine By Me',
-    slug: 'fine-by-me',
-    role: 'Film',
-    description:
-      'The first visual from the Other World. Shot on a gravel lot near Detroit\u2019s Ambassador Bridge, Fine By Me establishes FREE as The Faceless Man and The Lady In Black as the executor of consequence. The white BMW is his chariot through this night-world. The camera is a spy \u2014 long lenses, over-the-shoulder angles, and partial occlusions make every frame feel like a stolen moment.',
-    image: '/images/dusk-silhouette-two.avif',
-    alt: 'Dusk silhouette from Fine By Me',
-    videoUrl: 'https://www.youtube.com/watch?v=hNwNaHOud-U',
-  },
-  {
     title: 'AT NO COST',
     slug: 'at-no-cost',
     role: 'First Trailer',
@@ -30,14 +20,14 @@ const FINEXME_FILMS = [
     videoUrl: 'https://www.youtube.com/watch?v=Bpc8srzl8jA',
   },
   {
-    title: 'PILGRIM',
-    slug: 'pilgrim',
-    role: 'Visual',
+    title: 'Fine By Me',
+    slug: 'fine-by-me',
+    role: 'Film',
     description:
-      'The unseen final chapter where the consequences land. By Pilgrim, FREE is spiritually dead \u2014 destroyed by his indulgence. Whether that death is literal or emotional is left ambiguous.',
-    image: '/images/pilgrim-card.avif',
-    alt: 'PILGRIM title card',
-    videoUrl: 'https://www.youtube.com/watch?v=FBL3WTUDTOg',
+      'The first visual from the Other World. Shot on a gravel lot near the bridge, Fine By Me establishes FREE as The Faceless Man and The Lady In Black as the executor of consequence. The white BMW is his chariot through this night-world. The camera is a spy \u2014 long lenses, over-the-shoulder angles, and partial occlusions make every frame feel like a stolen moment.',
+    image: '/images/dusk-silhouette-two.avif',
+    alt: 'Dusk silhouette from Fine By Me',
+    videoUrl: 'https://www.youtube.com/watch?v=hNwNaHOud-U',
   },
 ]
 
@@ -47,7 +37,7 @@ const SINENOCTIS_FILMS = [
     slug: 'ante',
     role: 'Teaser',
     description:
-      'The liminal corridor between worlds. FREE emerging from a dark doorway in downtown Birmingham, face still obscured. The footage is tight, grayscale, intimate. The doorway is his portal into the new world \u2014 the threshold between death and reincarnation.',
+      'The liminal corridor between worlds. FREE emerging from a dark doorway, face still obscured. The footage is tight, grayscale, intimate. The doorway is his portal into the new world \u2014 the threshold between death and reincarnation.',
     image: '/images/ante-doorway.avif',
     alt: 'Stone archway doorway from ANTE teaser',
     videoUrl: 'https://www.youtube.com/watch?v=0MZYQ8p_QEU',
@@ -58,7 +48,7 @@ const SINENOCTIS_FILMS = [
     role: 'Teaser II',
     description:
       'Evening/dusk/evening star. FREE\u2019s first evening wandering this new world. Less shock, more numb, heavy melancholy. He drifts before the next set of temptations draws him in.',
-    image: '/images/sn-architecture.avif',
+    image: '/images/vespera-cover.avif',
     alt: 'European architecture at night from VESPERA',
     videoUrl: 'https://www.youtube.com/watch?v=UHIgUJa2fI4',
   },
@@ -68,7 +58,7 @@ const SINENOCTIS_FILMS = [
     role: 'Trailer',
     description:
       'The plunge into the new night. This is where FREE begins to actively participate in this incarnation \u2014 making choices, setting up for what comes next.',
-    image: '/images/bokeh-night.avif',
+    image: '/images/noctem-cover.avif',
     alt: 'Bokeh night photography from NOCTEM trailer',
     videoUrl: 'https://www.youtube.com/watch?v=PSIpF980ZAE',
   },
@@ -78,7 +68,7 @@ const SINENOCTIS_FILMS = [
     role: 'Full Visual',
     description:
       'A double visual for Van Gogh and Thin Ice Freestyle. The jacket replaces the BMW as the protective shell. FREE\u2019s face remains partially obscured through the corridors, streets, and stairwells of a single voyeuristic night.',
-    image: '/images/jacket-portrait.avif',
+    image: '/images/sinenoctis-visual-cover.avif',
     alt: 'Alpinestars jacket portrait from SINE NOCTIS visual',
   },
 ]
@@ -319,7 +309,7 @@ export default function FilmsPage() {
               Act I
             </span>
             <h2 className="font-sans text-4xl md:text-5xl lg:text-6xl italic text-heading tracking-wide">
-              FINExME Era
+              FINExME
             </h2>
             <div className="mt-4 w-16 h-px bg-[#c0392b]/40" />
           </div>
@@ -354,7 +344,7 @@ export default function FilmsPage() {
               Act II
             </span>
             <h2 className="font-sans text-4xl md:text-5xl lg:text-6xl italic text-[#e8e8e8]/90 tracking-wide">
-              SINE NOCTIS Era
+              SINE NOCTIS
             </h2>
             <div className="mt-4 w-16 h-px bg-white/20" />
           </div>

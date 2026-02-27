@@ -5,6 +5,7 @@ const PALETTES: Record<string, { background: string; foreground: string; accent:
   hero: { background: '#0a0a08', foreground: '#f2ede8', accent: '#b5afa5' },
   finexme: { background: '#1a0505', foreground: '#f5e6e0', accent: '#c0392b' },
   threshold: { background: '#0a0a08', foreground: '#d0d0d0', accent: '#666666' },
+  pilgrim: { background: '#0a0a0f', foreground: '#e0e8f0', accent: '#8899aa' },
   sinenoctis: { background: '#0f0f0f', foreground: '#e8e8e8', accent: '#d0d0d0' },
   mythos: { background: '#0a0a08', foreground: '#f2ede8', accent: '#b5afa5' },
   links: { background: '#0a0a08', foreground: '#f2ede8', accent: '#c0392b' },

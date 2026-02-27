@@ -2,6 +2,7 @@ import ScrollController from '@/components/ui/ScrollController'
 import GrainOverlay from '@/components/ui/GrainOverlay'
 import HeroSection from '@/components/sections/HeroSection'
 import FineXMeSection from '@/components/sections/FineXMeSection'
+import PilgrimSection from '@/components/sections/PilgrimSection'
 import SineNoctisSection from '@/components/sections/SineNoctisSection'
 import MythosSection from '@/components/sections/MythosSection'
 import LinksSection from '@/components/sections/LinksSection'
@@ -14,6 +15,7 @@ export default function HomePage() {
       <main>
         <HeroSection />
         <FineXMeSection />
+        <PilgrimSection />
         <SineNoctisSection />
         <MythosSection />
         <LinksSection />

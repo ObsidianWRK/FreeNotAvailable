@@ -1,10 +1,9 @@
-import Image from 'next/image'
 import FadeInView from '@/components/ui/FadeInView'
 
 const FUTURE_PROJECTS = [
-  { src: '/images/logotype-otherland.png', alt: 'OTHERLAND', label: 'Otherland' },
-  { src: '/images/logotype-neverdyin.png', alt: 'NEVERDYIN', label: 'Neverdyin' },
-  { src: '/images/logotype-sexsymbol.png', alt: 'SEX SYMBOL', label: 'Sex Symbol' },
+  { label: 'Sine Noctis 2' },
+  { label: 'Otherland' },
+  { label: 'Sex Symbol' },
 ]
 
 export default function MythosSection() {
@@ -60,18 +59,9 @@ export default function MythosSection() {
 
         {/* Future project logotypes */}
         <div className="grid grid-cols-3 gap-8 md:gap-16 items-center">
-          {FUTURE_PROJECTS.map(({ src, alt, label }) => (
-            <div key={src} className="flex flex-col items-center gap-4">
-              <div className="relative w-full aspect-[3/1]">
-                <Image
-                  src={src}
-                  alt={alt}
-                  fill
-                  className="object-contain opacity-40 hover:opacity-70 transition-opacity duration-500"
-                  sizes="(max-width: 768px) 30vw, 250px"
-                />
-              </div>
-              <span className="text-[10px] md:text-xs font-sans tracking-[0.2em] uppercase text-white/20">
+          {FUTURE_PROJECTS.map(({ label }) => (
+            <div key={label} className="flex flex-col items-center gap-4">
+              <span className="font-sans text-lg md:text-xl italic tracking-[0.08em] text-white/30 hover:text-white/60 transition-opacity duration-500 text-center">
                 {label}
               </span>
             </div>
