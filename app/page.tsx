@@ -5,6 +5,7 @@ import FineXMeSection from '@/components/sections/FineXMeSection'
 import PilgrimSection from '@/components/sections/PilgrimSection'
 import SineNoctisSection from '@/components/sections/SineNoctisSection'
 import MythosSection from '@/components/sections/MythosSection'
+import OtherMediaSection from '@/components/sections/OtherMediaSection'
 import LinksSection from '@/components/sections/LinksSection'
 import Footer from '@/components/layout/Footer'
 
@@ -18,6 +19,7 @@ export default function HomePage() {
         <PilgrimSection />
         <SineNoctisSection />
         <MythosSection />
+        <OtherMediaSection />
         <LinksSection />
       </main>
       <Footer />

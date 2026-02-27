@@ -970,10 +970,10 @@ function InternalContent() {
                   description: 'The next full-length album we are building toward.',
                 },
                 {
-                  title: 'NEVERDYIN',
-                  logo: '/images/logotype-neverdyin.png',
+                  title: 'SINE NOCTIS 2',
+                  logo: '/images/logotype-sinenoctis2.png',
                   description:
-                    'A developing concept tied to origins as an artist, exploring the reincarnation motif prevalent in this larger narrative.',
+                    'In final stages of completion and a companion piece to SINE NOCTIS sonically, narratively and visually.',
                 },
                 {
                   title: 'SEX SYMBOL (THE ALBUM)',

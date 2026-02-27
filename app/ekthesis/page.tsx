@@ -197,9 +197,7 @@ export default function EkthesisPage() {
             </div>
             <div>
               <div className="flex items-center gap-4 mb-2">
-                <div className="relative w-36 h-10">
-                  <Image src="/images/logotype-finexme.png" alt="FINExME" fill className="object-contain object-left" sizes="144px" />
-                </div>
+                <span className="font-sans text-2xl md:text-3xl italic text-[#f5e6e0] tracking-wide">FINExME</span>
                 <span className="font-sans text-xs tracking-[0.15em] uppercase text-accent">Act I &mdash; 2024</span>
               </div>
               <p className="font-sans text-sm leading-[1.8] text-muted mb-3">
@@ -219,14 +217,12 @@ export default function EkthesisPage() {
 
           <AnimatedElement custom={3} className="flex flex-col md:flex-row gap-6 md:gap-10">
             <div className="relative w-40 h-40 shrink-0">
-              <Image src="/images/jacket-portrait.avif" alt="FREE in the SINE NOCTIS era" fill className="object-cover grayscale" sizes="160px" />
+              <Image src="/images/sinenoctis-cover.avif" alt="SINE NOCTIS cover art" fill className="object-cover grayscale" sizes="160px" />
             </div>
             <div>
               <div className="flex items-center gap-4 mb-2">
-                <div className="relative w-36 h-10">
-                  <Image src="/images/logotype-sinenoctis.png" alt="SINE NOCTIS" fill className="object-contain object-left" sizes="144px" />
-                </div>
-                <span className="font-sans text-xs tracking-[0.15em] uppercase text-white/40">Act II &mdash; 2024/2026</span>
+                <span className="font-sans text-2xl md:text-3xl italic text-[#e8e8e8] tracking-wide">SINE NOCTIS</span>
+                <span className="font-sans text-xs tracking-[0.15em] uppercase text-white/40">2026</span>
               </div>
               <p className="font-sans text-sm leading-[1.8] text-muted mb-3">
                 The icy follow-up. Three tracks. Grayscale. Alone this time. Stillness on the
@@ -265,13 +261,15 @@ export default function EkthesisPage() {
           <span className="text-xs font-sans tracking-[0.15em] uppercase text-white/30 block mb-6">What comes next</span>
           <div className="grid grid-cols-3 gap-8">
             {[
-              { src: '/images/logotype-otherland.png', alt: 'OTHERLAND', status: 'In Development', desc: 'Next full-length album' },
-              { src: '/images/logotype-neverdyin.png', alt: 'NEVERDYIN', status: 'Early Concept', desc: 'Origins and reincarnation' },
-              { src: '/images/logotype-sexsymbol.png', alt: 'SEX SYMBOL', status: 'Postponed', desc: 'The culmination. Entirely produced by Worst Choice.' },
+              { alt: 'SINE NOCTIS 2', status: 'In Progress', desc: 'In final stages of completion and a companion piece to SINE NOCTIS sonically, narratively and visually.' },
+              { alt: 'OTHERLAND', status: 'In Development', desc: 'Next full-length album.' },
+              { alt: 'SEX SYMBOL', status: 'Postponed', desc: 'The culmination. Entirely produced by Worst Choice.' },
             ].map((item) => (
               <div key={item.alt}>
-                <div className="relative w-full aspect-[3/1] mb-4">
-                  <Image src={item.src} alt={item.alt} fill className="object-contain opacity-40" sizes="(max-width: 768px) 30vw, 250px" />
+                <div className="w-full aspect-[3/1] mb-4 flex items-center justify-center">
+                  <span className="font-sans text-xl md:text-2xl italic tracking-[0.06em] text-white/40">
+                    {item.alt}
+                  </span>
                 </div>
                 <span className="font-mono text-xs text-white/30 block mb-1">{item.status}</span>
                 <p className="font-sans text-xs text-muted">{item.desc}</p>
