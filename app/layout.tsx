@@ -4,7 +4,7 @@ import Nav from '@/components/layout/Nav'
 import './globals.css'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://free-not-available.vercel.app'),
+  metadataBase: new URL('https://atnocost.vercel.app'),
   title: {
     template: '%s | FREE',
     default: 'FREE — Other World Mythos',
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'FREE — Other World Mythos',
     description: 'Welcome to the Other World.',
-    url: 'https://free-not-available.vercel.app',
+    url: 'https://atnocost.vercel.app',
     siteName: 'FREE',
     locale: 'en_US',
     type: 'website',
